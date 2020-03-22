@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.skin.TableHeaderRow?>
+<?import javafx.scene.text.Text?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      styleClass="app"
+      spacing="50"
+      fx:controller="meltem.controllers.StudentsController"
+      alignment="CENTER">
+    <Text styleClass="header1">Ogrenciler</Text>
+    <TableView>
+        <columns>
+            <TableColumn text="Id">
+            </TableColumn>
+            <TableColumn text="First Name">
+            </TableColumn>
+            <TableColumn text="Last Name">
+            </TableColumn>
+        </columns>
+    </TableView>
+    <Button>Allah</Button>
+
+</VBox>

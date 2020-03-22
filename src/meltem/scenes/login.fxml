@@ -1,0 +1,19 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<GridPane fx:controller="meltem.controllers.LoginController" styleClass="app"
+          xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10">
+    <VBox spacing="25" alignment="TOP_CENTER">
+        <Text styleClass="header1">Username</Text>
+        <TextField fx:id="txtUsername"/>
+        <Text styleClass="header1">Password</Text>
+        <PasswordField fx:id="txtPassword"/>
+        <Button onAction="#login">Login</Button>
+    </VBox>
+</GridPane>
