@@ -45,7 +45,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Siniflar
+            Yoklama Listeleri
         </Button>
         <Button fx:id="btnMeetings">
             <graphic>
