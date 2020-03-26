@@ -7,13 +7,30 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
-<GridPane fx:controller="meltem.controllers.LoginController" styleClass="app"
-          xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10">
-    <VBox spacing="25" alignment="TOP_CENTER">
-        <Text styleClass="header1">Username</Text>
-        <TextField fx:id="txtUsername"/>
-        <Text styleClass="header1">Password</Text>
-        <PasswordField fx:id="txtPassword"/>
-        <Button onAction="#login">Login</Button>
-    </VBox>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane fx:controller="meltem.controllers.LoginController"
+          styleClass="app"
+          vgap="10"
+          hgap="10"
+          alignment="CENTER"
+          xmlns:fx="http://javafx.com/fxml">
+    <Text styleClass="header1" GridPane.rowIndex="1">Otomasyon Sistemi'ne Hosgeldiniz!</Text>
+    <Text styleClass="header2" GridPane.rowIndex="4">Kullanici Adi</Text>
+    <TextField fx:id="txtUsername" GridPane.rowIndex="5"/>
+    <Text styleClass="header2" GridPane.rowIndex="7">Parola</Text>
+    <PasswordField fx:id="txtPassword" GridPane.rowIndex="8"/>
+    <Button onAction="#login" GridPane.rowIndex="10" GridPane.halignment="CENTER">
+        <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                <image>
+                    <Image url="@../icons/enter.png" />
+                </image>
+            </ImageView>
+        </graphic>
+        Giris Yap
+    </Button>
 </GridPane>

@@ -6,10 +6,60 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            styleClass="app"
-            fx:controller="meltem.controllers.EmergencyController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          styleClass="app"
+          alignment="CENTER"
+          hgap="1"
+          vgap="3"
+          fx:controller="meltem.controllers.EmergencyController"
+          maxHeight="400.0" maxWidth="600.0">
+    <HBox alignment="CENTER" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.columnSpan="1">
+        <padding>
+            <Insets top="20" bottom="20"/>
+        </padding>
+        <Text textAlignment="JUSTIFY" GridPane.halignment="CENTER" styleClass="header1">
+            Acil Durum Numaralari
+        </Text>
+    </HBox>
+    <ScrollPane GridPane.rowIndex="2" GridPane.halignment="CENTER">
+        <VBox alignment="CENTER"  spacing="25">
+            <HBox GridPane.rowIndex="1" styleClass="card" spacing="75" alignment="CENTER">
+                <Text styleClass="card-title">Genel Koordinator</Text>
+                <Text styleClass="body2">Sema Yirun</Text>
+                <Text styleClass="body2">0541 333 2211</Text>
+            </HBox>
+            <HBox GridPane.rowIndex="1" styleClass="card" spacing="75" alignment="CENTER">
+                <Text styleClass="card-title">Kantin Sorumlusu</Text>
+                <Text styleClass="body2">Cevdet Yasar</Text>
+                <Text styleClass="body2">0506 355 5566</Text>
+            </HBox>
+            <HBox GridPane.rowIndex="1" styleClass="card" spacing="75" alignment="CENTER">
+                <Text styleClass="card-title">Temizlik Sorumlusu</Text>
+                <Text styleClass="body2">Naciye Temiz</Text>
+                <Text styleClass="body2">0431 355 4537</Text>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+    <HBox alignment="CENTER" GridPane.rowIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.columnSpan="1">
+        <padding>
+            <Insets top="20" bottom="20"/>
+        </padding>
+        <Button onAction="#goBack">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/arrow_left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Geri Don
+        </Button>
+    </HBox>
 
-</AnchorPane>
+
+</GridPane>

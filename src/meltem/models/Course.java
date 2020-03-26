@@ -1,6 +1,7 @@
 package meltem.models;
 
 public class Course {
-    private int courseId;
-    private String courseName;
+    public int courseId;
+    public String courseName;
+    public int courseTeacher;
 }

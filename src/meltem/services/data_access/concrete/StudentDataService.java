@@ -19,7 +19,12 @@ public class StudentDataService extends PersistentDataService<Student> {
     }
 
     @Override
-    public void Update(Student student) {
+    public void Add(Student entity) throws SQLException {
+
+    }
+
+    @Override
+    public void UpdateById(Student entity, int id) throws SQLException {
 
     }
 

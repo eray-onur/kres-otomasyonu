@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          styleClass="app"
+          vgap="12"
+          hgap="10"
+          fx:controller="meltem.controllers.StudentInfoController"
+          alignment="CENTER"
+          prefHeight="400.0" prefWidth="800.0">
+    <HBox GridPane.rowIndex="1"
+          alignment="CENTER"
+          spacing="75"
+    >
+        <Text styleClass="header1">Ogrenci Bilgileri</Text>
+    </HBox>
+    <VBox GridPane.rowIndex="2" style="-fx-background-radius: 5; -fx-background-color: white" spacing="10" alignment="CENTER">
+        <padding>
+            <Insets top="25" bottom="25" left="15" right="15"/>
+        </padding>
+
+        <HBox GridPane.rowIndex="2"
+              alignment="CENTER"
+              spacing="75"
+        >
+            <Text styleClass="body2">Ogrenci Adi</Text>
+            <Text fx:id="txtStudentName"></Text>
+        </HBox>
+        <HBox
+                GridPane.rowIndex="4"
+                alignment="CENTER"
+                spacing="75"
+        >
+            <Text styleClass="body2">Ogrenci Soyadi</Text>
+            <Text fx:id="txtStudentLastName"></Text>
+        </HBox>
+        <HBox
+                alignment="CENTER"
+                spacing="75"
+                GridPane.rowIndex="7"
+        >
+            <Text styleClass="body2">Oryantasyon Baslangic Tarihi</Text>
+            <Text fx:id="txtOrientationStart"></Text>
+        </HBox>
+        <HBox
+                alignment="CENTER"
+                spacing="75"
+                GridPane.rowIndex="10"
+        >
+            <Text styleClass="body2">Oryantasyon Bitis Tarihi</Text>
+            <Text fx:id="txtOrientationEnd"></Text>
+        </HBox>
+        <HBox
+                alignment="CENTER"
+                spacing="75"
+                GridPane.rowIndex="11"
+        >
+            <Text styleClass="body2">Veli Telefon Numarasi</Text>
+            <Text fx:id="txtParentNumber"></Text>
+        </HBox>
+    </VBox>
+    <HBox alignment="CENTER" GridPane.rowIndex="5" spacing="15">
+        <Button onAction="#goBack">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/arrow_left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Geri Don
+        </Button>
+        <Button onAction="#goUpdate">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Ogrenciyi Guncelle
+        </Button>
+        <Button fx:id="btnEdit" onAction="#goDelete">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/delete.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Ogrenciyi Sil
+        </Button>
+    </HBox>
+</GridPane>

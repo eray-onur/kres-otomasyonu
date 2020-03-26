@@ -8,23 +8,62 @@
 
 <?import javafx.scene.control.skin.TableHeaderRow?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       styleClass="app"
-      spacing="50"
-      fx:controller="meltem.controllers.StudentsController"
-      alignment="CENTER">
-    <Text styleClass="header1">Ogrenciler</Text>
-    <TableView>
-        <columns>
-            <TableColumn text="Id">
-            </TableColumn>
-            <TableColumn text="First Name">
-            </TableColumn>
-            <TableColumn text="Last Name">
-            </TableColumn>
-        </columns>
+      spacing="25"
+      alignment="CENTER"
+      fx:controller="meltem.controllers.StudentsController">
+    <Text textAlignment="CENTER" styleClass="header1">Ogrenciler</Text>
+    <TableView fx:id="table" onMousePressed="#clickItem">
     </TableView>
-    <Button>Allah</Button>
-
+    <VBox spacing="15" alignment="CENTER">
+        <HBox alignment="CENTER">
+            <TextField fx:id="txtStudentId" prefHeight="46" prefWidth="350"/>
+            <Button onAction="#findStudent" fx:id="btnAdd" prefWidth="175">
+                <graphic>
+                    <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                        <image>
+                            <Image url="@../icons/search.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+                Ogrenciyi Bul
+            </Button>
+        </HBox>
+    </VBox>
+    <FlowPane alignment="CENTER" hgap="25">
+        <Button onAction="#goBack">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/arrow_left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Geri Don
+        </Button>
+        <Button onAction="#addData">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/add.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Yeni Ogrenci Ekle
+        </Button>
+        <Button fx:id="btnEdit" onAction="#proceedToEdit">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Secilen Ogrenciyi Guncelle
+        </Button>
+    </FlowPane>
 </VBox>

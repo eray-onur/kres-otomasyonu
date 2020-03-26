@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="meltem.controllers.SearchController"
+          prefHeight="300" prefWidth="300"
+          alignment="CENTER"
+          vgap="1"
+          hgap="2"
+          styleClass="app">
+    <HBox alignment="CENTER" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.columnSpan="1">
+        <padding>
+            <Insets top="35" bottom="60"/>
+        </padding>
+        <Text textAlignment="JUSTIFY" GridPane.halignment="CENTER" styleClass="header1">
+            Sorgulama Paneli
+        </Text>
+    </HBox>
+    <VBox GridPane.rowIndex="2" spacing="20" alignment="CENTER" GridPane.hgrow="ALWAYS">
+        <Button fx:id="btnStudents" onAction="#goStudent">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/students.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Ogrenci Tablosu
+        </Button>
+        <Button fx:id="btnClassrooms" onAction="#goClasses">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/courses.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Siniflar
+        </Button>
+        <Button fx:id="btnCourses" onAction="#goCourses">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/courses.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Dersler
+        </Button>
+        <Button fx:id="btnTeachers" onAction="#goTeachers">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/teacher.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Ogretmenler
+        </Button>
+        <Button onAction="#goBack">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <image>
+                        <Image url="@../icons/arrow_left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Geri Don
+        </Button>
+    </VBox>
+</GridPane>
