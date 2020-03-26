@@ -46,4 +46,5 @@ public class Student {
         this.parentNumber = parentNumber;
         this.parentEmail = parentEmail;
     }
+
 }

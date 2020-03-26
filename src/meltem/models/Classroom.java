@@ -5,6 +5,15 @@ public class Classroom {
     private String classroomName;
     private int capacity;
 
+    public Classroom(int id, String name, int capacity) {
+        this.classroomId = id;
+        this.classroomName = name;
+        this.capacity = capacity;
+    }
+    public Classroom() {
+
+    }
+
     public void setClassroomId(int classroomId) {
         this.classroomId = classroomId;
     }

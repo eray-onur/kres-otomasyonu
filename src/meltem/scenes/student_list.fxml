@@ -17,8 +17,11 @@
       alignment="CENTER"
       fx:controller="meltem.controllers.StudentsController">
     <Text textAlignment="CENTER" styleClass="header1">Ogrenciler</Text>
+
     <TableView fx:id="table" onMousePressed="#clickItem">
+
     </TableView>
+
     <VBox spacing="15" alignment="CENTER">
         <HBox alignment="CENTER">
             <TextField fx:id="txtStudentId" prefHeight="46" prefWidth="350"/>

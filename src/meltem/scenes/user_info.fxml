@@ -13,21 +13,28 @@
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           styleClass="app"
-          vgap="10"
+          vgap="12"
           hgap="10"
-          fx:controller="meltem.controllers.UserEditController"
+          fx:controller="meltem.controllers.UserInfoController"
           alignment="CENTER"
-          prefHeight="400.0" prefWidth="600.0">
-    <VBox alignment="CENTER" spacing="15" style="-fx-background-radius: 5; -fx-background-color: white">
+          prefHeight="400.0" prefWidth="800.0">
+    <HBox GridPane.rowIndex="1"
+          alignment="CENTER"
+          spacing="75"
+    >
+        <Text styleClass="header1">Kullanici Bilgileri</Text>
+    </HBox>
+    <VBox GridPane.rowIndex="2" style="-fx-background-radius: 5; -fx-background-color: white" spacing="10" alignment="CENTER">
         <padding>
             <Insets top="25" bottom="25" left="15" right="15"/>
         </padding>
-        <HBox GridPane.rowIndex="1"
+
+        <HBox GridPane.rowIndex="2"
               alignment="CENTER"
               spacing="75"
         >
             <Text styleClass="body2">Kullanici ID'si</Text>
-            <TextField fx:id="txtUserId"></TextField>
+            <Text fx:id="txtUserId"></Text>
         </HBox>
         <HBox
                 GridPane.rowIndex="4"
@@ -35,7 +42,7 @@
                 spacing="75"
         >
             <Text styleClass="body2">Kullanici Adi</Text>
-            <TextField fx:id="txtUserName"></TextField>
+            <Text fx:id="txtUserName"></Text>
         </HBox>
         <HBox
                 alignment="CENTER"
@@ -43,18 +50,18 @@
                 GridPane.rowIndex="7"
         >
             <Text styleClass="body2">Kullanici Sifresi</Text>
-            <TextField fx:id="txtPw"></TextField>
+            <Text fx:id="txtPw"></Text>
         </HBox>
         <HBox
                 alignment="CENTER"
                 spacing="75"
                 GridPane.rowIndex="10"
         >
-            <Text styleClass="body2">Kullanici Tipi</Text>
-            <TextField fx:id="txtUserAuth"></TextField>
+            <Text styleClass="body2">Yetki Seviyesi</Text>
+            <Text fx:id="txtUserAuth"></Text>
         </HBox>
     </VBox>
-    <FlowPane alignment="CENTER" hgap="25" GridPane.rowIndex="15">
+    <HBox alignment="CENTER" GridPane.rowIndex="5" spacing="15">
         <Button onAction="#goBack">
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
@@ -65,7 +72,7 @@
             </graphic>
             Geri Don
         </Button>
-        <Button onAction="#goBack">
+        <Button onAction="#goUpdate">
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
                     <image>
@@ -73,9 +80,9 @@
                     </image>
                 </ImageView>
             </graphic>
-            Ogrenciyi Guncelle
+            Kullaniciyi Guncelle
         </Button>
-        <Button fx:id="btnEdit">
+        <Button fx:id="btnEdit" onAction="#goDelete">
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
                     <image>
@@ -83,7 +90,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Ogrenciyi Sil
+            Kullaniciyi Sil
         </Button>
-    </FlowPane>
+    </HBox>
 </GridPane>

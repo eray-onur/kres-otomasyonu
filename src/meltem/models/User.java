@@ -7,7 +7,10 @@ public class User {
     private short userAuth;
 
     public User(int userId, String userName, String password, short userType) {
-
+        this.setUserId(userId);
+        this.setUserName(userName);
+        this.setPassword(password);
+        this.setUserAuth(userType);
     }
     public User(int userId, String userName, String password) {
         this.setUserId(userId);
@@ -46,5 +49,18 @@ public class User {
 
     public void setUserAuth(short userAuth) {
         this.userAuth = userAuth;
+    }
+
+    public String getTrueAuth() {
+        switch(this.getUserAuth()) {
+            case 1:
+                return "Yonetici";
+            case 2:
+                return "Sinif Ogretmeni";
+            case 3:
+                return "Brans Ders Ogretmeni";
+            default:
+                return "Yetkisiz";
+        }
     }
 }
