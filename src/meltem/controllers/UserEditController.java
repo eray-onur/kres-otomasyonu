@@ -57,7 +57,9 @@ public class UserEditController implements Initializable {
             userAuth.setValue(setChoiceBoxValue());
             // Dropdown'a stringler atanir.
         } else {
-            txtUserId.setDisable(false);
+            if(txtUserId != null) {
+                txtUserId.setDisable(false);
+            }
             if(indicatorId != null) {
                 indicatorId.setDisable(false);
             }

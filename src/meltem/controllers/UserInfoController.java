@@ -1,7 +1,9 @@
 package meltem.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import meltem.models.RouteData;
 import meltem.models.Student;
@@ -16,6 +18,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserInfoController implements Initializable {
+    User user = new User(
+            1,
+            "Sema Yirun",
+            "*******",
+            (short) 1
+    );
     @FXML
     public Text txtUserId;
     @FXML
@@ -23,15 +31,31 @@ public class UserInfoController implements Initializable {
     @FXML
     public Text txtPw;
     @FXML
-    public Text txtUserAuth;
+    public ChoiceBox userAuth;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         User user = new UserViewModel(1, "sema_yirun", "1", 1).user;
+        userAuth.setItems(FXCollections.observableArrayList(
+                "Yonetici", "Sinif Ogretmeni", "Brans Ders Ogretmeni"
+        ));
         txtUserId.setText(String.valueOf(user.getUserId()));
         txtUserName.setText(user.getUserName());
         txtPw.setText(user.getPassword());
-        txtUserAuth.setText(user.getTrueAuth());
+        userAuth.setValue(setChoiceBoxValue());
 
+    }
+
+    public String setChoiceBoxValue() {
+        switch(user.getUserAuth()) {
+            case 1:
+                return "Yonetici";
+            case 2:
+                return "Sinif Ogretmeni";
+            case 3:
+                return "Brans Ogretmeni";
+            default:
+                return "Yetkisiz";
+        }
     }
 
     public void goBack() throws IOException {
@@ -42,5 +66,6 @@ public class UserInfoController implements Initializable {
     }
     public void delete() throws IOException {
         Logger.LogDebug("DELETE!");
+        SceneBuilder.Instance.BuildScene("user_list");
     }
 }

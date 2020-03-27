@@ -138,9 +138,9 @@
             <left>
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Yetkisi</Text>
             </left>
-            <right>
-                <Text fx:id="txtUserAuth" BorderPane.alignment="CENTER" />
-            </right>
+         <right>
+            <ChoiceBox fx:id="userAuth" prefWidth="150.0" BorderPane.alignment="CENTER" />
+         </right>
         </BorderPane>
     </VBox>
     <FlowPane alignment="CENTER" hgap="25" prefWidth="544.0" GridPane.rowIndex="12">
@@ -158,7 +158,7 @@
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/add.png" />
+                        <Image url="@../icons/edit.png" />
                     </image>
                 </ImageView>
             </graphic>
@@ -168,7 +168,7 @@
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/add.png" />
+                        <Image url="@../icons/delete.png" />
                     </image>
                 </ImageView>
             </graphic>

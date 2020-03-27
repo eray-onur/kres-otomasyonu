@@ -16,14 +16,6 @@
        <padding>
            <Insets left="25.0" right="25.0" />
        </padding>
-       <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
-           <left>
-               <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Numarasi</Text>
-           </left>
-           <right>
-               <Text fx:id="txtUserId" BorderPane.alignment="CENTER" />
-           </right>
-       </BorderPane>
        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
            <left>
                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Adi</Text>
