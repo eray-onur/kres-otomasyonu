@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.skin.TableHeaderRow?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      styleClass="app"
-      spacing="25"
-      alignment="CENTER"
-      fx:controller="meltem.controllers.UsersController">
-    <Text textAlignment="CENTER" styleClass="header1">Kullanicilar</Text>
+<VBox alignment="CENTER" prefHeight="667.0" prefWidth="463.0" spacing="15.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UsersController">
+    <Text style="-fx-font-size: 24px;" styleClass="header1" text="Kullanici Listesi" textAlignment="CENTER">Kullanicilar</Text>
 
     <TableView fx:id="table" onMousePressed="#clickItem">
 
     </TableView>
 
-    <VBox spacing="15" alignment="CENTER">
+    <VBox alignment="CENTER" spacing="15">
         <HBox alignment="CENTER">
-            <TextField fx:id="txtUserId" prefHeight="46" prefWidth="350"/>
-            <Button onAction="#findUser" fx:id="btnAdd" prefWidth="175">
+            <TextField fx:id="txtUserId" prefHeight="46" prefWidth="275" />
+            <Button fx:id="btnAdd" onAction="#findUser" prefWidth="175">
                 <graphic>
-                    <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../icons/search.png" />
                         </image>
@@ -37,10 +28,10 @@
             </Button>
         </HBox>
     </VBox>
-    <FlowPane alignment="CENTER" hgap="25">
+    <FlowPane alignment="BOTTOM_CENTER" columnHalignment="CENTER" focusTraversable="true" hgap="10.0" vgap="10.0">
         <Button onAction="#goBack">
             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../icons/arrow_left.png" />
                     </image>
@@ -50,7 +41,7 @@
         </Button>
         <Button onAction="#addData">
             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../icons/add.png" />
                     </image>
@@ -60,13 +51,19 @@
         </Button>
         <Button fx:id="btnEdit" onAction="#proceedToEdit">
             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../icons/edit.png" />
                     </image>
                 </ImageView>
             </graphic>
-            Secilen Kullaniciyi Goruntule
+            Secilen Kullanici'nin Bilgileri
         </Button>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
     </FlowPane>
+   <padding>
+      <Insets top="-25.0" />
+   </padding>
 </VBox>

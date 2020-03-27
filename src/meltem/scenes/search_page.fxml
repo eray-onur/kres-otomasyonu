@@ -23,7 +23,7 @@
             <Insets top="35" bottom="60"/>
         </padding>
         <Text textAlignment="JUSTIFY" GridPane.halignment="CENTER" styleClass="header1">
-            Sorgulama Paneli
+            Bilgi Sorgulama Paneli
         </Text>
     </HBox>
     <VBox GridPane.rowIndex="2" spacing="20" alignment="CENTER" GridPane.hgrow="ALWAYS">
@@ -41,7 +41,7 @@
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
                     <image>
-                        <Image url="@../icons/courses.png" />
+                        <Image url="@../icons/classroom.png" />
                     </image>
                 </ImageView>
             </graphic>

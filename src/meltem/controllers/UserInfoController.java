@@ -37,10 +37,10 @@ public class UserInfoController implements Initializable {
     public void goBack() throws IOException {
         SceneBuilder.Instance.BuildScene("user_list");
     }
-    public void goUpdate() throws IOException {
+    public void update() throws IOException {
         SceneBuilder.Instance.BuildScene("user_edit", new RouteData(1, "user"));
     }
-    public void goDelete() throws IOException {
+    public void delete() throws IOException {
         Logger.LogDebug("DELETE!");
     }
 }
