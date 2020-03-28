@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="667.0" prefWidth="463.0" spacing="15.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.AttendanceBranchController">
+    <Text style="-fx-font-size: 24px;" styleClass="header1" text="Sınıf Listesi" textAlignment="CENTER">Branş Ders Listesi</Text>
+
+    <TableView fx:id="tableBranches" onMousePressed="#findBranch">
+
+    </TableView>
+    <FlowPane alignment="BOTTOM_CENTER" columnHalignment="CENTER" focusTraversable="true" hgap="10.0" vgap="10.0">
+        <Button fx:id="btnEdit" onAction="#loadBranch">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Seçilen Branş Dersin Yoklama Listesi
+        </Button>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+    </FlowPane>
+    <padding>
+        <Insets top="-25.0" />
+    </padding>
+</VBox>

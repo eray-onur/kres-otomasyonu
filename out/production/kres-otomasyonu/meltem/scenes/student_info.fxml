@@ -6,49 +6,90 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10" prefHeight="400.0" prefWidth="800.0" styleClass="app" vgap="12" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentInfoController">
-    <HBox alignment="CENTER" spacing="75">
-        <Text styleClass="header1" style="-fx-font-size: 24">Ogrenci Bilgileri</Text>
-    </HBox>
-    <VBox alignment="CENTER" spacing="10" style="-fx-background-radius: 5; -fx-background-color: white" GridPane.rowIndex="2">
+<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentInfoController">
+    <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+        <image>
+            <Image backgroundLoading="true" url="@../icons/students.png" />
+        </image>
+    </ImageView>
+    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="10">
         <padding>
-            <Insets bottom="25" left="15" right="15" top="25" />
+            <Insets left="25.0" right="25.0" />
         </padding>
-
-        <BorderPane maxHeight="20.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text text="Ogrenci Adi" BorderPane.alignment="CENTER" />
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğrenci Numarası</Text>
             </left>
             <right>
-                <Text fx:id="txtStudentName" styleClass="body2" BorderPane.alignment="CENTER">Veli Telefon Numarasi</Text>
+                <Text fx:id="txtStudentId" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
-        <BorderPane maxHeight="20.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text text="Ogrenci Soyadi" BorderPane.alignment="CENTER" />
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğrenci Adı</Text>
             </left>
             <right>
-                <Text fx:id="txtStudentLastName" styleClass="body2" BorderPane.alignment="CENTER">Veli Telefon Numarasi</Text>
+                <Text fx:id="txtStudentName" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
-        <BorderPane maxHeight="20.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text text="Oryantasyon Baslangic Tarihi" BorderPane.alignment="CENTER" />
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğrenci Soyadı</Text>
             </left>
             <right>
-                <Text fx:id="txtOrientationStart" styleClass="body2" BorderPane.alignment="CENTER">Veli Telefon Numarasi</Text>
+                <Text fx:id="txtStudentLastName" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
-        <BorderPane maxHeight="20.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text text="Oryantasyon Bitis Tarihi" BorderPane.alignment="CENTER" />
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Oryantasyon Başlangıç</Text>
             </left>
             <right>
-                <Text fx:id="txtOrientationEnd" styleClass="body2" BorderPane.alignment="CENTER">Veli Telefon Numarasi</Text>
+                <Text fx:id="txtOrientationStart" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Oryantasyon Bitiş</Text>
+            </left>
+            <right>
+                <Text fx:id="txtOrientationEnd" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Veli Adı</Text>
+            </left>
+            <right>
+                <Text fx:id="txtParentName" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Veli Soyadı</Text>
+            </left>
+            <right>
+                <Text fx:id="txtParentLastName" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Veli Telefon No.</Text>
+            </left>
+            <right>
+                <Text fx:id="txtParentEmail" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Veli Email'i</Text>
+            </left>
+            <right>
+                <Text fx:id="txtParentNumber" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
     </VBox>
-    <HBox alignment="CENTER" spacing="15" GridPane.rowIndex="5">
+    <FlowPane alignment="CENTER" hgap="25" prefWidth="544.0" GridPane.rowIndex="12">
         <Button onAction="#goBack">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
@@ -59,7 +100,7 @@
             </graphic>
             Geri Don
         </Button>
-        <Button onAction="#goUpdate">
+        <Button fx:id="btnEdit" onAction="#update">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -67,9 +108,9 @@
                     </image>
                 </ImageView>
             </graphic>
-            Ogrenciyi Guncelle
+            Kullaniciyi Guncelle
         </Button>
-        <Button fx:id="btnEdit" onAction="#goDelete">
+        <Button fx:id="btnDelete" onAction="#delete">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -77,18 +118,28 @@
                     </image>
                 </ImageView>
             </graphic>
-            Ogrenciyi Sil
+            Kullaniciyi Sil
         </Button>
-    </HBox>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+    </FlowPane>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
 </GridPane>

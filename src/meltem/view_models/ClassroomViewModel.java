@@ -4,8 +4,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import meltem.models.Classroom;
+import meltem.models.Course;
 import meltem.models.Student;
 import meltem.services.logging.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassroomViewModel {
     public Classroom classroom;
@@ -30,5 +34,13 @@ public class ClassroomViewModel {
             Logger.LogError(ex.toString());
         }
     }
+
+    public CourseViewModel[] courses = new CourseViewModel[]{
+            new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2),
+            new CourseViewModel(1, "Türkçe", "Sema Yirun", 1),
+            new CourseViewModel(1, "Çizim", "Büşra Özel", 2),
+            new CourseViewModel(1, "Serbest Oyun", "Hülya Özdin",2),
+            new CourseViewModel(1, "İlgili Köşelerinde Oyun", "Seher Sedef Kurubaş",2),
+    };
 
 }

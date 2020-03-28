@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="meltem.scenes.CourseList"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER" prefHeight="667.0" prefWidth="463.0" spacing="15.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.CoursesController">
+    <Text style="-fx-font-size: 24px;" styleClass="header1" text="Ders Listesi" textAlignment="CENTER">Ders Listesi</Text>
 
-</AnchorPane>
+    <TableView fx:id="table" onMousePressed="#clickItem">
+
+    </TableView>
+
+    <VBox alignment="CENTER" spacing="15">
+        <HBox alignment="CENTER">
+            <TextField fx:id="txtCourseId" prefHeight="46" prefWidth="275" />
+            <Button fx:id="btnAdd" onAction="#findCourse" prefWidth="175">
+                <graphic>
+                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../icons/search.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+                Dersi Ara
+            </Button>
+        </HBox>
+    </VBox>
+    <FlowPane alignment="BOTTOM_CENTER" columnHalignment="CENTER" focusTraversable="true" hgap="10.0" vgap="10.0">
+        <Button onAction="#goBack">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/arrow_left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Geri Dön
+        </Button>
+        <Button onAction="#addData">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/add.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Yeni Ders Ekle
+        </Button>
+        <Button fx:id="btnEdit" onAction="#proceedToEdit">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Seçilen Dersi Güncelle
+        </Button>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+    </FlowPane>
+    <padding>
+        <Insets top="-25.0" />
+    </padding>
+</VBox>

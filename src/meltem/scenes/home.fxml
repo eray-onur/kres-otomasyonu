@@ -23,7 +23,7 @@
             <Insets top="35" bottom="30"/>
         </padding>
         <Text textAlignment="JUSTIFY" GridPane.halignment="CENTER" styleClass="header1">
-            Kres Otomasyon Paneli
+            Kreş Otomasyon Paneli
         </Text>
     </HBox>
     <VBox GridPane.rowIndex="2" spacing="40" alignment="CENTER" GridPane.hgrow="ALWAYS">
@@ -55,7 +55,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Toplanti Kayitlari
+            Toplanti Kayıtları
         </Button>
         <Button fx:id="btnEmergency">
             <graphic>
@@ -65,7 +65,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Acil Durum Numaralari
+            Acil Durum Numaraları
         </Button>
     </VBox>
     <Button GridPane.rowIndex="3" GridPane.columnIndex="0" fx:id="btnUsers">

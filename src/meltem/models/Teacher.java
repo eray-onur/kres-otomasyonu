@@ -6,4 +6,5 @@ public class Teacher {
     private String teacherLastName;
     private String teacherEmail;
     private byte teacherType;
+
 }

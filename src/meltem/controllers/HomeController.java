@@ -37,17 +37,8 @@ public class HomeController {
     private void LoadClassroom() throws IOException {
         btnClassrooms.setOnAction(e -> {
             try {
-                SceneBuilder.Instance.BuildScene("classroom");
+                SceneBuilder.Instance.BuildScene("attendance_list");
             } catch (IOException ex) {
-                Logger.LogError(ex.getMessage());
-            }
-        });
-    }
-    private void LoadCourse() throws  IOException {
-        btnClassrooms.setOnAction(e -> {
-            try {
-                SceneBuilder.Instance.BuildScene("course");
-            } catch(IOException ex) {
                 Logger.LogError(ex.getMessage());
             }
         });

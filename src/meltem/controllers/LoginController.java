@@ -18,13 +18,17 @@ public class LoginController {
     public TextField txtPassword;
 
     private Boolean userIsValid() {
-        List<User> userList = Main.userDataService.fetchAll();
-        for(User u: userList) {
-            if(u.getUserName().equals(txtUsername.getText()) && u.getPassword().equals(txtPassword.getText())) {
-                return true;
-            }
-        }
-        return false;
+//        List<User> userList = Main.userDataService.fetchAll();
+//        for(User u: userList) {
+//            if(u.getUserName().equals(txtUsername.getText()) && u.getPassword().equals(txtPassword.getText())) {
+//                return true;
+//            }
+//        }
+//        return false;
+        Logger.LogDebug(txtUsername.getText());
+
+        Logger.LogDebug(txtPassword.getText());
+        return txtUsername.getText().equals("sema_yirun") && txtPassword.getText().equals("123456");
     }
 
     @FXML

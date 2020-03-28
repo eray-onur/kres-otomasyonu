@@ -6,100 +6,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<?import java.lang.*?>-->
-<!--<?import java.util.*?>-->
-<!--<?import javafx.scene.*?>-->
-<!--<?import javafx.scene.control.*?>-->
-<!--<?import javafx.scene.layout.*?>-->
-<!--<?import javafx.scene.text.Text?>-->
-<!--<?import javafx.scene.image.ImageView?>-->
-<!--<?import javafx.scene.image.Image?>-->
-<!--<?import javafx.geometry.Insets?>-->
-<!--<GridPane xmlns="http://javafx.com/javafx"-->
-<!--          xmlns:fx="http://javafx.com/fxml"-->
-<!--          styleClass="app"-->
-<!--          vgap="12"-->
-<!--          hgap="10"-->
-<!--          fx:controller="meltem.controllers.UserInfoController"-->
-<!--          alignment="CENTER"-->
-<!--          prefHeight="400.0" prefWidth="800.0">-->
-<!--    <HBox GridPane.rowIndex="1"-->
-<!--          alignment="CENTER"-->
-<!--          spacing="75"-->
-<!--    >-->
-<!--        <Text styleClass="header1">Kullanici Bilgileri</Text>-->
-<!--    </HBox>-->
-<!--    <VBox GridPane.rowIndex="2" style="-fx-background-radius: 5; -fx-background-color: white" spacing="10" alignment="CENTER">-->
-<!--        <padding>-->
-<!--            <Insets top="25" bottom="25" left="15" right="15"/>-->
-<!--        </padding>-->
-<!--        <HBox GridPane.rowIndex="2"-->
-<!--              alignment="CENTER"-->
-<!--              spacing="75"-->
-<!--        >-->
-<!--            <Text styleClass="body2">Kullanici ID'si</Text>-->
-<!--            <Text fx:id="txtUserId"></Text>-->
-<!--        </HBox>-->
-<!--        <HBox-->
-<!--                GridPane.rowIndex="4"-->
-<!--                alignment="CENTER"-->
-<!--                spacing="75"-->
-<!--        >-->
-<!--            <Text styleClass="body2">Kullanici Adi</Text>-->
-<!--            <Text fx:id="txtUserName"></Text>-->
-<!--        </HBox>-->
-<!--        <HBox-->
-<!--                alignment="CENTER"-->
-<!--                spacing="75"-->
-<!--                GridPane.rowIndex="7"-->
-<!--        >-->
-<!--            <Text styleClass="body2">Kullanici Sifresi</Text>-->
-<!--            <Text fx:id="txtPw"></Text>-->
-<!--        </HBox>-->
-<!--        <HBox-->
-<!--                alignment="CENTER"-->
-<!--                spacing="75"-->
-<!--                GridPane.rowIndex="10"-->
-<!--        >-->
-<!--            <Text styleClass="body2">Yetki Seviyesi</Text>-->
-<!--            <Text fx:id="txtUserAuth"></Text>-->
-<!--        </HBox>-->
-<!--    </VBox>-->
-<!--    <HBox alignment="CENTER" GridPane.rowIndex="5" spacing="15">-->
-<!--        <Button onAction="#goBack">-->
-<!--            <graphic>-->
-<!--                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                    <image>-->
-<!--                        <Image url="@../icons/arrow_left.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--            Geri Don-->
-<!--        </Button>-->
-<!--        <Button onAction="#goUpdate">-->
-<!--            <graphic>-->
-<!--                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                    <image>-->
-<!--                        <Image url="@../icons/edit.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--            Kullaniciyi Guncelle-->
-<!--        </Button>-->
-<!--        <Button fx:id="btnEdit" onAction="#goDelete">-->
-<!--            <graphic>-->
-<!--                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                    <image>-->
-<!--                        <Image url="@../icons/delete.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--            Kullaniciyi Sil-->
-<!--        </Button>-->
-<!--    </HBox>-->
-<!--</GridPane>-->
-
 <GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UserInfoController">
     <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="6">
         <image>
@@ -112,7 +18,7 @@
         </padding>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Numarasi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Numarası</Text>
             </left>
             <right>
                 <Text fx:id="txtUserId" BorderPane.alignment="CENTER" />
@@ -120,7 +26,7 @@
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Adi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Adı</Text>
             </left>
             <right>
                 <Text fx:id="txtUserName" BorderPane.alignment="CENTER" />
@@ -128,7 +34,7 @@
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Soyadi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Soyadı</Text>
             </left>
             <right>
                 <Text fx:id="txtPw" BorderPane.alignment="CENTER" />
@@ -136,7 +42,7 @@
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Yetkisi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Yetkisi</Text>
             </left>
          <right>
             <ChoiceBox fx:id="userAuth" prefWidth="150.0" BorderPane.alignment="CENTER" />
@@ -152,7 +58,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Geri Don
+            Geri Dön
         </Button>
         <Button fx:id="btnEdit" onAction="#update">
             <graphic>
@@ -162,7 +68,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Kullaniciyi Guncelle
+            Kullanıcıyı Güncelle
         </Button>
         <Button fx:id="btnDelete" onAction="#delete">
             <graphic>
@@ -172,7 +78,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Kullaniciyi Sil
+            Kullanıcıyı Sil
         </Button>
     </FlowPane>
     <columnConstraints>

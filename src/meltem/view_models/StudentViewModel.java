@@ -14,6 +14,9 @@ public class StudentViewModel {
     public ObservableValue<SimpleStringProperty> studentLastName;
     public ObservableValue<SimpleStringProperty> orientationStart;
     public ObservableValue<SimpleStringProperty> orientationEnd;
+    public ObservableValue<SimpleStringProperty> parentName;
+    public ObservableValue<SimpleStringProperty> parentLastName;
+    public ObservableValue<SimpleStringProperty> parentEmail;
     public ObservableValue<SimpleStringProperty> parentNumber;
 
     public StudentViewModel (
@@ -22,7 +25,10 @@ public class StudentViewModel {
             String lname,
             String orientationStart,
             String orientationEnd,
-            String parentNumber
+            String parentNumber,
+            String parentName,
+            String parentLastName,
+            String parentEmail
     ) {
         try {
             this.studentId = (ObservableValue) new SimpleIntegerProperty(id);
@@ -30,9 +36,11 @@ public class StudentViewModel {
             this.studentLastName = (ObservableValue) new SimpleStringProperty(lname);
             this.orientationStart = (ObservableValue) new SimpleStringProperty(orientationStart);
             this.orientationEnd = (ObservableValue) new SimpleStringProperty(orientationEnd);
+            this.parentName = (ObservableValue) new SimpleStringProperty(parentName);
+            this.parentLastName = (ObservableValue) new SimpleStringProperty(parentLastName);
+            this.parentEmail = (ObservableValue) new SimpleStringProperty(parentEmail);
             this.parentNumber = (ObservableValue) new SimpleStringProperty(parentNumber);
-
-            this.student = new Student(id, name, lname, orientationStart, orientationEnd);
+            this.student = new Student(id, name, lname, orientationStart, orientationEnd, parentName,parentLastName,parentNumber,parentEmail);
         }
         catch(NullPointerException ex) {
             Logger.LogError(ex.toString());

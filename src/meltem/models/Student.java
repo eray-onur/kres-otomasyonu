@@ -7,6 +7,7 @@ public class Student {
     public int studentId;
     public String studentName;
     public String studentLastName;
+    public String studentGender;
     public String orientationStart;
     public String orientationEnd;
     public String parentName;
@@ -25,6 +26,7 @@ public class Student {
         this.studentLastName = lastName;
         this.orientationStart = orientationStart;
         this.orientationEnd = orientationEnd;
+        this.studentGender = "Erkek";
     }
     public Student(int id,
                    String name,

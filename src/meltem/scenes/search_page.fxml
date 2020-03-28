@@ -35,7 +35,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Ogrenci Tablosu
+            Öğrenci Tablosu
         </Button>
         <Button fx:id="btnClassrooms" onAction="#goClasses">
             <graphic>
@@ -45,7 +45,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Siniflar
+            Sınıflar
         </Button>
         <Button fx:id="btnCourses" onAction="#goCourses">
             <graphic>
@@ -65,7 +65,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Ogretmenler
+            Öğretmenler
         </Button>
         <Button onAction="#goBack">
             <graphic>
@@ -75,7 +75,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Geri Don
+            Geri Dön
         </Button>
     </VBox>
 </GridPane>

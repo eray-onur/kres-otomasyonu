@@ -27,4 +27,6 @@ public class Classroom {
     public String getClassroomName() {
         return this.classroomName;
     }
+    public void setClassroomCapacity(int capacity) { this.capacity = capacity; }
+    public int getClassroomCapacity() { return this.capacity; }
 }

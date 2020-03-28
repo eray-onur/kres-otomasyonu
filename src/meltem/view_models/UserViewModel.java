@@ -3,7 +3,6 @@ package meltem.view_models;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
-import meltem.models.Student;
 import meltem.models.User;
 import meltem.services.logging.Logger;
 

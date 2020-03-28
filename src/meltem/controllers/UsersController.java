@@ -42,10 +42,9 @@ public class UsersController implements Initializable {
     @FXML
     private TableView<UserViewModel> table = new TableView<UserViewModel>();
     public final ObservableList<UserViewModel> data = FXCollections.observableArrayList(
-            new UserViewModel(1, "allah", "1", 1),
-            new UserViewModel(2, "allah", "1", 1),
-            new UserViewModel(3, "allah", "1", 1),
-            new UserViewModel(4, "allah", "1", 1)
+            new UserViewModel(1, "sema_yirun", "1234", 1),
+            new UserViewModel(2, "busra_ozel", "123", 2),
+            new UserViewModel(3, "neriman_unel", "1", 3)
     );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -40,51 +40,121 @@ public class StudentsController implements Initializable {
     @FXML
     private TableView<StudentViewModel> table = new TableView<StudentViewModel>();
     public final ObservableList<StudentViewModel> data = FXCollections.observableArrayList(
-                    new StudentViewModel(1, "Ali", "Ozcan" , "27/03/2020", "28/03/2020", "0 555 333 2211"),
-                    new StudentViewModel(2, "Veli", "Ozcan" , "27/03/2020", "28/03/2020", "0 555 333 2211"),
-                    new StudentViewModel(3, "Ahmet", "Ozcan" , "27/03/2020", "28/03/2020", "0 555 333 2211"),
-                    new StudentViewModel(4, "Mehmet", "Ozcan" , "27/03/2020", "28/03/2020", "0 555 333 2211"),
-                    new StudentViewModel(5, "Ali", "Ozcan" , "27/03/2020", "28/03/2020", "0 555 333 2211"),
-                    new StudentViewModel(6, "Ali", "Ozcan" , "27/03/2020", "28/03/2020", "0 555 333 2211")
+            new StudentViewModel(1,
+                    "Ali",
+                    "Oncul",
+                    "23/03/2020",
+                    "07/04/2020",
+                    "0543 555 4433",
+                    "Ahmet",
+                    "Oncul",
+                    "aoncul76@hotmail.com"
+            ),
+            new StudentViewModel(1,
+                    "Veli",
+                    "Turk",
+                    "23/03/2020",
+                    "07/04/2020",
+                    "0543 555 4433",
+                    "Huseyin",
+                    "Turk",
+                    ""
+            ),
+            new StudentViewModel(1,
+                    "Mehmet",
+                    "Kaya",
+                    "23/03/2020",
+                    "07/04/2020",
+                    "0543 666 1122",
+                    "Nazan",
+                    "Ata",
+                    "nazan.ata@gmail.com"
+            ),
+            new StudentViewModel(1,
+                    "Abdullah",
+                    "Gök",
+                    "23/03/2020",
+                    "07/04/2020",
+                    "0543 222 3399",
+                    "Davud",
+                    "Gök",
+                    ""
+            ),
+            new StudentViewModel(1,
+                    "Atakan",
+                    "Irmak",
+                    "23/03/2020",
+                    "07/04/2020",
+                    "0543 545 4433",
+                    "Davud",
+                    "Oncul",
+                    "aoncul76@hotmail.com"
+            )
     );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnEdit.setDisable(true);
         table.setEditable(true);
         // First Name
-        TableColumn<StudentViewModel, SimpleStringProperty> firstNameCol = new TableColumn<>("Ogrenci Adi");
+        TableColumn<StudentViewModel, SimpleStringProperty> firstNameCol = new TableColumn<>("Öğrenci Adı");
         firstNameCol.setMinWidth(100);
         firstNameCol.setCellValueFactory(
                 student -> student.getValue().studentName
         );
         // Last Name
-        TableColumn<StudentViewModel, SimpleStringProperty> lastNameCol = new TableColumn<>("Ogrenci Soyadi");
+        TableColumn<StudentViewModel, SimpleStringProperty> lastNameCol = new TableColumn<>("Öğrenci Soyadı");
         lastNameCol.setMinWidth(100);
         lastNameCol.setCellValueFactory(
                 student -> student.getValue().studentLastName
         );
         // Orientation Start
-        TableColumn<StudentViewModel, SimpleStringProperty> orientatonStartCol = new TableColumn<>("Oryantasyon Baslangic Tarihi");
+        TableColumn<StudentViewModel, SimpleStringProperty> orientatonStartCol = new TableColumn<>("Oryantasyon Baslangıç Tarihi");
         orientatonStartCol.setMinWidth(250);
         orientatonStartCol.setCellValueFactory(
                 student -> student.getValue().orientationStart
         );
         // Orientation End
-        TableColumn<StudentViewModel, SimpleStringProperty> orientatonEndCol = new TableColumn<>("Oryantasyon Bitis Tarihi");
+        TableColumn<StudentViewModel, SimpleStringProperty> orientatonEndCol = new TableColumn<>("Oryantasyon Bitiş Tarihi");
         orientatonEndCol.setMinWidth(200);
         orientatonEndCol.setCellValueFactory(
                 student -> student.getValue().orientationEnd
         );
         // Parent Phone Number
-        TableColumn<StudentViewModel, SimpleStringProperty> phoneNumberCol = new TableColumn<>("Veli Telefon Numarasi");
-        phoneNumberCol.setMinWidth(175);
-        phoneNumberCol.setCellValueFactory(
+        TableColumn<StudentViewModel, SimpleStringProperty> parentNameCol = new TableColumn<>("Veli Adı");
+        parentNameCol.setMinWidth(175);
+        parentNameCol.setCellValueFactory(
+                student -> student.getValue().parentName
+        );
+        // Parent Phone Number
+        TableColumn<StudentViewModel, SimpleStringProperty> parentLnameCol = new TableColumn<>("Veli Soyadı");
+        parentLnameCol.setMinWidth(175);
+        parentLnameCol.setCellValueFactory(
+                student -> student.getValue().parentLastName
+        );
+        // Parent Phone Number
+        TableColumn<StudentViewModel, SimpleStringProperty> parentNumberCol = new TableColumn<>("Veli Telefon No.");
+        parentNumberCol.setMinWidth(175);
+        parentNumberCol.setCellValueFactory(
                 student -> student.getValue().parentNumber
+        );
+        // Parent Phone Number
+        TableColumn<StudentViewModel, SimpleStringProperty> emailCol = new TableColumn<>("Veli Email");
+        emailCol.setMinWidth(175);
+        emailCol.setCellValueFactory(
+                student -> student.getValue().parentEmail
         );
 
 
         table.setItems(data);
-        table.getColumns().addAll(firstNameCol, lastNameCol, orientatonStartCol, orientatonEndCol, phoneNumberCol);
+        table.getColumns().addAll(
+                firstNameCol,
+                lastNameCol,
+                orientatonStartCol,
+                orientatonEndCol,
+                parentNameCol,
+                parentLnameCol,
+                parentNumberCol
+        );
 
     }
 

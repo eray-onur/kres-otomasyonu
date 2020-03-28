@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" prefHeight="667.0" prefWidth="463.0" spacing="15.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentsController">
-    <Text style="-fx-font-size: 24px;" styleClass="header1" text="Kullanici Listesi" textAlignment="CENTER">Ogrenci Listesi</Text>
+    <Text style="-fx-font-size: 24px;" styleClass="header1" text="Kullanici Listesi" textAlignment="CENTER">Kullanicilar</Text>
 
     <TableView fx:id="table" onMousePressed="#clickItem">
 
@@ -16,7 +16,7 @@
     <VBox alignment="CENTER" spacing="15">
         <HBox alignment="CENTER">
             <TextField fx:id="txtStudentId" prefHeight="46" prefWidth="275" />
-            <Button onAction="#findStudent" prefWidth="175">
+            <Button fx:id="btnAdd" onAction="#findStudent" prefWidth="175">
                 <graphic>
                     <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -24,7 +24,7 @@
                         </image>
                     </ImageView>
                 </graphic>
-                Ogrenci Arama
+                Öğrenci Ara
             </Button>
         </HBox>
     </VBox>
@@ -47,7 +47,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Yeni Ogrenci Ekle
+            Yeni Öğrenci Ekle
         </Button>
         <Button fx:id="btnEdit" onAction="#proceedToEdit">
             <graphic>
@@ -57,7 +57,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Secilen Ogrenci'yi Guncelle
+            Seçilen Öğrenci'nin Bilgileri
         </Button>
         <VBox.margin>
             <Insets />
@@ -67,78 +67,3 @@
         <Insets top="-25.0" />
     </padding>
 </VBox>
-
-
-
-        <!--<?xml version="1.0" encoding="UTF-8"?>-->
-
-<!--<?import java.lang.*?>-->
-<!--<?import java.util.*?>-->
-<!--<?import javafx.scene.*?>-->
-<!--<?import javafx.scene.control.*?>-->
-<!--<?import javafx.scene.layout.*?>-->
-
-<!--<?import javafx.scene.control.skin.TableHeaderRow?>-->
-<!--<?import javafx.scene.text.Text?>-->
-<!--<?import javafx.scene.image.ImageView?>-->
-<!--<?import javafx.scene.image.Image?>-->
-<!--<VBox xmlns="http://javafx.com/javafx"-->
-<!--      xmlns:fx="http://javafx.com/fxml"-->
-<!--      styleClass="app"-->
-<!--      spacing="25"-->
-<!--      alignment="CENTER"-->
-<!--      fx:controller="meltem.controllers.StudentsController">-->
-<!--    <Text textAlignment="CENTER" styleClass="header1">Ogrenciler</Text>-->
-
-<!--    <TableView fx:id="table" onMousePressed="#clickItem">-->
-
-<!--    </TableView>-->
-
-<!--    <VBox spacing="15" alignment="CENTER">-->
-<!--        <HBox alignment="CENTER">-->
-<!--            <TextField fx:id="txtStudentId" prefHeight="46" prefWidth="350"/>-->
-<!--            <Button onAction="#findStudent" fx:id="btnAdd" prefWidth="175">-->
-<!--                <graphic>-->
-<!--                    <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                        <image>-->
-<!--                            <Image url="@../icons/search.png" />-->
-<!--                        </image>-->
-<!--                    </ImageView>-->
-<!--                </graphic>-->
-<!--                Ogrenciyi Bul-->
-<!--            </Button>-->
-<!--        </HBox>-->
-<!--    </VBox>-->
-<!--    <FlowPane alignment="CENTER" hgap="25">-->
-<!--        <Button onAction="#goBack">-->
-<!--            <graphic>-->
-<!--                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                    <image>-->
-<!--                        <Image url="@../icons/arrow_left.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--            Geri Don-->
-<!--        </Button>-->
-<!--        <Button onAction="#addData">-->
-<!--            <graphic>-->
-<!--                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                    <image>-->
-<!--                        <Image url="@../icons/add.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--            Yeni Ogrenci Ekle-->
-<!--        </Button>-->
-<!--        <Button fx:id="btnEdit" onAction="#proceedToEdit">-->
-<!--            <graphic>-->
-<!--                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="35" fitWidth="35">-->
-<!--                    <image>-->
-<!--                        <Image url="@../icons/edit.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--            Secilen Ogrenciyi Guncelle-->
-<!--        </Button>-->
-<!--    </FlowPane>-->
-<!--</VBox>-->
