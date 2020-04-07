@@ -12,6 +12,7 @@ import meltem.services.logging.Logger;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class SceneBuilder<T> {
     public static RouteData routeData = new RouteData();
@@ -33,8 +34,8 @@ public class SceneBuilder<T> {
 
     public void BuildScene(String sceneName) throws IOException {
         routeData = null;
-        Logger.Log(LogType.Debug, String.format("../scenes/%s.fxml", getSceneName(sceneName)));
-        Parent root = FXMLLoader.load(getClass().getResource(String.format("../scenes/%s.fxml", getSceneName(sceneName))));
+        Logger.Log(LogType.Debug, String.format("/meltem/scenes/%s.fxml", getSceneName(sceneName)));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(String.format("meltem/scenes/%s.fxml", getSceneName(sceneName)))));
         PrimaryStage.setTitle("Kres Otomasyonu");
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add("meltem/styles/main.css");
@@ -48,8 +49,8 @@ public class SceneBuilder<T> {
     }
     public void BuildScene(String sceneName, RouteData data) throws IOException {
         routeData = data;
-        Logger.Log(LogType.Debug, String.format("../scenes/%s.fxml", getSceneName(sceneName)));
-        Parent root = FXMLLoader.load(getClass().getResource(String.format("../scenes/%s.fxml", getSceneName(sceneName))));
+        Logger.Log(LogType.Debug, String.format("./scenes/%s.fxml", getSceneName(sceneName)));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(String.format("\"meltem/scenes/%s.fxml", getSceneName(sceneName))));
         PrimaryStage.setTitle("Kres Otomasyonu");
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add("meltem/styles/main.css");

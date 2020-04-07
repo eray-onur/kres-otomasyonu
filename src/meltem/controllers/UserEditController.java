@@ -89,10 +89,10 @@ public class UserEditController implements Initializable {
     }
     public void changeAuthSelection() {
         userAuth.getSelectionModel().selectedIndexProperty().addListener(
-                new ChangeListener<>() {
+                new ChangeListener() {
                     @Override
-                    public void changed(ObservableValue<? extends Number> observableValue, Number val, Number newVal) {
-                        user.setUserAuth((Short) newVal);
+                    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                        user.setUserAuth((Short) newValue);
                         Logger.LogDebug(String.valueOf(user.getUserAuth()));
                     }
                 }

@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="kres-otomasyonu:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/kres_otomasyonu_jar</output-path>
-    <root id="archive" name="kres-otomasyonu.jar">
-      <element id="module-output" name="kres-otomasyonu" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/useful_sql_scripts/sqljdbc_8.2/enu/mssql-jdbc-8.2.0.jre11.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>

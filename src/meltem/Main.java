@@ -11,10 +11,10 @@ import meltem.services.logging.Logger;
 import meltem.services.SceneBuilder;
 
 public class Main extends Application {
-    public static UserDataService userDataService = new UserDataService();
-    public static StudentDataService studentDataService = new StudentDataService();
-    public static ClassroomDataService classroomDataService = new ClassroomDataService();
-    public static TeacherDataService teacherDataService = new TeacherDataService();
+//    public static UserDataService userDataService = new UserDataService();
+//    public static StudentDataService studentDataService = new StudentDataService();
+//    public static ClassroomDataService classroomDataService = new ClassroomDataService();
+//    public static TeacherDataService teacherDataService = new TeacherDataService();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
