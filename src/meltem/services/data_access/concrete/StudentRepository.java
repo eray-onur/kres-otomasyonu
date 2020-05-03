@@ -22,7 +22,7 @@ public class StudentRepository extends PersistentDataService<Student> {
     }
 
     @Override
-    public Student fetchById(int id) throws SQLException {
+    public Student fetchById(int id) {
         Student[] studentList = new Student[1];
         try {
             this.connect();
@@ -36,8 +36,8 @@ public class StudentRepository extends PersistentDataService<Student> {
                         rs.getInt("student_id"),
                         rs.getString("student_name"),
                         rs.getString("student_lastname"),
-                        rs.getDate("orientation_start").toString(),
-                        rs.getDate("orientation_end").toString(),
+                        rs.getString("orientation_start"),
+                        rs.getString("orientation_end"),
                         rs.getString("parent_name"),
                         rs.getString("parent_lastname"),
                         rs.getString("parent_phone"),
@@ -79,8 +79,8 @@ public class StudentRepository extends PersistentDataService<Student> {
                         rs.getInt("student_id"),
                         rs.getString("student_name"),
                         rs.getString("student_lastname"),
-                        rs.getDate("orientation_start").toString(),
-                        rs.getDate("orientation_end").toString(),
+                        rs.getString("orientation_start"),
+                        rs.getString("orientation_end"),
                         rs.getString("parent_name"),
                         rs.getString("parent_lastname"),
                         rs.getString("parent_phone"),
@@ -108,8 +108,8 @@ public class StudentRepository extends PersistentDataService<Student> {
             pst.setInt(1, entity.getStudentId());
             pst.setString(2, entity.getStudentName());
             pst.setString(3, entity.getStudentLastName());
-            pst.setDate(4, Date.valueOf(entity.getOrientationStart()));
-            pst.setDate(5, Date.valueOf(entity.getOrientationEnd()));
+            pst.setString(4, entity.getOrientationStart());
+            pst.setString(5, entity.getOrientationEnd());
             pst.setString(6, entity.getParentName());
             pst.setString(7, entity.getParentLastName());
             pst.setString(8, entity.getParentNumber());
@@ -133,8 +133,8 @@ public class StudentRepository extends PersistentDataService<Student> {
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setString(1, entity.getStudentName());
             pst.setString(2, entity.getStudentLastName());
-            pst.setDate(3, Date.valueOf(entity.getOrientationStart()));
-            pst.setDate(4, Date.valueOf(entity.getOrientationEnd()));
+            pst.setString(3, entity.getOrientationStart());
+            pst.setString(4, entity.getOrientationEnd());
             pst.setString(5, entity.getParentName());
             pst.setString(6, entity.getParentLastName());
             pst.setString(7, entity.getParentNumber());

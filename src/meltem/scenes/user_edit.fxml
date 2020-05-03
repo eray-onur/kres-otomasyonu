@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="5.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UserEditController">
+<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UserEditController">
     <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="6">
         <image>
             <Image backgroundLoading="true" url="@../icons/user.png" />
@@ -16,14 +16,6 @@
         <padding>
             <Insets left="25.0" right="25.0" />
         </padding>
-        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
-            <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Numarası</Text>
-            </left>
-            <right>
-                <Text fx:id="txtUserId" BorderPane.alignment="CENTER" />
-            </right>
-        </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Adı</Text>
@@ -34,7 +26,7 @@
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Soyadı</Text>
+                <Text styleClass="body2" text="Kullanıcı Şifresi" BorderPane.alignment="CENTER">Kullanıcı Soyadı</Text>
             </left>
             <right>
                 <TextField fx:id="txtPw" BorderPane.alignment="CENTER" />
@@ -49,7 +41,7 @@
             </right>
         </BorderPane>
     </VBox>
-    <FlowPane alignment="CENTER" hgap="25" prefHeight="90.0" prefWidth="544.0" GridPane.rowIndex="12">
+    <FlowPane alignment="CENTER" hgap="25" prefWidth="544.0" GridPane.rowIndex="12">
         <Button onAction="#goBack">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
@@ -60,15 +52,15 @@
             </graphic>
             Geri Dön
         </Button>
-        <Button onAction="#update">
+        <Button fx:id="btnUpdate" onAction="#updateUser">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/edit.png" />
+                        <Image url="@../icons/add.png" />
                     </image>
                 </ImageView>
             </graphic>
-            Kullanıcıyı Güncelle
+            Kullanıcıyı Ekle
         </Button>
     </FlowPane>
     <columnConstraints>

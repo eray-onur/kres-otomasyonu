@@ -16,6 +16,7 @@ public class CourseViewModel{
     public ObservableValue<SimpleStringProperty> teacherName;
     public ObservableValue<SimpleStringProperty> teacherLastName;
     public ObservableValue<SimpleStringProperty> teacherPhone;
+    public ObservableValue<SimpleStringProperty> teacherEmail;
 
     public CourseViewModel (
             Course course
@@ -28,6 +29,7 @@ public class CourseViewModel{
             this.teacherName = (ObservableValue) new SimpleStringProperty(course.getTeacherName());
             this.teacherLastName = (ObservableValue) new SimpleStringProperty(course.getTeacherLastName());
             this.teacherPhone = (ObservableValue) new SimpleStringProperty(course.getTeacherPhone());
+            this.teacherEmail = (ObservableValue) new SimpleStringProperty(course.getTeacherEmail());
             //Logger.LogDebug(this.course.courseName + " is generated!");
         }
         catch(NullPointerException ex) {

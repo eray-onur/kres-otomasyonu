@@ -6,40 +6,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="1.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentNewController">
-    <HBox alignment="CENTER" prefHeight="500.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-        <children>
-            <GridPane alignment="CENTER" HBox.hgrow="ALWAYS">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                </rowConstraints>
-                <children>
-                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                        <children>
-                            <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image backgroundLoading="true" url="@../icons/students.png" />
-                                </image>
-                            </ImageView>
-                        </children>
-                    </VBox>
-                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
-                        <children>
-                            <Text fill="WHITE" text="Lütfen adam gibi verin şu değerleri amk evlatları">
-                                <font>
-                                    <Font size="20.0" />
-                                </font>
-                            </Text>
-                        </children>
-                    </VBox>
-                </children>
-            </GridPane>
-        </children>
-    </HBox>
+<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="1.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentEditController">
+   <HBox alignment="CENTER" prefHeight="500.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <children>
+         <GridPane alignment="CENTER" HBox.hgrow="ALWAYS">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                      <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image backgroundLoading="true" url="@../icons/students.png" />
+                          </image>
+                      </ImageView>
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+                  <children>
+                      <Text fill="WHITE" text="Lütfen adam gibi verin şu değerleri amk evlatları">
+                        <font>
+                           <Font size="20.0" />
+                        </font>
+                     </Text>
+                  </children>
+               </VBox>
+            </children>
+         </GridPane>
+      </children>
+   </HBox>
     <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="1">
         <padding>
             <Insets left="25.0" right="25.0" />
@@ -50,9 +50,9 @@
             </left>
             <right>
                 <TextField fx:id="txtStudentName" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -61,9 +61,9 @@
             </left>
             <right>
                 <TextField fx:id="txtStudentLastName" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -72,9 +72,9 @@
             </left>
             <right>
                 <TextField fx:id="txtOryantasyonBas" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -83,9 +83,9 @@
             </left>
             <right>
                 <TextField fx:id="txtOryantasyonBit" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -94,9 +94,9 @@
             </left>
             <right>
                 <TextField fx:id="txtParentName" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -105,9 +105,9 @@
             </left>
             <right>
                 <TextField fx:id="txtParentLastName" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -116,9 +116,9 @@
             </left>
             <right>
                 <TextField fx:id="txtParentNumber" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -127,36 +127,35 @@
             </left>
             <right>
                 <TextField fx:id="txtParentEmail" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="16.0" />
-                    </font></TextField>
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             </right>
         </BorderPane>
     </VBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-        <children>
-            <Button onAction="#goBack">
-                <graphic>
-                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../icons/arrow_left.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-                Geri Dön
-            </Button>
-            <Button fx:id="btnAdd" onAction="#add">
-                <graphic>
-                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../icons/add.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-                Öğrenciyi Sınıfa Ekle
-            </Button>
-        </children>
-    </HBox>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <children>
+           <Button onAction="#goBack">
+               <graphic>
+                   <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../icons/arrow_left.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+               Geri Dön
+           </Button>
+           <Button fx:id="btnAdd" onAction="#update" text="Öğrenciyi Güncelle">
+               <graphic>
+                   <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../icons/edit.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </Button>
+      </children>
+   </HBox>
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>

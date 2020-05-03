@@ -3,11 +3,9 @@ package meltem.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import meltem.Main;
-import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.ClassroomAttendanceRepository;
@@ -15,15 +13,15 @@ import meltem.services.data_access.concrete.StudentRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.StudentViewModel;
 
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class StudentEditController implements Initializable {
+public class StudentNewController implements Initializable {
     public static int StudentId = -1;
-    public static int route = 1;
+    public static int ClassroomId = -1;
+    public static int BranchCourseId = -1;
+    public static int route = 0;
     Student student = null;
     @FXML
     public Text txtStudentId;
@@ -50,7 +48,6 @@ public class StudentEditController implements Initializable {
             if(StudentId != -1) {
 
                 student = new StudentViewModel(StudentRepository.Instance.fetchById(StudentId)).student;
-                Logger.LogDebug(student.getParentNumber() + " IS THE PARENT NUMBER!");
 
                 if(txtStudentId != null) {
                     txtStudentId.setText(String.valueOf(StudentId));
@@ -64,11 +61,12 @@ public class StudentEditController implements Initializable {
                 txtParentName.setText(student.getParentName());
                 txtParentLastName.setText(student.getParentLastName());
                 txtParentEmail.setText(student.getParentEmail());
+                StudentId = -1;
 
             }
 
-            if(StudentId != -1) {
-                Logger.LogDebug(String.valueOf(StudentId));
+            if(ClassroomId != -1) {
+                Logger.LogDebug(String.valueOf(ClassroomId));
             }
 
         } catch (Exception e) {
@@ -97,7 +95,7 @@ public class StudentEditController implements Initializable {
     public void goBack(int route) throws IOException {
         switch(route) {
             case 1:
-                SceneBuilder.Instance.BuildScene("classroom_info_admin");
+                SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
                 break;
             case 2:
                 SceneBuilder.Instance.BuildScene("student_list");
@@ -124,7 +122,8 @@ public class StudentEditController implements Initializable {
         );
 
         try {
-            StudentRepository.Instance.UpdateById(updatedStudent, StudentId);
+            StudentRepository.Instance.UpdateById(updatedStudent, student.getStudentId());
+            Logger.LogDebug(StudentRepository.Instance.fetchById(student.getStudentId()).getParentName());
             goBack(route);
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -147,8 +146,8 @@ public class StudentEditController implements Initializable {
         );
 
         try {
-            StudentRepository.Instance.Add(studentToAdd);
-            SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
+            ClassroomAttendanceRepository.Instance.Add(studentToAdd);
+            goBack(route);
         } catch(Exception ex) {
             ex.printStackTrace();
         }

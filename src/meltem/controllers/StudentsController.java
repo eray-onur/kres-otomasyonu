@@ -35,17 +35,32 @@ import java.util.ResourceBundle;
 public class StudentsController implements Initializable {
     @FXML
     public Button btnUpdateStudent;
+    @FXML
     public TableView<StudentViewModel> tableStudents;
+    @FXML
     public TableColumn<StudentViewModel, SimpleIntegerProperty> colStudentId;
+    @FXML
     public TableColumn<StudentViewModel, SimpleStringProperty> colStudentName;
+    @FXML
     public TableColumn<StudentViewModel, SimpleStringProperty> colStudentLastName;
+    @FXML
     public TableColumn<StudentViewModel, SimpleStringProperty> colParentPhone;
-    int selectedId = 0;
+    @FXML
+    public TableColumn<StudentViewModel, SimpleStringProperty> colOrientationStart;
+    @FXML
+    public TableColumn<StudentViewModel, SimpleStringProperty> colOrientationEnd;
+    @FXML
+    public Button btnParentInfo;
+    @FXML
+    public Button btnPaymentInfo;
     @FXML
     public Button btnEdit;
     @FXML
     public TextField txtStudentId;
+
     public ObservableList<StudentViewModel> studentVMs = FXCollections.observableArrayList();
+
+    private int selectedId;
 
     public StudentsController() throws SQLException {
     }
@@ -62,8 +77,7 @@ public class StudentsController implements Initializable {
             SceneBuilder.Instance.BuildScene("student_info_branch", new RouteData(studentId, "student"));
         }
     }
-    @FXML
-    private TableView<StudentViewModel> table = new TableView<StudentViewModel>();
+
     public final ObservableList<StudentViewModel> data = FXCollections.observableArrayList(
             fetchAllModelsForStudents()
     );
@@ -78,8 +92,11 @@ public class StudentsController implements Initializable {
 
     private void getCourseViewModel() {
         if(tableStudents.getSelectionModel().getSelectedItem() != null) {
+            selectedId = tableStudents.getSelectionModel().getSelectedItem().student.getStudentId();
+            StudentEditController.StudentId = selectedId;
+            Logger.LogDebug(String.valueOf(selectedId) + " is the selected ID.");
             btnUpdateStudent.setDisable(false);
-            Logger.LogDebug(String.valueOf(AdminClassroomInfoController.ClassroomId));
+            btnPaymentInfo.setDisable(false);
         }
     }
 
@@ -103,48 +120,29 @@ public class StudentsController implements Initializable {
         colParentPhone.setCellValueFactory(
                 student -> student.getValue().parentNumber
         );
+        colOrientationStart.setCellValueFactory(
+                student -> student.getValue().orientationStart
+        );
+        colOrientationEnd.setCellValueFactory(
+                student -> student.getValue().orientationEnd
+        );
+
 
 
         tableStudents.setItems(data);
-
-        tableStudents.getColumns().addAll(
-                colStudentId,
-                colStudentName,
-                colStudentLastName,
-                colParentPhone
-        );
 
         tableStudents.setOnMouseClicked(v -> getCourseViewModel());
 
     }
 
-    public void clickItem(MouseEvent event) {
-        table.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //selectedId = table.getSelectionModel().getSelectedItem().student.studentId;
-                Logger.LogDebug(String.valueOf(selectedId));
-                if(selectedId != 0) {
-                    btnEdit.setDisable(false);
-                }
-            }
-        });
-    }
-
-    public void assignStudent() throws IOException {
-        SceneBuilder.Instance.BuildScene("student_assign_branch");
-    }
-
-    public void addData() throws IOException {
+    public void proceedToAdd() throws IOException {
+        StudentNewController.route = 2;
         SceneBuilder.Instance.BuildScene("student_new");
     }
 
-    public void proceedToAdd() throws IOException {
-        SceneBuilder.Instance.BuildScene("student_info", new RouteData(selectedId, "student"));
-    }
-
     public void proceedToEdit() throws IOException {
-        SceneBuilder.Instance.BuildScene("student_edit", new RouteData(selectedId, "student"));
+        StudentEditController.route = 2;
+        SceneBuilder.Instance.BuildScene("student_edit");
     }
     public void proceedToInfo() throws IOException {
         SceneBuilder.Instance.BuildScene("student_info", new RouteData(selectedId, "student"));

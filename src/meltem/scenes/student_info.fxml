@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentInfoController">
+<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="meltem.controllers.StudentInfoController">
     <ImageView fx:id="imageView" fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
         <image>
             <Image backgroundLoading="true" url="@../icons/students.png" />
@@ -45,7 +46,7 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Oryantasyon Başlangıç</Text>
             </left>
             <right>
-                <Text fx:id="txtOrientationStart" BorderPane.alignment="CENTER" />
+                <Text fx:id="txtOryantasyonBas" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -53,7 +54,7 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Oryantasyon Bitiş</Text>
             </left>
             <right>
-                <Text fx:id="txtOrientationEnd" BorderPane.alignment="CENTER" />
+                <Text fx:id="txtOryantasyonBit" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -101,7 +102,7 @@
                 </graphic>
                 Geri Dön
             </Button>
-            <Button onAction="#update">
+            <Button onAction="#add">
                 <graphic>
                     <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -109,7 +110,7 @@
                         </image>
                     </ImageView>
                 </graphic>
-                Öğrenci Bilgilerini Güncelle
+                Öğrenciyi Ekle
             </Button>
         </children>
         <GridPane.margin>

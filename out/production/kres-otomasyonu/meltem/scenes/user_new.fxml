@@ -52,7 +52,7 @@
             </graphic>
             Geri Dön
         </Button>
-        <Button fx:id="btnAdd" onAction="#goBack">
+        <Button fx:id="btnAdd" onAction="#addUser">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>

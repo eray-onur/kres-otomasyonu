@@ -46,6 +46,8 @@
                               <TableColumn fx:id="colStudentName" prefWidth="75.0" text="Öğrenci Ad" />
                               <TableColumn fx:id="colStudentLastName" prefWidth="75.0" text="Öğrenci Soyad" />
                               <TableColumn fx:id="colParentPhone" prefWidth="75.0" text="Veli Tel No." />
+                              <TableColumn fx:id="colOrientationStart" prefWidth="75.0" text="Oryantasyon Başlangıç" />
+                              <TableColumn fx:id="colOrientationEnd" prefWidth="75.0" text="Oryantasyon Bitiş" />
                           </columns>
                           <effect>
                               <DropShadow height="5.0" radius="2.0" width="5.0" />
@@ -58,7 +60,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="50.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <children>
-                    <Button fx:id="btnAddStudent" maxWidth="1.7976931348623157E308" prefHeight="75.0" text="Öğrenci Ekle">
+                    <Button fx:id="btnUpdateStudent" disable="true" layoutX="30.0" layoutY="233.0" maxWidth="1.7976931348623157E308" onAction="#proceedToEdit" prefHeight="75.0" text="Öğrenciyi Güncelle">
                         <graphic>
                             <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -70,31 +72,7 @@
                             <Font size="18.0" />
                         </font>
                     </Button>
-                    <Button fx:id="btnUpdateStudent" disable="true" layoutX="30.0" layoutY="233.0" maxWidth="1.7976931348623157E308" prefHeight="75.0" text="Öğrenciyi Güncelle">
-                        <graphic>
-                            <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@../icons/students.png" />
-                                </image>
-                            </ImageView>
-                        </graphic>
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Button>
-               <Button fx:id="btnUpdateStudent1" disable="true" layoutX="30.0" layoutY="243.0" maxWidth="1.7976931348623157E308" prefHeight="75.0" text="Veli Bilgileri">
-                  <graphic>
-                     <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../icons/students.png" />
-                        </image>
-                     </ImageView>
-                  </graphic>
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-               </Button>
-               <Button fx:id="btnUpdateStudent11" disable="true" layoutX="30.0" layoutY="305.0" maxWidth="1.7976931348623157E308" prefHeight="75.0" text="Ödeme Bilgileri">
+               <Button fx:id="btnPaymentInfo" disable="true" layoutX="30.0" layoutY="305.0" maxWidth="1.7976931348623157E308" prefHeight="75.0" text="Ödeme Bilgileri">
                   <graphic>
                      <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -116,7 +94,7 @@
             </VBox>
         </children>
     </GridPane>
-    <GridPane alignment="CENTER" prefHeight="100.0" VBox.vgrow="ALWAYS">
+    <GridPane alignment="CENTER" style="-fx-background-color: white;">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -127,30 +105,57 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                <Button alignment="CENTER" graphicTextGap="25.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#goBack" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+            <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647">
+                <children>
+                    <Text lineSpacing="5.0" text="Arama Parametreleri" textAlignment="CENTER">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </Text>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                        <children>
+                            <CheckBox mnemonicParsing="false" text="Sınıf Numarası" />
+                            <CheckBox layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Sınıf İsmi" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: white;" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+                <Button maxWidth="1.7976931348623157E308" onAction="#goBack">
                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/arrow_left.png" />
                             </image>
-                            <viewport>
-                                <Rectangle2D />
-                            </viewport>
                         </ImageView>
                     </graphic>
                     <font>
+                        <Font size="14.0" />
+                    </font>
+                    Geri Dön
+                </Button>
+                <TextField fx:id="txtStudentId" prefHeight="46" prefWidth="310.0">
+                    <font>
                         <Font size="18.0" />
                     </font>
-                    <HBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                    </HBox.margin>
-                    Geri Dön
+                </TextField>
+                <Button fx:id="btnAdd" onAction="#findStudent" prefWidth="125.0">
+                    <graphic>
+                        <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/search.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    Öğrenci Ara
                 </Button>
             </HBox>
         </children>
         <VBox.margin>
-            <Insets bottom="10.0" />
+            <Insets />
         </VBox.margin>
     </GridPane>
 </VBox>

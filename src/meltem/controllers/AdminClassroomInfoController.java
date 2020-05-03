@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import meltem.models.*;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.ClassroomAttendanceRepository;
 import meltem.services.data_access.concrete.ClassroomCourseRepository;
 import meltem.services.data_access.concrete.ClassroomRepository;
 import meltem.services.data_access.concrete.StudentRepository;
@@ -36,6 +37,7 @@ public class AdminClassroomInfoController implements Initializable {
     public static int CourseId;
     public static int ClassroomId;
     public static String ClassroomTeacherFullName;
+    public Student selectedStudent;
     @FXML
     public Button btnShowStudents;
     @FXML
@@ -107,6 +109,8 @@ public class AdminClassroomInfoController implements Initializable {
 
             tableCourses.setOnMouseClicked(v -> getCourseViewModel());
 
+            tableStudents.setOnMouseClicked(v -> getStudentViewModel());
+
             colCourseId.setCellValueFactory(
                     course -> course.getValue().courseId
             );
@@ -123,7 +127,7 @@ public class AdminClassroomInfoController implements Initializable {
                     course -> course.getValue().teacherPhone
             );
 
-            studentModels = StudentRepository.Instance.fetchAll();
+            studentModels = ClassroomAttendanceRepository.Instance.fetchAll(ClassroomId);
 
             studentTable = FXCollections.observableArrayList(
                     fetchAllModelsForStudents()
@@ -170,6 +174,14 @@ public class AdminClassroomInfoController implements Initializable {
         }
     }
 
+    private void getStudentViewModel() {
+        if(tableStudents.getSelectionModel().getSelectedItem() != null) {
+            btnUpdateStudent.setDisable(false);
+            selectedStudent = tableStudents.getSelectionModel().getSelectedItem().student;
+            Logger.LogDebug(selectedStudent.getParentNumber());
+        }
+    }
+
     public ArrayList<CourseViewModel> fetchAllModels() {
         for (Course course: courseModels) {
             courseList.add(new CourseViewModel(course));
@@ -195,13 +207,8 @@ public class AdminClassroomInfoController implements Initializable {
         SceneBuilder.Instance.BuildScene("classroom_list");
     }
 
-    public void findStudent(ActionEvent event) {
-    }
-
-    public void findCourse(ActionEvent event) {
-    }
-
     public void goClassroomCourseEdit(ActionEvent event) {
+        StudentEditController.route = 1;
         SceneBuilder.Instance.BuildScene("classroom_course_edit");
     }
 
@@ -225,5 +232,17 @@ public class AdminClassroomInfoController implements Initializable {
     public void changeStackToCourses(ActionEvent event) {
         tableStudents.setVisible(false);
         tableCourses.setVisible(true);
+    }
+
+    public void goClassroomStudentNew(ActionEvent event) {
+        StudentNewController.ClassroomId = Integer.parseInt(txtClassroomId.getText());
+        StudentNewController.route = 1;
+        SceneBuilder.Instance.BuildScene("student_new_classroom");
+    }
+
+    public void goClassroomStudentEdit(ActionEvent event) {
+        StudentEditController.StudentId = selectedStudent.getStudentId();
+        StudentEditController.route = 1;
+        SceneBuilder.Instance.BuildScene("student_edit_classroom");
     }
 }

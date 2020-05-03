@@ -199,7 +199,7 @@
                      <Font size="18.0" />
                   </font>
                </Button>
-                <Button fx:id="btnAddStudent" maxWidth="1.7976931348623157E308" onAction="#showAttendanceModal" prefHeight="75.0" text="Öğrenci Ekle">
+                <Button fx:id="btnAddStudent" maxWidth="1.7976931348623157E308" onAction="#goClassroomStudentNew" prefHeight="75.0" text="Öğrenci Ekle">
                     <graphic>
                         <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -211,7 +211,7 @@
                         <Font size="18.0" />
                     </font>
                 </Button>
-               <Button fx:id="btnUpdateStudent" disable="true" layoutX="30.0" layoutY="233.0" maxWidth="1.7976931348623157E308" onAction="#showAttendanceModal" prefHeight="75.0" text="Öğrenciyi Güncelle">
+               <Button fx:id="btnUpdateStudent" disable="true" layoutX="30.0" layoutY="233.0" maxWidth="1.7976931348623157E308" onAction="#goClassroomStudentEdit" prefHeight="75.0" text="Öğrenciyi Güncelle">
                   <graphic>
                      <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                         <image>

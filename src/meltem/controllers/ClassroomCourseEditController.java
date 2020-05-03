@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class ClassroomCourseEditController implements Initializable {
     public static Course courseToEdit = null;
+    public static int route = 1;
     @FXML
     public Text txtClassroomCourseId;
     @FXML
@@ -58,9 +59,14 @@ public class ClassroomCourseEditController implements Initializable {
                 edtTeacherEmail.getText()
         );
         ClassroomCourseRepository.Instance.UpdateById(newCourse, courseToEdit.getCourseId());
+        goBack();
     }
 
     public void goBack(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("classroom_info_admin");
+    }
+
+    public void goBack() {
         SceneBuilder.Instance.BuildScene("classroom_info_admin");
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import meltem.models.Course;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.ClassroomCourseRepository;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.view_models.CourseViewModel;
 
 import java.net.URL;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 public class ClassroomCourseNewController implements Initializable {
     public static Course courseToEdit = null;
     public static String teacherNameToAdd = null;
+    public static int route = 1;
     @FXML
     public Text txtClassroomCourseId;
     @FXML
@@ -51,7 +53,8 @@ public class ClassroomCourseNewController implements Initializable {
                 edtTeacherEmail.getText()
         );
 
-        ClassroomCourseRepository.Instance.Add(newCourse, teacherNameToAdd);
+        ClassroomCourseRepository.Instance.Add(newCourse);
+        goBack();
     }
 
     public void updateCourse(ActionEvent event)  {
@@ -64,9 +67,13 @@ public class ClassroomCourseNewController implements Initializable {
                 edtTeacherEmail.getText()
         );
         ClassroomCourseRepository.Instance.UpdateById(newCourse, courseToEdit.getCourseId());
+        goBack();
     }
 
     public void goBack(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("classroom_info_admin");
+    }
+    public void goBack() {
         SceneBuilder.Instance.BuildScene("classroom_info_admin");
     }
 }

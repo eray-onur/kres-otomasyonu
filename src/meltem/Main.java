@@ -16,6 +16,7 @@ public class Main extends Application {
     public static UserRepository userDataService = new UserRepository();
     public ClassroomRepository cr = new ClassroomRepository();
     public ClassroomCourseRepository ccr = new ClassroomCourseRepository();
+    public ClassroomAttendanceRepository car = new ClassroomAttendanceRepository();
     public TeacherRepository tr = new TeacherRepository();
     public StudentRepository sr = new StudentRepository();
 //    public static StudentDataService studentDataService = new StudentDataService();

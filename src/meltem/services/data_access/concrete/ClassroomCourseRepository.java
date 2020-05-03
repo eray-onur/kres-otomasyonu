@@ -5,6 +5,7 @@ import meltem.controllers.AdminClassroomInfoController;
 import meltem.enums.LogType;
 import meltem.models.Course;
 import meltem.models.Student;
+import meltem.models.Teacher;
 import meltem.services.data_access.PersistentDataService;
 import meltem.services.logging.Logger;
 
@@ -102,17 +103,23 @@ public class ClassroomCourseRepository extends PersistentDataService<Course> {
     @Override
     public void Add(Course entity)  {
         try {
+            Teacher teacherToAdd = new Teacher(99, entity.getTeacherName(), entity.getTeacherLastName(), entity.getTeacherPhone(), entity.getTeacherEmail(), 2);
+            TeacherRepository.Instance.Add(teacherToAdd);
             this.connect();
-            String sql = "INSERT INTO courses values (?, ?, ?);";
+
+            String sql = "INSERT INTO courses values (?, ?, ?, ?);";
 
             PreparedStatement pst = this.connection.prepareStatement(sql);
+
+            Logger.LogDebug(TeacherRepository.Instance
+                    .fetchByName(teacherToAdd.getTeacherName()).getTeacherName() + " ALLASDFDSF");
 
             pst.setInt(1, entity.getClassroomCourseId());
             pst.setString(2, entity.getCourseName());
             pst.setInt(3, TeacherRepository.Instance
-                    .fetchByName(entity.getTeacherName())
-                    .getTeacherId()
+                    .fetchByName(teacherToAdd.getTeacherName()).getTeacherId()
             );
+            pst.setString(4, entity.getTeacherName());
 
             int i = pst.executeUpdate();
             Logger.LogDebug(String.valueOf(i));
@@ -128,7 +135,7 @@ public class ClassroomCourseRepository extends PersistentDataService<Course> {
             this.connect();
 
             String sqlTeacherAdd = "INSERT INTO teachers(teacher_name, teacher_lastname, teacher_phone, teacher_email, teacher_auth) VALUES ('" + entity.getTeacherName() + "','" + entity.getTeacherLastName() + "','"+ entity.getTeacherPhone() + "','" + entity.getTeacherEmail() + "', 2);";
-            String sqlCourseAdd = "INSERT INTO courses values (?, ?, ?);";
+            String sqlCourseAdd = "INSERT INTO courses values (?, ?, ?, ?);";
 
             Statement pstTeacher = this.connection.createStatement();
 
@@ -138,10 +145,40 @@ public class ClassroomCourseRepository extends PersistentDataService<Course> {
 
             pstCourse.setInt(1, AdminClassroomInfoController.ClassroomId);
             pstCourse.setString(2, entity.getCourseName());
-            pstCourse.setInt(3, TeacherRepository.Instance
-                    .fetchByName(entity.getTeacherName())
-                    .getTeacherId()
-            );
+            //pstCourse.setInt(3, teacherName);
+            pstCourse.setString(4, entity.getTeacherName());
+
+            int i2 = pstCourse.executeUpdate();
+            Logger.LogDebug(String.valueOf(i2));
+            this.close();
+        }
+        catch(Exception ex) {
+            Logger.Log(LogType.Error, ex.getMessage());
+        }
+    }
+
+    public void Add(Course entity, int teacherId) {
+        try {
+            this.connect();
+
+            Logger.LogDebug("START OF LOG");
+            Logger.LogDebug(entity.getTeacherName());
+            Logger.LogDebug(entity.getTeacherLastName());
+            Logger.LogDebug(entity.getTeacherPhone());
+            Logger.LogDebug(entity.getTeacherEmail());
+            Logger.LogDebug("END OF LOG");
+
+            Teacher teacherToAdd = new Teacher(99, entity.getTeacherName(), entity.getTeacherLastName(), entity.getTeacherPhone(), entity.getTeacherEmail(), 2);
+            TeacherRepository.Instance.Add(teacherToAdd);
+
+            String sqlCourseAdd = "INSERT INTO courses values (?, ?, ?, ?);";
+
+            PreparedStatement pstCourse = this.connection.prepareStatement(sqlCourseAdd);
+
+            pstCourse.setInt(1, AdminClassroomInfoController.ClassroomId);
+            pstCourse.setString(2, entity.getCourseName());
+            pstCourse.setInt(3, teacherId);
+            pstCourse.setString(4, entity.getTeacherName());
 
             int i2 = pstCourse.executeUpdate();
             Logger.LogDebug(String.valueOf(i2));
@@ -188,19 +225,6 @@ public class ClassroomCourseRepository extends PersistentDataService<Course> {
 
     @Override
     public void Delete(int id) {
-        try {
-            this.connect();
-            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
-            String sql = "DELETE FROM students WHERE student_id = ?";
-            PreparedStatement pst = this.connection.prepareStatement(sql);
-            pst.setInt(1, id);
-            int i = pst.executeUpdate();
-            Logger.LogDebug(String.valueOf(i));
-            // Bitis
-            this.close();
-        }
-        catch (Exception ex) {
-            Logger.Log(LogType.Error, ex.getMessage());
-        }
+
     }
 }

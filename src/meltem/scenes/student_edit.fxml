@@ -101,7 +101,7 @@
                </graphic>
                Geri Dön
            </Button>
-           <Button onAction="#assign">
+           <Button onAction="#update">
                <graphic>
                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                        <image>

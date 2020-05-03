@@ -56,7 +56,6 @@ public class StudentViewModel {
     ) {
         try {
             this.student = student;
-
             this.studentId = (ObservableValue) new SimpleIntegerProperty(student.getStudentId());
             this.studentName = (ObservableValue) new SimpleStringProperty(student.getStudentName());
             this.studentLastName = (ObservableValue) new SimpleStringProperty(student.getStudentLastName());

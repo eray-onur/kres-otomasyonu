@@ -3,6 +3,7 @@ package meltem.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.models.User;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.UserRepository;
 import meltem.services.logging.Logger;
 
 
@@ -24,12 +26,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserEditController implements Initializable {
-    User user = new User(
-            1,
-            "Sema Yirun",
-            "*******",
-            (short) 1
-    );
+    public static int route = 1;
+    public static int UserId = -1;
+    public static User User;
+    public User user = null;
     @FXML
     public Text indicatorId;
     @FXML
@@ -42,28 +42,27 @@ public class UserEditController implements Initializable {
     public Button btnNew;
     @FXML
     public ChoiceBox<String> userAuth;
-    private Integer[] auths = new Integer[]{1, 2, 3};
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Main.userDataService.fetchById(SceneBuilder.routeData.id);
+
         userAuth.setItems(FXCollections.observableArrayList(
                 "Yonetici", "Sinif Ogretmeni", "Brans Ders Ogretmeni"
         ));
-        if(SceneBuilder.routeData != null) {
-            Logger.LogDebug(SceneBuilder.routeData.dataName);
-            txtUserId.setText(String.valueOf(user.getUserId()));
-            txtUserName.setText(user.getUserName());
-            txtPw.setText(user.getPassword());
-            userAuth.setValue(setChoiceBoxValue());
-            // Dropdown'a stringler atanir.
+
+        if(User != null) {
+            txtUserName.setText(User.getUserName());
+            txtPw.setText(User.getPassword());
+            userAuth.setValue(User.getTrueAuth());
         } else {
-            if(txtUserId != null) {
-                txtUserId.setDisable(false);
-            }
-            if(indicatorId != null) {
-                indicatorId.setDisable(false);
-            }
+            User = new User(-1, "", "", 0);
         }
+
+        changeAuthSelection();
+        ArrayList<String> choiceBoxList = new ArrayList<>();
+        choiceBoxList.add("Yönetici");
+        choiceBoxList.add("Sınıf Öğretmeni");
+        choiceBoxList.add("Branş Ders Öğretmeni");
+        userAuth.setItems(FXCollections.observableList(choiceBoxList));
     }
     public String setChoiceBoxValue() {
         switch(user.getUserAuth()) {
@@ -77,34 +76,50 @@ public class UserEditController implements Initializable {
                 return "Yetkisiz";
         }
     }
-    public void update() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_edit", new RouteData(1, "user"));
-    }
-    public void delete() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_list");
-        Logger.LogDebug("DELETE!");
+    @FXML
+    public void goBack()  {
+        try {
+            switch(route) {
+                case 1:
+                    SceneBuilder.Instance.BuildScene("user_list");
+                    break;
+                case 2:
+                    SceneBuilder.Instance.BuildScene("home_classroom");
+                    break;
+                default:
+                    SceneBuilder.Instance.BuildScene("home_branch");
+                    break;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
     @FXML
-    public void goBack() throws IOException {
-        switch(Main.user.getUserAuth()) {
-            case 1:
-                SceneBuilder.Instance.BuildScene("user_list");
-                break;
-            case 2:
-                SceneBuilder.Instance.BuildScene("user_info");
-                break;
-            default:
-                SceneBuilder.Instance.BuildScene("user_info");
-                break;
-        }
+    public void addUser() {
+        User.setUserName(txtUserName.getText());
+        User.setPassword(txtPw.getText());
+        User.setUserAuth(userAuth.getSelectionModel().getSelectedIndex() + 1);
+        UserRepository.Instance.Add(User);
+        User = null;
+        goBack();
+    }
+    @FXML
+    public void updateUser() {
+        User.setUserName(txtUserName.getText());
+        User.setPassword(txtPw.getText());
+        User.setUserAuth(userAuth.getSelectionModel().getSelectedIndex() + 1);
+        UserRepository.Instance.UpdateById(User, User.getUserId());
+        User = null;
+        goBack();
     }
     public void changeAuthSelection() {
         userAuth.getSelectionModel().selectedIndexProperty().addListener(
                 new ChangeListener() {
                     @Override
                     public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                        user.setUserAuth((Short) newValue);
-                        Logger.LogDebug(String.valueOf(user.getUserAuth()));
+                        User.setUserAuth((int) newValue + 1);
+                        Logger.LogDebug(String.valueOf(User.getUserAuth()));
                     }
                 }
         );

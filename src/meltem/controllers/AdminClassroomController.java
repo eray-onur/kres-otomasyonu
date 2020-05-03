@@ -135,6 +135,7 @@ public class AdminClassroomController implements Initializable {
         SceneBuilder.Instance.BuildScene("search_page");
     }
 
-    public void clickItem(MouseEvent mouseEvent) {
+    public void proceedToAddClassroom(MouseEvent mouseEvent) {
+        SceneBuilder.Instance.BuildScene("classroom_course_new");
     }
 }

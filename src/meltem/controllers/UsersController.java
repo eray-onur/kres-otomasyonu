@@ -16,94 +16,91 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import meltem.models.RouteData;
 import meltem.models.Student;
+import meltem.models.User;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.UserRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.StudentViewModel;
 import meltem.view_models.UserViewModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 //new GregorianCalendar(2020,0,31)
 
 public class UsersController implements Initializable {
+    @FXML
+    TableColumn<UserViewModel, SimpleIntegerProperty> userIdCol;
+    @FXML
+    TableColumn<UserViewModel, SimpleStringProperty> userNameCol;
+    @FXML
+    TableColumn<UserViewModel, SimpleStringProperty> trueAuthCol;
     int selectedId = 0;
     @FXML
-    public Button btnEdit;
+    public Button btnUpdateUser;
     @FXML
     public TextField txtUserId;
-    public void findUser() throws IOException {
-        int userId = Integer.parseInt(txtUserId.getText());
-        if(userId != 0) {
-            SceneBuilder.Instance.BuildScene("user_info");
+    @FXML
+    public void findUser() {
+        if(tableUsers.getSelectionModel().getSelectedItem() != null) {
+            btnUpdateUser.setDisable(false);
+            UserEditController.User = tableUsers.getSelectionModel().getSelectedItem().user;
+            Logger.LogDebug(UserEditController.User.getUserName());
         }
     }
     @FXML
-    private TableView<UserViewModel> table = new TableView<UserViewModel>();
+    private TableView<UserViewModel> tableUsers = new TableView<UserViewModel>();
     public final ObservableList<UserViewModel> data = FXCollections.observableArrayList(
-            new UserViewModel(1, "sema_yirun", "1234", 1),
-            new UserViewModel(2, "busra_ozel", "123", 2),
-            new UserViewModel(3, "neriman_unel", "1", 3)
+            fetchUserList()
     );
+
+    private List<UserViewModel> fetchUserList() {
+        ArrayList<User> userList = (ArrayList<User>) UserRepository.Instance.fetchAll();
+        ArrayList<UserViewModel> userViewModels = new ArrayList<>();
+        for(User user: userList) {
+            userViewModels.add(new UserViewModel(user.getUserId(), user.getUserName(), user.getPassword(), user.getUserAuth()));
+        }
+        return userViewModels;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnEdit.setDisable(true);
-        table.setEditable(true);
+        tableUsers.setEditable(true);
         Logger.LogDebug(data.get(1).user.toString());
         // First Name
-        TableColumn<UserViewModel, SimpleIntegerProperty> userIdCol = new TableColumn<>("Kullanici ID'si");
-        userIdCol.setMinWidth(100);
+        tableUsers.setFixedCellSize(50);
         userIdCol.setCellValueFactory(
                 user -> user.getValue().userId
         );
         // Last Name
-        TableColumn<UserViewModel, SimpleStringProperty> usernameCol = new TableColumn<>("Kullanici Adi");
-        usernameCol.setMinWidth(100);
-        usernameCol.setCellValueFactory(
+        userNameCol.setPrefWidth(50);
+        userNameCol.setCellValueFactory(
                 user -> user.getValue().userName
         );
-        // Orientation Start
-        TableColumn<UserViewModel, SimpleStringProperty> pwCol = new TableColumn<>("Sifre");
-        pwCol.setMinWidth(250);
-        pwCol.setCellValueFactory(
-                user -> user.getValue().userPassword
-        );
-
-        TableColumn<UserViewModel, SimpleIntegerProperty> userAuthCol = new TableColumn<>("Yetki Seviyesi");
-        userAuthCol.setMinWidth(250);
-        userAuthCol.setCellValueFactory(
-                user -> user.getValue().userAuth
+        trueAuthCol.setPrefWidth(50);
+        trueAuthCol.setCellValueFactory(
+                user -> user.getValue().userTrueAuth
         );
 
 
 
-        table.setItems(data);
-        table.getColumns().addAll(userIdCol, usernameCol, pwCol, userAuthCol);
-
-    }
-
-    public void clickItem(MouseEvent event) {
-        table.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                selectedId = table.getSelectionModel().getSelectedItem().user.getUserId();
-                if(selectedId != 0) {
-                    btnEdit.setDisable(false);
-                }
-            }
-        });
-    }
-
-    public void addData() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_new");
+        tableUsers.setItems(data);
+        tableUsers.setOnMouseClicked(v -> findUser());
     }
 
     public void proceedToEdit() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_edit", new RouteData(selectedId, "user"));
+        Logger.LogDebug(UserEditController.User.getUserName() + "???????????");
+        SceneBuilder.Instance.BuildScene("user_edit");
     }
 
     public void goBack(ActionEvent actionEvent) throws IOException {
         SceneBuilder.Instance.BuildScene("search_page");
+    }
+
+    public void proceedToNew(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("user_new");
     }
 }
