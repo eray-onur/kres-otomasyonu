@@ -29,10 +29,10 @@ public class MeetingInfoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Logger.LogDebug(SceneBuilder.routeData.dataName);
-        txtMeetingId.setText(String.valueOf(data.get(0).meeting.meetingId));
-        txtMeetingTitle.setText(data.get(0).meeting.meetingTitle);
-        txtMeetingDate.setText(data.get(0).meeting.meetingDate);
-        txtMeetingSummary.setText(data.get(0).meeting.meetingDescription);
+        txtMeetingId.setText(String.valueOf(data.get(0).meeting.getMeetingId()));
+        txtMeetingTitle.setText(data.get(0).meeting.getMeetingTitle());
+        txtMeetingDate.setText(data.get(0).meeting.getMeetingDate());
+        txtMeetingSummary.setText(data.get(0).meeting.getMeetingSummary());
     }
 
     public void goBack() throws IOException {

@@ -27,7 +27,8 @@ public class StudentEditController implements Initializable {
             "0543 555 4433",
             "Ahmet",
             "Oncul",
-            "aoncul76@hotmail.com"
+            "aoncul76@hotmail.com",
+            680
     ).student;
     @FXML
     public Text txtStudentId;
@@ -54,19 +55,46 @@ public class StudentEditController implements Initializable {
         //Main.userDataService.fetchById(SceneBuilder.routeData.id);
         if(SceneBuilder.routeData != null) {
             Logger.LogDebug(SceneBuilder.routeData.dataName);
-            txtStudentName.setText(student.studentName);
-            txtStudentLastName.setText(student.studentLastName);
-            txtOryantasyonBas.setText(student.orientationStart);
-            txtOryantasyonBit.setText(student.orientationEnd);
-            txtParentNumber.setText(student.parentNumber);
-            txtParentName.setText(student.parentName);
-            txtParentLastName.setText(student.parentLastName);
-            txtParentEmail.setText(student.parentEmail);
+            txtStudentName.setText(student.getStudentName());
+            txtStudentLastName.setText(student.getStudentLastName());
+            txtOryantasyonBas.setText(student.getOrientationStart().toString());
+            txtOryantasyonBit.setText(student.getOrientationEnd().toString());
+            txtParentNumber.setText(student.getParentNumber());
+            txtParentName.setText(student.getParentName());
+            txtParentLastName.setText(student.getParentLastName());
+            txtParentEmail.setText(student.getParentEmail());
         }
     }
+
+    @FXML
+    public void assign() throws IOException {
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("attendance_classroom");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("attendance_classroom");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("branch_course_single");
+                break;
+        }
+    }
+
     @FXML
     public void goBack() throws IOException {
-        SceneBuilder.Instance.BuildScene("student_list");
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("student_info");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("student_info");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("branch_course_single");
+                break;
+        }
+
     }
 
     public void update(ActionEvent actionEvent) throws IOException {

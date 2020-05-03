@@ -3,6 +3,7 @@ package meltem.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourseEditController implements Initializable {
-    Course course = new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2).course;
+    //Course course = new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2).course;
     @FXML
     public Text txtCourseId;
     @FXML
@@ -42,9 +43,9 @@ public class CourseEditController implements Initializable {
         //Main.userDataService.fetchById(SceneBuilder.routeData.id);
         if(SceneBuilder.routeData != null) {
             Logger.LogDebug(SceneBuilder.routeData.dataName);
-            txtCourseId.setText(String.valueOf(course.courseId));
-            txtCourseName.setText(course.courseName);
-            txtCourseTeacher.setText(course.teacherName);
+            //txtCourseId.setText(String.valueOf(course.courseId));
+            //txtCourseName.setText(course.courseName);
+           // txtCourseTeacher.setText(course.teacherName);
         } else {
             if(txtCourseId != null) {
                 txtCourseId.setDisable(false);
@@ -64,5 +65,9 @@ public class CourseEditController implements Initializable {
     @FXML
     public void goBack() throws IOException {
         SceneBuilder.Instance.BuildScene("course_list");
+    }
+
+    public void addCourseToClass(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
     }
 }

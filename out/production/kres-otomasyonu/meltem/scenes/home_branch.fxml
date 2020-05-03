@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="meltem.controllers.HomeController"
+          prefHeight="300" prefWidth="300"
+          alignment="CENTER"
+          vgap="1"
+          hgap="2"
+          styleClass="app">
+    <HBox alignment="CENTER" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.columnSpan="1">
+        <padding>
+            <Insets top="35" bottom="30"/>
+        </padding>
+        <Text textAlignment="JUSTIFY" GridPane.halignment="CENTER" styleClass="header1">
+            Öğretmen Paneli (Branş)
+        </Text>
+    </HBox>
+    <VBox GridPane.rowIndex="2" spacing="15" alignment="CENTER" GridPane.hgrow="ALWAYS">
+        <Button onAction="#loadUserInfo">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/courses.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Kullanıcı Bilgilerim
+        </Button>
+        <Button onAction="#loadBranch">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/courses.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Branş Ders İşlemleri
+        </Button>
+        <Button onAction="#quit">
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true" fitHeight="65" fitWidth="65">
+                    <image>
+                        <Image url="@../icons/delete.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Çıkış Yap
+        </Button>
+    </VBox>
+</GridPane>

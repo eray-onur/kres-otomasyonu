@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import meltem.Main;
 import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
@@ -42,18 +43,20 @@ public class CoursesController implements Initializable {
     }
     @FXML
     private TableView<CourseViewModel> table = new TableView<CourseViewModel>();
-    public final ObservableList<CourseViewModel> data = FXCollections.observableArrayList(
-            new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2),
-            new CourseViewModel(1, "Türkçe", "Sema Yirun", 1),
-            new CourseViewModel(1, "Çizim", "Büşra Özel",2),
-            new CourseViewModel(1, "Serbest Oyun", "Hülya Özdin",2),
-            new CourseViewModel(1, "İlgili Köşelerinde Oyun", "Seher Sedef Kurubaş",2)
-    );
+//    public final ObservableList<CourseViewModel> data = FXCollections.observableArrayList(
+//            new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2),
+//            new CourseViewModel(1, "Türkçe", "Sema Yirun", 1),
+//            new CourseViewModel(1, "Çizim", "Büşra Özel",2),
+//            new CourseViewModel(1, "Serbest Oyun", "Hülya Özdin",2),
+//            new CourseViewModel(1, "İlgili Köşelerinde Oyun", "Seher Sedef Kurubaş",2)
+//    );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnEdit.setDisable(true);
+        if(btnEdit != null) {
+            btnEdit.setDisable(true);
+        }
         table.setEditable(true);
-        Logger.LogDebug(data.get(1).course.courseName.toString());
+        //Logger.LogDebug(data.get(1).course.courseName.toString());
         // First Name
         TableColumn<CourseViewModel, SimpleIntegerProperty> courseIdCol = new TableColumn<>("Ders Numarası");
         courseIdCol.setMinWidth(100);
@@ -66,23 +69,11 @@ public class CoursesController implements Initializable {
         courseNameCol.setCellValueFactory(
                 course -> course.getValue().courseName
         );
-        // Orientation Start
-        TableColumn<CourseViewModel, SimpleStringProperty> courseTeacher = new TableColumn<>("Dersin Öğretmeni");
-        courseTeacher.setMinWidth(250);
-        courseTeacher.setCellValueFactory(
-                course -> course.getValue().courseTeacher
-        );
-
-        TableColumn<CourseViewModel, SimpleStringProperty> userAuthCol = new TableColumn<>("Yetki Seviyesi");
-        userAuthCol.setMinWidth(250);
-        userAuthCol.setCellValueFactory(
-                course -> course.getValue().teacherAuth
-        );
 
 
 
-        table.setItems(data);
-        table.getColumns().addAll(courseIdCol, courseNameCol, courseTeacher, userAuthCol);
+        //table.setItems(data);
+        //table.getColumns().addAll(courseIdCol, courseNameCol, courseTeacher, userAuthCol);
 
     }
 
@@ -90,7 +81,7 @@ public class CoursesController implements Initializable {
         table.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                selectedId = table.getSelectionModel().getSelectedItem().course.courseId;
+                selectedId = table.getSelectionModel().getSelectedItem().course.getCourseId();
                 if(selectedId != 0) {
                     btnEdit.setDisable(false);
                 }
@@ -103,10 +94,23 @@ public class CoursesController implements Initializable {
     }
 
     public void proceedToEdit() throws IOException {
-        SceneBuilder.Instance.BuildScene("course_edit", new RouteData(selectedId, "user"));
+        SceneBuilder.Instance.BuildScene("course_edit", new RouteData(selectedId, "course"));
     }
 
     public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("search_page");
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("search_page");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("home_class");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("home_branch");
+                break;
+        }
+    }
+    public void goBackProcess(ActionEvent event) throws Exception {
+        SceneBuilder.Instance.BuildScene("home");
     }
 }

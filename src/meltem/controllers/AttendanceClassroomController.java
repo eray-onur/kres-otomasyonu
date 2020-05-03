@@ -29,7 +29,8 @@ public class AttendanceClassroomController implements Initializable {
                     "0543 555 4433",
                     "Ahmet",
                     "Oncul",
-                    "aoncul76@hotmail.com"
+                    "aoncul76@hotmail.com",
+                    680
             ),
             new StudentViewModel(1,
                     "Veli",
@@ -39,7 +40,8 @@ public class AttendanceClassroomController implements Initializable {
                     "0543 555 4433",
                     "Huseyin",
                     "Turk",
-                    ""
+                    "",
+                    680
             ),
             new StudentViewModel(1,
                     "Mehmet",
@@ -49,7 +51,8 @@ public class AttendanceClassroomController implements Initializable {
                     "0543 666 1122",
                     "Nazan",
                     "Ata",
-                    "nazan.ata@gmail.com"
+                    "nazan.ata@gmail.com",
+                    680
             ),
             new StudentViewModel(1,
                     "Abdullah",
@@ -59,7 +62,8 @@ public class AttendanceClassroomController implements Initializable {
                     "0543 222 3399",
                     "Davud",
                     "Gök",
-                    ""
+                    "",
+                    680
             ),
             new StudentViewModel(1,
                     "Atakan",
@@ -69,7 +73,8 @@ public class AttendanceClassroomController implements Initializable {
                     "0543 545 4433",
                     "Davud",
                     "Oncul",
-                    "aoncul76@hotmail.com"
+                    "aoncul76@hotmail.com",
+                    680
             )
     );
 

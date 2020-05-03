@@ -82,7 +82,7 @@ public class MeetingsController implements Initializable {
         table.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                selectedId = table.getSelectionModel().getSelectedItem().meeting.meetingId;
+                //selectedId = table.getSelectionModel().getSelectedItem().meeting.meetingId;
                 Logger.LogDebug(String.valueOf(selectedId));
                 if(selectedId != 0) {
                     btnEdit.setDisable(false);
@@ -95,11 +95,15 @@ public class MeetingsController implements Initializable {
         SceneBuilder.Instance.BuildScene("meeting_new");
     }
 
+    public void proceedToInfo() throws IOException {
+        SceneBuilder.Instance.BuildScene("meeting_info", new RouteData(1, "meeting"));
+    }
+
     public void proceedToEdit() throws IOException {
         SceneBuilder.Instance.BuildScene("meeting_edit", new RouteData(1, "meeting"));
     }
 
     public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("home");
+        SceneBuilder.Instance.BuildScene("search_page");
     }
 }

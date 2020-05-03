@@ -4,18 +4,13 @@ public class User {
     private int userId;
     private String userName;
     private String password;
-    private short userAuth;
+    private int userAuth;
 
-    public User(int userId, String userName, String password, short userType) {
+    public User(int userId, String userName, String password, int userType) {
         this.setUserId(userId);
         this.setUserName(userName);
         this.setPassword(password);
         this.setUserAuth(userType);
-    }
-    public User(int userId, String userName, String password) {
-        this.setUserId(userId);
-        this.setUserName(userName);
-        this.setPassword(password);
     }
     public User(){}
 
@@ -43,11 +38,11 @@ public class User {
         this.password = password;
     }
 
-    public short getUserAuth() {
+    public int getUserAuth() {
         return this.userAuth;
     }
 
-    public void setUserAuth(short userAuth) {
+    public void setUserAuth(int userAuth) {
         this.userAuth = userAuth;
     }
 

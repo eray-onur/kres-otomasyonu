@@ -1,14 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="meltem.controllers.TeacherEditController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.TeacherEditController">
+    <ImageView fx:id="imageView" fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <image>
+            <Image backgroundLoading="true" url="@../icons/students.png" />
+        </image>
+    </ImageView>
+    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+        </padding>
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Numarası</Text>
+            </left>
+            <right>
+                <Text fx:id="txtTeacherId" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Adı</Text>
+            </left>
+            <right>
+                <TextField fx:id="txtTeacherName" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Soyadı</Text>
+            </left>
+            <right>
+                <TextField fx:id="txtTeacherLastName" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Email'i</Text>
+            </left>
+            <right>
+                <TextField fx:id="txtTeacherEmail" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Tipi</Text>
+            </left>
+            <right>
+                <TextField fx:id="txtTeacherType" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
+    </VBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+        <children>
+            <Button onAction="#goBack">
+                <graphic>
+                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../icons/arrow_left.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+                Geri Dön
+            </Button>
+            <Button onAction="#update">
+                <graphic>
+                    <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../icons/edit.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+                Öğretmen Bilgilerini Güncelle
+            </Button>
+        </children>
+        <GridPane.margin>
+            <Insets bottom="10.0" />
+        </GridPane.margin>
+    </HBox>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>

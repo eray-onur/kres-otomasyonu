@@ -24,7 +24,8 @@ public class BranchViewModel{
                     "0543 555 4433",
                     "Ahmet",
                     "Oncul",
-                    "aoncul76@hotmail.com"
+                    "aoncul76@hotmail.com",
+                    680
             ),
             new StudentViewModel(1,
                     "Veli",
@@ -34,7 +35,8 @@ public class BranchViewModel{
                     "0543 555 4433",
                     "Huseyin",
                     "Turk",
-                    ""
+                    "",
+                    680
             ),
             new StudentViewModel(1,
                     "Mehmet",
@@ -44,7 +46,8 @@ public class BranchViewModel{
                     "0543 666 1122",
                     "Nazan",
                     "Ata",
-                    "nazan.ata@gmail.com"
+                    "nazan.ata@gmail.com",
+                    680
             ),
             new StudentViewModel(1,
                     "Abdullah",
@@ -54,7 +57,8 @@ public class BranchViewModel{
                     "0543 222 3399",
                     "Davud",
                     "Gök",
-                    ""
+                    "",
+                    680
             ),
             new StudentViewModel(1,
                     "Atakan",
@@ -64,7 +68,8 @@ public class BranchViewModel{
                     "0543 545 4433",
                     "Davud",
                     "Oncul",
-                    "aoncul76@hotmail.com"
+                    "aoncul76@hotmail.com",
+                    680
             ),
     };
 
@@ -73,12 +78,7 @@ public class BranchViewModel{
             String teacher
     ) {
         try {
-            this.nBranchCourse = (ObservableValue) new SimpleStringProperty(course);
-            this.nBranchTeacherFullName = (ObservableValue) new SimpleStringProperty(teacher);
 
-            this.branch = new Branch(course, teacher);
-            this.branch.branchId = 1;
-            Logger.LogDebug(this.branch.nBranchCourse);
         }
         catch(NullPointerException ex) {
             Logger.LogError(ex.toString());

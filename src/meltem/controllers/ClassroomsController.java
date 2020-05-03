@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 //new GregorianCalendar(2020,0,31)
 
 public class ClassroomsController implements Initializable {
+
     int selectedId = 0;
     @FXML
     public Button btnEdit;
@@ -43,39 +44,45 @@ public class ClassroomsController implements Initializable {
     @FXML
     private TableView<ClassroomViewModel> table = new TableView<ClassroomViewModel>();
     public final ObservableList<ClassroomViewModel> data = FXCollections.observableArrayList(
-            new ClassroomViewModel(1, "A", 25),
-            new ClassroomViewModel(2, "B", 25),
-            new ClassroomViewModel(3, "C", 25),
-            new ClassroomViewModel(4, "D", 25)
+            //new ClassroomViewModel(1, "A", 1, 25),
+            //new ClassroomViewModel(2, "B", 1, 25),
+           // new ClassroomViewModel(3, "C", 1, 25),
+            //new ClassroomViewModel(4, "D", 1, 25)
     );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnEdit.setDisable(true);
+        //btnEdit.setDisable(true);
         table.setEditable(true);
-        Logger.LogDebug(data.get(1).classroom.toString());
-        // First Name
+        //Logger.LogDebug(data.get(1).classroom.toString());
+        // Classroom ID
         TableColumn<ClassroomViewModel, SimpleIntegerProperty> userIdCol = new TableColumn<>("Sınıf Numarası");
         userIdCol.setMinWidth(100);
         userIdCol.setCellValueFactory(
                 user -> user.getValue().classroomId
         );
-        // Last Name
+        // Classroom Name
         TableColumn<ClassroomViewModel, SimpleStringProperty> usernameCol = new TableColumn<>("Sınıf Ismi");
         usernameCol.setMinWidth(100);
         usernameCol.setCellValueFactory(
                 user -> user.getValue().classroomName
         );
-        // Orientation Start
+        // Capacity
         TableColumn<ClassroomViewModel, SimpleIntegerProperty> pwCol = new TableColumn<>("Sınıf Kontenjanı");
         pwCol.setMinWidth(250);
         pwCol.setCellValueFactory(
                 user -> user.getValue().capacity
         );
+        // Orientation Start
+        TableColumn<ClassroomViewModel, SimpleStringProperty> teachCol = new TableColumn<>("Sınıf Öğretmeni");
+        teachCol.setMinWidth(250);
+        teachCol.setCellValueFactory(
+                user -> user.getValue().classroomTeacherFullName
+        );
 
 
 
-        table.setItems(data);
-        table.getColumns().addAll(userIdCol, usernameCol, pwCol);
+        //table.setItems(data);
+        //table.getColumns().addAll(userIdCol, usernameCol, pwCol, teachCol);
 
     }
 
@@ -91,15 +98,19 @@ public class ClassroomsController implements Initializable {
         });
     }
 
-    public void addData() throws IOException {
-        SceneBuilder.Instance.BuildScene("classroom_new");
+    public void addTeacher() throws IOException {
+        SceneBuilder.Instance.BuildScene("teacher_new_admin");
     }
 
     public void proceedToEdit() throws IOException {
         SceneBuilder.Instance.BuildScene("classroom_edit", new RouteData(selectedId, "classroom"));
     }
 
+    public void proceedToInfo() {
+        SceneBuilder.Instance.BuildScene("classroom_info_admin");
+    }
+
     public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("home");
+        SceneBuilder.Instance.BuildScene("search_page");
     }
 }

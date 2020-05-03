@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CourseInfoController implements Initializable {
-    Course course = new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2).course;
+   // Course course = new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2).course;
     @FXML
     public Text txtCourseId;
     @FXML
@@ -29,9 +29,6 @@ public class CourseInfoController implements Initializable {
     public Text txtCourseTeacher;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtCourseId.setText(String.valueOf(course.courseId));
-        txtCourseName.setText(course.courseName);
-        txtCourseTeacher.setText(course.teacherName);
 
     }
 

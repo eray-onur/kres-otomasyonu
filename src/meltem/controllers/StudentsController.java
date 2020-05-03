@@ -1,5 +1,6 @@
 package meltem.controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,154 +8,113 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import meltem.Main;
 import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.StudentRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.StudentViewModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 //new GregorianCalendar(2020,0,31)
 
 public class StudentsController implements Initializable {
+    @FXML
+    public Button btnUpdateStudent;
+    public TableView<StudentViewModel> tableStudents;
+    public TableColumn<StudentViewModel, SimpleIntegerProperty> colStudentId;
+    public TableColumn<StudentViewModel, SimpleStringProperty> colStudentName;
+    public TableColumn<StudentViewModel, SimpleStringProperty> colStudentLastName;
+    public TableColumn<StudentViewModel, SimpleStringProperty> colParentPhone;
     int selectedId = 0;
     @FXML
     public Button btnEdit;
     @FXML
     public TextField txtStudentId;
+    public ObservableList<StudentViewModel> studentVMs = FXCollections.observableArrayList();
+
+    public StudentsController() throws SQLException {
+    }
+
     public void findStudent() throws IOException {
         int studentId = Integer.parseInt(txtStudentId.getText());
         if(studentId != 0) {
             SceneBuilder.Instance.BuildScene("student_info", new RouteData(studentId, "student"));
         }
     }
+    public void findStudentForClass() throws IOException {
+        int studentId = Integer.parseInt(txtStudentId.getText());
+        if(studentId != 0) {
+            SceneBuilder.Instance.BuildScene("student_info_branch", new RouteData(studentId, "student"));
+        }
+    }
     @FXML
     private TableView<StudentViewModel> table = new TableView<StudentViewModel>();
     public final ObservableList<StudentViewModel> data = FXCollections.observableArrayList(
-            new StudentViewModel(1,
-                    "Ali",
-                    "Oncul",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 555 4433",
-                    "Ahmet",
-                    "Oncul",
-                    "aoncul76@hotmail.com"
-            ),
-            new StudentViewModel(1,
-                    "Veli",
-                    "Turk",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 555 4433",
-                    "Huseyin",
-                    "Turk",
-                    ""
-            ),
-            new StudentViewModel(1,
-                    "Mehmet",
-                    "Kaya",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 666 1122",
-                    "Nazan",
-                    "Ata",
-                    "nazan.ata@gmail.com"
-            ),
-            new StudentViewModel(1,
-                    "Abdullah",
-                    "Gök",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 222 3399",
-                    "Davud",
-                    "Gök",
-                    ""
-            ),
-            new StudentViewModel(1,
-                    "Atakan",
-                    "Irmak",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 545 4433",
-                    "Davud",
-                    "Oncul",
-                    "aoncul76@hotmail.com"
-            )
+            fetchAllModelsForStudents()
     );
+
+    public List<StudentViewModel> fetchAllModelsForStudents() throws SQLException {
+        List<Student> students = StudentRepository.Instance.fetchAll();
+        for (Student student: students) {
+            studentVMs.add(new StudentViewModel(student));
+        }
+        return studentVMs;
+    }
+
+    private void getCourseViewModel() {
+        if(tableStudents.getSelectionModel().getSelectedItem() != null) {
+            btnUpdateStudent.setDisable(false);
+            Logger.LogDebug(String.valueOf(AdminClassroomInfoController.ClassroomId));
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnEdit.setDisable(true);
-        table.setEditable(true);
+        tableStudents.setFixedCellSize(50);
+
+        colStudentId.setCellValueFactory(
+                student -> student.getValue().studentId
+        );
+
         // First Name
-        TableColumn<StudentViewModel, SimpleStringProperty> firstNameCol = new TableColumn<>("Öğrenci Adı");
-        firstNameCol.setMinWidth(100);
-        firstNameCol.setCellValueFactory(
+        colStudentName.setCellValueFactory(
                 student -> student.getValue().studentName
         );
         // Last Name
-        TableColumn<StudentViewModel, SimpleStringProperty> lastNameCol = new TableColumn<>("Öğrenci Soyadı");
-        lastNameCol.setMinWidth(100);
-        lastNameCol.setCellValueFactory(
+        colStudentLastName.setCellValueFactory(
                 student -> student.getValue().studentLastName
         );
         // Orientation Start
-        TableColumn<StudentViewModel, SimpleStringProperty> orientatonStartCol = new TableColumn<>("Oryantasyon Baslangıç Tarihi");
-        orientatonStartCol.setMinWidth(250);
-        orientatonStartCol.setCellValueFactory(
-                student -> student.getValue().orientationStart
-        );
-        // Orientation End
-        TableColumn<StudentViewModel, SimpleStringProperty> orientatonEndCol = new TableColumn<>("Oryantasyon Bitiş Tarihi");
-        orientatonEndCol.setMinWidth(200);
-        orientatonEndCol.setCellValueFactory(
-                student -> student.getValue().orientationEnd
-        );
-        // Parent Phone Number
-        TableColumn<StudentViewModel, SimpleStringProperty> parentNameCol = new TableColumn<>("Veli Adı");
-        parentNameCol.setMinWidth(175);
-        parentNameCol.setCellValueFactory(
-                student -> student.getValue().parentName
-        );
-        // Parent Phone Number
-        TableColumn<StudentViewModel, SimpleStringProperty> parentLnameCol = new TableColumn<>("Veli Soyadı");
-        parentLnameCol.setMinWidth(175);
-        parentLnameCol.setCellValueFactory(
-                student -> student.getValue().parentLastName
-        );
-        // Parent Phone Number
-        TableColumn<StudentViewModel, SimpleStringProperty> parentNumberCol = new TableColumn<>("Veli Telefon No.");
-        parentNumberCol.setMinWidth(175);
-        parentNumberCol.setCellValueFactory(
+        colParentPhone.setCellValueFactory(
                 student -> student.getValue().parentNumber
         );
-        // Parent Phone Number
-        TableColumn<StudentViewModel, SimpleStringProperty> emailCol = new TableColumn<>("Veli Email");
-        emailCol.setMinWidth(175);
-        emailCol.setCellValueFactory(
-                student -> student.getValue().parentEmail
-        );
 
 
-        table.setItems(data);
-        table.getColumns().addAll(
-                firstNameCol,
-                lastNameCol,
-                orientatonStartCol,
-                orientatonEndCol,
-                parentNameCol,
-                parentLnameCol,
-                parentNumberCol
+        tableStudents.setItems(data);
+
+        tableStudents.getColumns().addAll(
+                colStudentId,
+                colStudentName,
+                colStudentLastName,
+                colParentPhone
         );
+
+        tableStudents.setOnMouseClicked(v -> getCourseViewModel());
 
     }
 
@@ -162,7 +122,7 @@ public class StudentsController implements Initializable {
         table.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                selectedId = table.getSelectionModel().getSelectedItem().student.studentId;
+                //selectedId = table.getSelectionModel().getSelectedItem().student.studentId;
                 Logger.LogDebug(String.valueOf(selectedId));
                 if(selectedId != 0) {
                     btnEdit.setDisable(false);
@@ -171,15 +131,57 @@ public class StudentsController implements Initializable {
         });
     }
 
+    public void assignStudent() throws IOException {
+        SceneBuilder.Instance.BuildScene("student_assign_branch");
+    }
+
     public void addData() throws IOException {
         SceneBuilder.Instance.BuildScene("student_new");
+    }
+
+    public void proceedToAdd() throws IOException {
+        SceneBuilder.Instance.BuildScene("student_info", new RouteData(selectedId, "student"));
     }
 
     public void proceedToEdit() throws IOException {
         SceneBuilder.Instance.BuildScene("student_edit", new RouteData(selectedId, "student"));
     }
+    public void proceedToInfo() throws IOException {
+        SceneBuilder.Instance.BuildScene("student_info", new RouteData(selectedId, "student"));
+    }
+    public void proceedToUneditableInfo() throws IOException {
+        SceneBuilder.Instance.BuildScene("student_info_branch", new RouteData(selectedId, "student"));
+    }
 
-    public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("search_page");
+    @FXML
+    public void goBackToBranch(ActionEvent actionEvent) throws IOException {
+        SceneBuilder.Instance.BuildScene("attendance_branch");
+    }
+
+    @FXML
+    public void goBackToClassroom(ActionEvent actionEvent) throws IOException {
+        SceneBuilder.Instance.BuildScene("attendance_classroom");
+    }
+
+
+    public void goBack(ActionEvent event) throws IOException {
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("search_page");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("home_class");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("home_branch");
+                break;
+        }
+    }
+
+    public void proceedToAssignBranch(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("student_assign_branch");
+    }
+    public void proceedToAssignClassroom(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("student_assign_branch");
     }
 }

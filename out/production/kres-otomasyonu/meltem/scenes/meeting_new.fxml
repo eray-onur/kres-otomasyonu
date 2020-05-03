@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UserEditController">
+<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.MeetingEditController">
     <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="6">
         <image>
-            <Image backgroundLoading="true" url="@../icons/user.png" />
+            <Image backgroundLoading="true" url="@../icons/meetings.png" />
         </image>
     </ImageView>
     <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="10">
@@ -18,26 +18,26 @@
         </padding>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Adi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Toplantı Başlığı</Text>
             </left>
             <right>
-                <TextField fx:id="txtUserName" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtMeetingTitle" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Soyadi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Toplantı Tarihi</Text>
             </left>
             <right>
-                <TextField fx:id="txtPw" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtMeetingDate" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
-        <BorderPane layoutX="35.0" layoutY="145.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" text="Kullanici Yetkisi" BorderPane.alignment="CENTER" />
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Toplantı Özeti</Text>
             </left>
             <right>
-                <ChoiceBox fx:id="userAuth" prefWidth="150.0" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtMeetingSummary" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
     </VBox>
@@ -50,7 +50,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Geri Don
+            Geri Dön
         </Button>
         <Button fx:id="btnAdd" onAction="#goBack">
             <graphic>
@@ -60,7 +60,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Kullaniciyi Ekle
+            Toplantı Kaydını Ekle
         </Button>
     </FlowPane>
     <columnConstraints>

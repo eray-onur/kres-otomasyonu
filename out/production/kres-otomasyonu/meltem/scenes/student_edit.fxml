@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="5.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentEditController">
-    <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.StudentEditController">
+    <ImageView fx:id="imageView" fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
         <image>
             <Image backgroundLoading="true" url="@../icons/students.png" />
         </image>
     </ImageView>
-    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="10">
+    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <padding>
-            <Insets left="25.0" right="25.0" />
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
         </padding>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
             <left>
@@ -89,45 +89,51 @@
             </right>
         </BorderPane>
     </VBox>
-    <FlowPane alignment="CENTER" hgap="25" prefHeight="90.0" prefWidth="544.0" GridPane.rowIndex="12">
-        <Button onAction="#goBack">
-            <graphic>
-                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/arrow_left.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            Geri Don
-        </Button>
-        <Button onAction="#update">
-            <graphic>
-                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/edit.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            Öğrenci Bilgilerini Güncelle
-        </Button>
-        <Button onAction="#delete">
-            <graphic>
-                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/delete.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            Öğrenciyi Sil
-        </Button>
-    </FlowPane>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+      <children>
+           <Button onAction="#goBack">
+               <graphic>
+                   <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../icons/arrow_left.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+               Geri Dön
+           </Button>
+           <Button onAction="#assign">
+               <graphic>
+                   <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../icons/edit.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+               Öğrenci Bilgilerini Güncelle
+           </Button>
+      </children>
+      <GridPane.margin>
+         <Insets bottom="10.0" />
+      </GridPane.margin>
+   </HBox>
     <columnConstraints>
         <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints />
         <RowConstraints />
-        <RowConstraints />
+        <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
         <RowConstraints />
         <RowConstraints />
         <RowConstraints />

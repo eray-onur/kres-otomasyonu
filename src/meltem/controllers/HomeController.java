@@ -1,5 +1,6 @@
 package meltem.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import meltem.services.SceneBuilder;
@@ -14,60 +15,37 @@ public class HomeController {
     @FXML
     Button btnClassrooms;
     @FXML
+    Button btnBranch;
+    @FXML
     Button btnMeetings;
     @FXML
     Button btnEmergency;
     @FXML
     public void initialize() throws Exception {
-        LoadStudents();
-        LoadClassroom();
-        LoadMeetings();
-        LoadEmergency();
-        LoadUsers();
+
     }
-    private void LoadStudents() throws IOException {
-        btnStudents.setOnAction(e -> {
-            try {
-                SceneBuilder.Instance.BuildScene("search_page");
-            } catch (IOException ex) {
-                Logger.LogError(ex.getMessage());
-            }
-        });
+
+    @FXML
+    private void loadClassroom() throws IOException {
+    SceneBuilder.Instance.BuildScene("attendance_classroom");
     }
-    private void LoadClassroom() throws IOException {
-        btnClassrooms.setOnAction(e -> {
-            try {
-                SceneBuilder.Instance.BuildScene("attendance_list");
-            } catch (IOException ex) {
-                Logger.LogError(ex.getMessage());
-            }
-        });
+
+    @FXML
+    private void loadBranch() throws IOException {
+        SceneBuilder.Instance.BuildScene("branch_course_single");
     }
-    private void LoadMeetings() throws IOException {
-        btnMeetings.setOnAction(e -> {
-            try {
-                SceneBuilder.Instance.BuildScene("meeting_list");
-            } catch (IOException ex) {
-                Logger.LogError(ex.getMessage());
-            }
-        });
+
+    @FXML
+    private void loadEmergency() throws IOException {
+        SceneBuilder.Instance.BuildScene("emergency_numbers");
     }
-    private void LoadEmergency() throws IOException {
-        btnEmergency.setOnAction(e -> {
-            try {
-                SceneBuilder.Instance.BuildScene("emergency_numbers");
-            } catch (IOException ex) {
-                Logger.LogError(ex.getMessage());
-            }
-        });
+
+
+    public void quit(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("login");
     }
-    private void LoadUsers() throws IOException {
-        btnUsers.setOnAction(e -> {
-            try {
-                SceneBuilder.Instance.BuildScene("user_list");
-            } catch (IOException ex) {
-                Logger.LogError(ex.getMessage());
-            }
-        });
+
+    public void loadUserInfo(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("user_info_notadmin");
     }
 }

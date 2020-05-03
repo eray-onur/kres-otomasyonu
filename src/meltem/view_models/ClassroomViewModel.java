@@ -3,9 +3,13 @@ package meltem.view_models;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import meltem.controllers.ClassroomInfoController;
 import meltem.models.Classroom;
 import meltem.models.Course;
 import meltem.models.Student;
+import meltem.models.Teacher;
+import meltem.services.data_access.concrete.ClassroomRepository;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
 
 import java.util.ArrayList;
@@ -13,34 +17,34 @@ import java.util.List;
 
 public class ClassroomViewModel {
     public Classroom classroom;
-
+    public Teacher teacher;
     public ObservableValue<SimpleIntegerProperty> classroomId;
     public ObservableValue<SimpleStringProperty> classroomName;
     public ObservableValue<SimpleIntegerProperty> capacity;
+    public ObservableValue<SimpleStringProperty> classroomTeacherFullName;
 
     public ClassroomViewModel (
             int id,
-            String name,
-            int capacity
+            int teacherId
     ) {
         try {
-            this.classroomId = (ObservableValue) new SimpleIntegerProperty(id);
-            this.classroomName = (ObservableValue) new SimpleStringProperty(name);
-            this.capacity = (ObservableValue) new SimpleIntegerProperty(capacity);
-
-            this.classroom = new Classroom(id, name, capacity);
+            classroom = ClassroomRepository.Instance.fetchById(id);
+            teacher = TeacherRepository.Instance.fetchById(teacherId);
+            this.classroomId = (ObservableValue) new SimpleIntegerProperty(classroom.getClassroomId());
+            this.classroomName = (ObservableValue) new SimpleStringProperty(classroom.getClassroomName());
+            this.capacity = (ObservableValue) new SimpleIntegerProperty(classroom.getClassroomCapacity());
+            this.classroomTeacherFullName = (ObservableValue) new SimpleStringProperty(teacher.getTeacherName() + " " + teacher.getTeacherLastName());
         }
         catch(NullPointerException ex) {
             Logger.LogError(ex.toString());
         }
     }
-
-    public CourseViewModel[] courses = new CourseViewModel[]{
-            new CourseViewModel(1, "Sabah Jimnastiği", "Neşe Sönmez", 2),
-            new CourseViewModel(1, "Türkçe", "Sema Yirun", 1),
-            new CourseViewModel(1, "Çizim", "Büşra Özel", 2),
-            new CourseViewModel(1, "Serbest Oyun", "Hülya Özdin",2),
-            new CourseViewModel(1, "İlgili Köşelerinde Oyun", "Seher Sedef Kurubaş",2),
-    };
+    public ClassroomViewModel(Classroom classroom) {
+        this.classroomId = (ObservableValue) new SimpleIntegerProperty(classroom.getClassroomId());
+        this.classroomName = (ObservableValue) new SimpleStringProperty(classroom.getClassroomName());
+        this.capacity = (ObservableValue) new SimpleIntegerProperty(classroom.getClassroomCapacity());
+        this.classroomTeacherFullName = (ObservableValue) new SimpleStringProperty(classroom.getClassroomTeacherName() + " " + classroom.getClassroomTeacherLastName());
+        this.classroom = classroom;
+    }
 
 }

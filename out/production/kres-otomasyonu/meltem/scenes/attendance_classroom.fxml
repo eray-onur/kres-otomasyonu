@@ -12,12 +12,33 @@
     <TableView fx:id="tableClassroom" onMousePressed="#findClass">
 
     </TableView>
+
     <FlowPane alignment="BOTTOM_CENTER" columnHalignment="CENTER" focusTraversable="true" hgap="10.0" vgap="10.0">
+        <Button onAction="#goBack">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/arrow_left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Geri Dön
+        </Button>
+        <Button fx:id="btnCourse" onAction="#loadClassroomCourses">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/courses.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Seçilen Sınıfın Dersleri
+        </Button>
         <Button fx:id="btnEdit" onAction="#loadClassroom">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/edit.png" />
+                        <Image url="@../icons/classroom.png" />
                     </image>
                 </ImageView>
             </graphic>

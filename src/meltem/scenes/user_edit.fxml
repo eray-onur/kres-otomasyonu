@@ -70,16 +70,6 @@
             </graphic>
             Kullanıcıyı Güncelle
         </Button>
-        <Button onAction="#delete">
-            <graphic>
-                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/delete.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            Kullanıcıyı Sil
-        </Button>
     </FlowPane>
     <columnConstraints>
         <ColumnConstraints />

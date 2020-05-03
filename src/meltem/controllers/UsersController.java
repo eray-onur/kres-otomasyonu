@@ -104,6 +104,6 @@ public class UsersController implements Initializable {
     }
 
     public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("home");
+        SceneBuilder.Instance.BuildScene("search_page");
     }
 }

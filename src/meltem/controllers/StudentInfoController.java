@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
+import meltem.Main;
 import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
@@ -15,6 +16,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StudentInfoController implements Initializable {
+    Student student = new StudentViewModel(1,
+            "Ali",
+            "Oncul",
+            "23/03/2020",
+            "07/04/2020",
+            "0543 555 4433",
+            "Ahmet",
+            "Oncul",
+            "aoncul76@hotmail.com",
+            680
+    ).student;
     @FXML
     public Text txtStudentId;
     @FXML
@@ -45,28 +57,45 @@ public class StudentInfoController implements Initializable {
                 "0543 555 4433",
                 "Ahmet",
                 "Oncul",
-                "aoncul76@hotmail.com").student;
-        txtStudentId.setText(String.valueOf(student.studentId));
-        txtStudentName.setText(student.studentName);
-        txtStudentLastName.setText(student.studentLastName);
-        txtOrientationStart.setText(student.orientationStart);
-        txtOrientationEnd.setText(student.orientationEnd);
-        txtParentName.setText(student.parentName);
-        txtParentLastName.setText(student.parentLastName);
-        txtParentNumber.setText(student.parentNumber);
-        txtParentEmail.setText(student.parentEmail);
+                "aoncul76@hotmail.com", 680).student;
+        if(txtStudentId != null) {
+            txtStudentId.setText(String.valueOf(student.getStudentId()));
+        }
+        txtStudentName.setText(student.getStudentName());
+        txtStudentLastName.setText(student.getStudentLastName());
+        txtOrientationStart.setText(student.getOrientationStart().toString());
+        txtOrientationEnd.setText(student.getOrientationEnd().toString());
+        txtParentName.setText(student.getParentName());
+        txtParentLastName.setText(student.getParentLastName());
+        txtParentNumber.setText(student.getParentNumber());
+        txtParentEmail.setText(student.getParentEmail());
 
     }
 
     @FXML
-    public void goBack() throws IOException {
-        SceneBuilder.Instance.BuildScene("student_list");
+    public void goAssign() throws IOException {
+        SceneBuilder.Instance.BuildScene("student_assign");
     }
 
+    @FXML
+    public void goBack() throws IOException {
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("classroom_student_list");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("classroom_student_list");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("branch_course_single");
+                break;
+        }
+    }
+    @FXML
     public void update(ActionEvent actionEvent) throws IOException {
         SceneBuilder.Instance.BuildScene("student_edit", new RouteData(1, "student"));
     }
-
+    @FXML
     public void delete(ActionEvent actionEvent) throws IOException {
         SceneBuilder.Instance.BuildScene("student_list");
     }

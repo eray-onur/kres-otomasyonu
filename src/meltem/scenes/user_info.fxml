@@ -34,7 +34,7 @@
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Soyadı</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Şifresi</Text>
             </left>
             <right>
                 <Text fx:id="txtPw" BorderPane.alignment="CENTER" />
@@ -45,7 +45,7 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Yetkisi</Text>
             </left>
          <right>
-            <ChoiceBox fx:id="userAuth" prefWidth="150.0" BorderPane.alignment="CENTER" />
+            <Text fx:id="userAuth" BorderPane.alignment="CENTER" />
          </right>
         </BorderPane>
     </VBox>
@@ -69,16 +69,6 @@
                 </ImageView>
             </graphic>
             Kullanıcıyı Güncelle
-        </Button>
-        <Button fx:id="btnDelete" onAction="#delete">
-            <graphic>
-                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/delete.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            Kullanıcıyı Sil
         </Button>
     </FlowPane>
     <columnConstraints>

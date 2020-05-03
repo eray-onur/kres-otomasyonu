@@ -4,11 +4,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import meltem.Main;
 import meltem.services.SceneBuilder;
 import meltem.services.logging.Logger;
 import meltem.view_models.BranchViewModel;
@@ -30,12 +33,6 @@ public class AttendanceController implements Initializable {
     public Tab tabSinif;
     @FXML
     public Tab tabBrans;
-    public final ObservableList<ClassroomViewModel> classes = FXCollections.observableArrayList(
-            new ClassroomViewModel(1, "A", 25),
-            new ClassroomViewModel(2, "B", 25),
-            new ClassroomViewModel(3, "C", 25),
-            new ClassroomViewModel(4, "D", 25)
-    );
     public final ObservableList<BranchViewModel> branches = FXCollections.observableArrayList(
             new BranchViewModel("Dans", "Oya Doğan"),
             new BranchViewModel("Fen ve Doğa", "Yasemin Karagöz"),
@@ -44,6 +41,10 @@ public class AttendanceController implements Initializable {
     );
     @FXML
     public Button btnEdit;
+    @FXML
+    public Button btnEditT;
+    @FXML
+    public Button btnCourse;
 
     @FXML
     private TableView<ClassroomViewModel> tableClassroom = new TableView<ClassroomViewModel>();
@@ -64,31 +65,44 @@ public class AttendanceController implements Initializable {
         if(btnEdit != null) {
             btnEdit.setDisable(true);
         }
+        if(btnEditT != null) {
+            btnEditT.setDisable(true);
+        }
+        if(btnCourse != null) {
+            btnCourse.setDisable(true);
+        }
+
         tableClassroom.setEditable(true);
-        Logger.LogDebug(classes.get(1).classroom.toString());
+        //Logger.LogDebug(classes.get(1).classroom.toString());
         // First Name
-        TableColumn<ClassroomViewModel, SimpleIntegerProperty> userIdCol = new TableColumn<>("Sınıf Numarası");
-        userIdCol.setMinWidth(100);
-        userIdCol.setCellValueFactory(
-                user -> user.getValue().classroomId
+        TableColumn<ClassroomViewModel, SimpleIntegerProperty> classroomIdCol = new TableColumn<>("Sınıf Numarası");
+        classroomIdCol.setMinWidth(100);
+        classroomIdCol.setCellValueFactory(
+                classroom -> classroom.getValue().classroomId
         );
         // Last Name
-        TableColumn<ClassroomViewModel, SimpleStringProperty> usernameCol = new TableColumn<>("Sınıf Ismi");
-        usernameCol.setMinWidth(100);
-        usernameCol.setCellValueFactory(
-                user -> user.getValue().classroomName
+        TableColumn<ClassroomViewModel, SimpleStringProperty> classroomNameCol = new TableColumn<>("Sınıf Ismi");
+        classroomNameCol.setMinWidth(100);
+        classroomNameCol.setCellValueFactory(
+                classroom -> classroom.getValue().classroomName
         );
         // Orientation Start
-        TableColumn<ClassroomViewModel, SimpleIntegerProperty> pwCol = new TableColumn<>("Sınıf Kontenjanı");
-        pwCol.setMinWidth(250);
-        pwCol.setCellValueFactory(
-                user -> user.getValue().capacity
+        TableColumn<ClassroomViewModel, SimpleIntegerProperty> capacityCol = new TableColumn<>("Sınıf Kontenjanı");
+        capacityCol.setMinWidth(250);
+        capacityCol.setCellValueFactory(
+                classroom -> classroom.getValue().capacity
+        );
+        // Orientation Start
+        TableColumn<ClassroomViewModel, SimpleStringProperty> teachCol = new TableColumn<>("Sınıf Öğretmeni");
+        teachCol.setMinWidth(250);
+        teachCol.setCellValueFactory(
+                classroom -> classroom.getValue().classroomTeacherFullName
         );
 
 
 
-        tableClassroom.setItems(classes);
-        tableClassroom.getColumns().addAll(userIdCol, usernameCol, pwCol);
+        //tableClassroom.setItems(classes);
+        tableClassroom.getColumns().addAll(classroomIdCol, classroomNameCol, capacityCol, teachCol);
     }
 
     @FXML
@@ -99,11 +113,46 @@ public class AttendanceController implements Initializable {
     public void loadClassroom() throws IOException {
         SceneBuilder.Instance.BuildScene("classroom_student_list");
     }
+    @FXML
+    public void loadClassroomCourses() throws IOException {
+        SceneBuilder.Instance.BuildScene("course_assign");
+    }
 
     public void findClass() throws IOException {
-        int id = tableClassroom.getSelectionModel().getSelectedItem().classroom.getClassroomId();
+        int id = tableClassroom.getSelectionModel().getSelectedItem().classroomId.getValue().get();
         if(id != 0) {
             btnEdit.setDisable(false);
+            if(btnEditT != null) {
+                btnEditT.setDisable(false);
+            }
+            if(btnCourse != null) {
+                btnCourse.setDisable(false);
+            }
         }
+    }
+
+    public void loadTeacherClassroom(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("teacher_assign_classroom");
+    }
+    public void loadTeacherBranch(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("teacher_assign_branch");
+    }
+
+    public void goBack(ActionEvent event) throws IOException {
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("search_page");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("home_class");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("home_branch");
+                break;
+        }
+    }
+
+    public void addClassroom(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("classroom_new");
     }
 }

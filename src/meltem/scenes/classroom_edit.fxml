@@ -52,6 +52,16 @@
             </graphic>
             Geri Dön
         </Button>
+        <Button onAction="#attendance">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            Yoklama Listesi Görüntüle
+        </Button>
         <Button onAction="#update">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">

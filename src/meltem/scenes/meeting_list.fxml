@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" prefHeight="667.0" prefWidth="463.0" spacing="15.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.MeetingsController">
-    <Text style="-fx-font-size: 24px;" styleClass="header1" text="Toplantı Kayıtları" textAlignment="CENTER">Toplantı Kayıtları</Text>
+    <Text style="-fx-font-size: 24px;" styleClass="header1" textAlignment="CENTER">Toplantı Kayıtları</Text>
 
     <TableView fx:id="table" onMousePressed="#clickItem">
 
@@ -49,7 +49,7 @@
             </graphic>
             Toplantı Kaydı Ekle
         </Button>
-        <Button fx:id="btnEdit" onAction="#proceedToEdit">
+        <Button fx:id="btnEdit" onAction="#proceedToInfo">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>

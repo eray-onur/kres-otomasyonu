@@ -81,11 +81,22 @@ public class UserEditController implements Initializable {
         SceneBuilder.Instance.BuildScene("user_edit", new RouteData(1, "user"));
     }
     public void delete() throws IOException {
+        SceneBuilder.Instance.BuildScene("user_list");
         Logger.LogDebug("DELETE!");
     }
     @FXML
     public void goBack() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_list");
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("user_list");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("user_info");
+                break;
+            default:
+                SceneBuilder.Instance.BuildScene("user_info");
+                break;
+        }
     }
     public void changeAuthSelection() {
         userAuth.getSelectionModel().selectedIndexProperty().addListener(

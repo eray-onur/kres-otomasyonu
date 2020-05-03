@@ -1,19 +1,13 @@
 package meltem.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import meltem.Main;
 import meltem.models.RouteData;
-import meltem.models.Student;
-import meltem.models.User;
 import meltem.services.SceneBuilder;
 import meltem.services.logging.Logger;
 import meltem.view_models.MeetingViewModel;
@@ -21,8 +15,6 @@ import meltem.view_models.MeetingViewModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MeetingEditController implements Initializable {
@@ -46,10 +38,10 @@ public class MeetingEditController implements Initializable {
         //Main.userDataService.fetchById(SceneBuilder.routeData.id);
         if(SceneBuilder.routeData != null) {
             Logger.LogDebug(SceneBuilder.routeData.dataName);
-            txtMeetingId.setText(String.valueOf(data.get(0).meeting.meetingId));
-            txtMeetingTitle.setText(data.get(0).meeting.meetingTitle);
-            txtMeetingDate.setText(data.get(0).meeting.meetingDate);
-            txtMeetingSummary.setText(data.get(0).meeting.meetingDescription);
+            txtMeetingId.setText(String.valueOf(data.get(0).meeting.getMeetingId()));
+            txtMeetingTitle.setText(data.get(0).meeting.getMeetingTitle());
+            txtMeetingDate.setText(data.get(0).meeting.getMeetingDate());
+            txtMeetingSummary.setText(data.get(0).meeting.getMeetingSummary());
             // Dropdown'a stringler atanir.
         } else {
             if(txtMeetingId != null) {

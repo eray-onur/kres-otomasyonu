@@ -4,26 +4,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.AttendanceController">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
-   <children>
-      <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab id="tabSınıf" fx:id="tabSinif" text="Sınıflar">
-              <fx:include source="attendance_classroom.fxml" />
-          </Tab>
-          <Tab id="tabBrans" fx:id="tabBrans" text="Branş Dersleri">
-              <fx:include source="attendance_branch.fxml" />
-          </Tab>
-        </tabs>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </TabPane>
-   </children>
-</GridPane>
+<BorderPane  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.AttendanceController">
+    <center>
+<!--            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">-->
+<!--                <tabs>-->
+<!--                    <Tab id="tabSınıf" fx:id="tabSinif" text="Sınıflar">-->
+<!--                        <fx:include source="attendance_classroom.fxml" />-->
+<!--                    </Tab>-->
+<!--                    <Tab id="tabBrans" fx:id="tabBrans" text="Branş Dersleri">-->
+<!--                        <fx:include source="attendance_branch.fxml" />-->
+<!--                    </Tab>-->
+<!--                </tabs>-->
+<!--                <padding>-->
+<!--                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />-->
+<!--                </padding>-->
+<!--            </TabPane>-->
+    </center>
+</BorderPane>

@@ -18,7 +18,7 @@
         </padding>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Adi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Sınıf Adı</Text>
             </left>
             <right>
                 <TextField fx:id="txtClassroomName" BorderPane.alignment="CENTER" />
@@ -26,7 +26,7 @@
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanici Soyadi</Text>
+                <Text styleClass="body2" BorderPane.alignment="CENTER">Sınıf Kontenjanı</Text>
             </left>
             <right>
                 <TextField fx:id="txtClassroomCapacity" BorderPane.alignment="CENTER" />

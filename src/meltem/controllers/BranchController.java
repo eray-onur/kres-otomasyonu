@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
@@ -34,10 +35,14 @@ public class BranchController implements Initializable {
     public Button btnEdit;
     @FXML
     public TextField txtCourseId;
-    public void findUser() throws IOException {
+    @FXML
+    public Text txtCourseName;
+    @FXML
+    public Text txtCourseTeacher;
+    public void findCourse() throws IOException {
         int userId = Integer.parseInt(txtCourseId.getText());
         if(userId != 0) {
-            SceneBuilder.Instance.BuildScene("user_info");
+            SceneBuilder.Instance.BuildScene("course_info");
         }
     }
     @FXML
@@ -49,17 +54,20 @@ public class BranchController implements Initializable {
     );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnEdit.setDisable(true);
+        if(btnEdit != null) {
+            btnEdit.setDisable(true);
+        }
+
         table.setEditable(true);
         Logger.LogDebug(data.get(1).branch.toString());
         // First Name
-        TableColumn<BranchViewModel, SimpleStringProperty> userIdCol = new TableColumn<>("Kullanici ID'si");
+        TableColumn<BranchViewModel, SimpleStringProperty> userIdCol = new TableColumn<>("Branş Ders İsmi");
         userIdCol.setMinWidth(100);
         userIdCol.setCellValueFactory(
                 user -> user.getValue().nBranchCourse
         );
         // Last Name
-        TableColumn<BranchViewModel, SimpleStringProperty> usernameCol = new TableColumn<>("Kullanici Adi");
+        TableColumn<BranchViewModel, SimpleStringProperty> usernameCol = new TableColumn<>("Branş Ders Öğretmeni");
         usernameCol.setMinWidth(100);
         usernameCol.setCellValueFactory(
                 user -> user.getValue().nBranchTeacherFullName
@@ -76,7 +84,7 @@ public class BranchController implements Initializable {
         table.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                selectedId = table.getSelectionModel().getSelectedItem().branch.branchId;
+                selectedId = table.getSelectionModel().getSelectedItem().branch.getBranchId();
                 if(selectedId != 0) {
                     btnEdit.setDisable(false);
                 }

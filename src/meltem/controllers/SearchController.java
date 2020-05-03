@@ -13,18 +13,26 @@ public class SearchController {
     }
     @FXML
     public void goClasses() throws IOException {
-        SceneBuilder.Instance.BuildScene("classroom_list");
+        SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
     }
     @FXML
     public void goCourses() throws IOException {
-        SceneBuilder.Instance.BuildScene("course_list");
+        SceneBuilder.Instance.BuildScene("attendance_branch");
     }
     @FXML
     public void goTeachers() throws IOException {
         SceneBuilder.Instance.BuildScene("teacher_list");
     }
 
-    public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("home");
+    public void goMeetings(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("meeting_list");
+    }
+
+    public void goUsers(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("user_list");
+    }
+
+    public void quit(ActionEvent event) throws IOException {
+        SceneBuilder.Instance.BuildScene("login");
     }
 }

@@ -18,6 +18,7 @@ public class StudentViewModel {
     public ObservableValue<SimpleStringProperty> parentLastName;
     public ObservableValue<SimpleStringProperty> parentEmail;
     public ObservableValue<SimpleStringProperty> parentNumber;
+    public ObservableValue<SimpleIntegerProperty> paymentMonthly;
 
     public StudentViewModel (
             int id,
@@ -28,9 +29,12 @@ public class StudentViewModel {
             String parentNumber,
             String parentName,
             String parentLastName,
-            String parentEmail
+            String parentEmail,
+            int paymentMonthly
     ) {
         try {
+            this.student = new Student(id, name, lname, orientationStart, orientationEnd, parentName,parentLastName,parentNumber,parentEmail, paymentMonthly);
+            
             this.studentId = (ObservableValue) new SimpleIntegerProperty(id);
             this.studentName = (ObservableValue) new SimpleStringProperty(name);
             this.studentLastName = (ObservableValue) new SimpleStringProperty(lname);
@@ -40,7 +44,29 @@ public class StudentViewModel {
             this.parentLastName = (ObservableValue) new SimpleStringProperty(parentLastName);
             this.parentEmail = (ObservableValue) new SimpleStringProperty(parentEmail);
             this.parentNumber = (ObservableValue) new SimpleStringProperty(parentNumber);
-            this.student = new Student(id, name, lname, orientationStart, orientationEnd, parentName,parentLastName,parentNumber,parentEmail);
+            this.paymentMonthly = (ObservableValue) new SimpleIntegerProperty(paymentMonthly);
+        }
+        catch(NullPointerException ex) {
+            Logger.LogError(ex.toString());
+        }
+    }
+
+    public StudentViewModel (
+            Student student
+    ) {
+        try {
+            this.student = student;
+
+            this.studentId = (ObservableValue) new SimpleIntegerProperty(student.getStudentId());
+            this.studentName = (ObservableValue) new SimpleStringProperty(student.getStudentName());
+            this.studentLastName = (ObservableValue) new SimpleStringProperty(student.getStudentLastName());
+            this.orientationStart = (ObservableValue) new SimpleStringProperty(student.getOrientationStart());
+            this.orientationEnd = (ObservableValue) new SimpleStringProperty(student.getOrientationEnd());
+            this.parentName = (ObservableValue) new SimpleStringProperty(student.getParentName());
+            this.parentLastName = (ObservableValue) new SimpleStringProperty(student.getParentLastName());
+            this.parentEmail = (ObservableValue) new SimpleStringProperty(student.getParentEmail());
+            this.parentNumber = (ObservableValue) new SimpleStringProperty(student.getParentNumber());
+            this.paymentMonthly = (ObservableValue) new SimpleIntegerProperty(student.getPaymentMonthly());
         }
         catch(NullPointerException ex) {
             Logger.LogError(ex.toString());

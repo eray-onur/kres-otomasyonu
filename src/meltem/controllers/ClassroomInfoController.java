@@ -1,6 +1,7 @@
 package meltem.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -21,7 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClassroomInfoController implements Initializable {
-    Classroom classroom = new ClassroomViewModel(1, "A Sınıfı", 25).classroom;
+    //Classroom classroom = new ClassroomViewModel(1, "A Sınıfı", 25, "Neşe Sönmez").classroom;
     @FXML
     public Text txtClassroomId;
     @FXML
@@ -30,9 +31,11 @@ public class ClassroomInfoController implements Initializable {
     public Text txtClassroomCapacity;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtClassroomId.setText(String.valueOf(classroom.getClassroomId()));
-        txtClassroomName.setText(classroom.getClassroomName());
-        txtClassroomCapacity.setText(String.valueOf(classroom.getClassroomCapacity()));
+        if(txtClassroomId != null) {
+            txtClassroomId.setText(String.valueOf(1));
+        }
+        txtClassroomName.setText("A Sınıfı");
+        //txtClassroomCapacity.setText(String.valueOf(25));
 
     }
 
@@ -45,5 +48,12 @@ public class ClassroomInfoController implements Initializable {
     public void delete() throws IOException {
         Logger.LogDebug("DELETE!");
         SceneBuilder.Instance.BuildScene("classroom_list");
+    }
+
+    public void findClassroom(ActionEvent event) {
+    }
+
+    public void goBackToClassroomAdmin(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
     }
 }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
+import meltem.Main;
 import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.models.User;
@@ -31,17 +32,14 @@ public class UserInfoController implements Initializable {
     @FXML
     public Text txtPw;
     @FXML
-    public ChoiceBox userAuth;
+    public Text userAuth;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         User user = new UserViewModel(1, "sema_yirun", "1", 1).user;
-        userAuth.setItems(FXCollections.observableArrayList(
-                "Yonetici", "Sinif Ogretmeni", "Brans Ders Ogretmeni"
-        ));
         txtUserId.setText(String.valueOf(user.getUserId()));
         txtUserName.setText(user.getUserName());
         txtPw.setText(user.getPassword());
-        userAuth.setValue(setChoiceBoxValue());
+        userAuth.setText(setChoiceBoxValue());
 
     }
 
@@ -59,7 +57,17 @@ public class UserInfoController implements Initializable {
     }
 
     public void goBack() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_list");
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("user_list");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("home_class");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("home_branch");
+                break;
+        }
     }
     public void update() throws IOException {
         SceneBuilder.Instance.BuildScene("user_edit", new RouteData(1, "user"));

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -92,7 +91,7 @@
             </graphic>
             Geri Dön
         </Button>
-        <Button fx:id="btnAdd" onAction="#goBack">
+        <Button fx:id="btnAdd" onAction="#assign">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>

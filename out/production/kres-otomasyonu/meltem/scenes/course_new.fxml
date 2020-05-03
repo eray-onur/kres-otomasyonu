@@ -44,7 +44,7 @@
             </graphic>
             Geri Dön
         </Button>
-        <Button fx:id="btnAdd" onAction="#update">
+        <Button fx:id="btnAdd" onAction="#addCourseToClass">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -52,7 +52,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            Kullaniciyi Ekle
+            Dersi Ekle
         </Button>
     </FlowPane>
     <columnConstraints>

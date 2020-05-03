@@ -1,14 +1,47 @@
 package meltem.models;
 
 public class Branch {
-    public int branchId;
-    public int branchCourseId;
-    public int branchTeacher;
-    public String nBranchCourse;
-    public String nBranchTeacherFullName;
+    private int branchId;
+    private String branchCourseName;
+    private int branchTeacher;
+    private int branchCapacity;
 
-    public Branch(String course, String teacher) {
-        this.nBranchCourse = course;
-        this.nBranchTeacherFullName = teacher;
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getBranchCourseName() {
+        return branchCourseName;
+    }
+
+    public void setBranchCourseName(String branchCourseName) {
+        this.branchCourseName = branchCourseName;
+    }
+
+    public int getBranchTeacher() {
+        return branchTeacher;
+    }
+
+    public void setBranchTeacher(int branchTeacher) {
+        this.branchTeacher = branchTeacher;
+    }
+
+    public int getBranchCapacity() {
+        return branchCapacity;
+    }
+
+    public void setBranchCapacity(int branchCapacity) {
+        this.branchCapacity = branchCapacity;
+    }
+
+    public Branch(int id, String courseName, int teacher, int capacity) {
+        this.branchId = id;
+        this.branchCourseName = courseName;
+        this.branchTeacher = teacher;
+        this.branchCapacity = capacity;
     }
 }

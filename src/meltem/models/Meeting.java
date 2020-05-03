@@ -1,15 +1,47 @@
 package meltem.models;
 
 public class Meeting {
-    public int meetingId;
-    public String studentFullName;
-    public String meetingTitle;
-    public String meetingDescription;
-    public String meetingDate;
-    public Meeting(int id, String title, String description, String date) {
+    private int meetingId;
+    private String meetingTitle;
+    private String meetingSummary;
+    private String meetingDate;
+
+    public int getMeetingId() {
+        return meetingId;
+    }
+
+    public void setMeetingId(int meetingId) {
+        this.meetingId = meetingId;
+    }
+
+    public String getMeetingTitle() {
+        return meetingTitle;
+    }
+
+    public void setMeetingTitle(String meetingTitle) {
+        this.meetingTitle = meetingTitle;
+    }
+
+    public String getMeetingSummary() {
+        return meetingSummary;
+    }
+
+    public void setMeetingSummary(String meetingSummary) {
+        this.meetingSummary = meetingSummary;
+    }
+
+    public String getMeetingDate() {
+        return meetingDate;
+    }
+
+    public void setMeetingDate(String meetingDate) {
+        this.meetingDate = meetingDate;
+    }
+
+    public Meeting(int id, String title, String summary, String date) {
         this.meetingId = id;
         this.meetingTitle = title;
-        this.meetingDescription = description;
+        this.meetingSummary = summary;
         this.meetingDate = date;
     }
 }
