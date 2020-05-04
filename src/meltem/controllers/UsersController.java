@@ -69,7 +69,6 @@ public class UsersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableUsers.setEditable(true);
-        Logger.LogDebug(data.get(1).user.toString());
         // First Name
         tableUsers.setFixedCellSize(50);
         userIdCol.setCellValueFactory(
