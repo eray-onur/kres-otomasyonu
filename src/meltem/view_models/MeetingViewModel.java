@@ -34,4 +34,21 @@ public class MeetingViewModel {
         }
     }
 
+    public MeetingViewModel(
+            Meeting meeting
+    ) {
+        try {
+
+            this.meeting = meeting;
+
+            this.meetingId = (ObservableValue) new SimpleIntegerProperty(meeting.getMeetingId());
+            this.meetingTitle = (ObservableValue) new SimpleStringProperty(meeting.getMeetingTitle());
+            this.meetingSummary = (ObservableValue) new SimpleStringProperty(meeting.getMeetingSummary());
+            this.meetingDate = (ObservableValue) new SimpleStringProperty(meeting.getMeetingDate());
+        }
+        catch(NullPointerException ex) {
+            Logger.LogError(ex.toString());
+        }
+    }
+
 }

@@ -8,6 +8,15 @@ public class Classroom {
     private String classroomTeacherLastName;
     private int classroomCapacity;
 
+    public Classroom() {
+        this.classroomId = -1;
+        this.classroomName = "";
+        this.classroomTeacherId = -1;
+        this.classroomTeacherName = "";
+        this.classroomTeacherLastName = "";
+        this.classroomCapacity = 25;
+    }
+
     public Classroom(int classroom_id, String classroom_name, String teacher_name, String teacher_lastname, int classroom_capacity) {
         this.classroomId = classroom_id;
         this.classroomName = classroom_name;

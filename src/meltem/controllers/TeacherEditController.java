@@ -11,6 +11,7 @@ import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.models.Teacher;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.StudentViewModel;
 import meltem.view_models.TeacherViewModel;
@@ -21,11 +22,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TeacherEditController implements Initializable {
-//    TeacherViewModel teacherVM = new TeacherViewModel(1,
-//            "Sema",
-//            "Yirun",
-//            "s.yirun@abd.com",
-//            (byte)0);
+
+    public static int TeacherId = -1;
+
     @FXML
     public Text txtTeacherId;
     @FXML
@@ -33,27 +32,27 @@ public class TeacherEditController implements Initializable {
     @FXML
     public TextField txtTeacherLastName;
     @FXML
+    public TextField txtTeacherPhone;
+    @FXML
     public TextField txtTeacherEmail;
     @FXML
-    public TextField txtTeacherType;
-    @FXML
-    public Button btnNew;
+    public Text txtTeacherType;
+
+    public Teacher teacher = null;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Main.userDataService.fetchById(SceneBuilder.routeData.id);
-        if(SceneBuilder.routeData != null) {
-            Logger.LogDebug(SceneBuilder.routeData.dataName);
-            //txtTeacherId.setText(String.valueOf(teacherVM.teacher.getTeacherId()));
-            //txtTeacherName.setText(teacherVM.teacher.getTeacherName());
-            //txtTeacherLastName.setText(teacherVM.teacher.getTeacherLastName());
-            //txtTeacherEmail.setText(teacherVM.teacher.getTeacherEmail());
-            //txtTeacherType.setText("Sınıf Öğretmeni");
+        if(TeacherId != -1) {
+            teacher = TeacherRepository.Instance.fetchById(TeacherId);
+            txtTeacherId.setText(String.valueOf(teacher.getTeacherId()));
+            txtTeacherName.setText(teacher.getTeacherName());
+            txtTeacherLastName.setText(teacher.getTeacherLastName());
+            txtTeacherEmail.setText(teacher.getTeacherEmail());
+            txtTeacherType.setText(teacher.getTeacherType());
         }
     }
-    @FXML
-    public void goAssign() throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_assign");
-    }
+
     @FXML
     public void goBack() throws IOException {
         SceneBuilder.Instance.BuildScene("teacher_list");
@@ -64,7 +63,15 @@ public class TeacherEditController implements Initializable {
         SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
     }
 
-    public void update(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_edit", new RouteData(1, "student"));
+    @FXML
+    public void update() {
+        teacher.setTeacherName(txtTeacherName.getText());
+        teacher.setTeacherLastName(txtTeacherLastName.getText());
+        teacher.setTeacherPhone(txtTeacherPhone.getText());
+        teacher.setTeacherEmail(txtTeacherEmail.getText());
+
+        TeacherRepository.Instance.UpdateById(teacher, TeacherId);
+
+        SceneBuilder.Instance.BuildScene("teacher_list");
     }
 }

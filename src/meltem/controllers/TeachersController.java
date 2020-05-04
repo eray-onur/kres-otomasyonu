@@ -1,10 +1,10 @@
 package meltem.controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,10 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import meltem.models.RouteData;
+import meltem.Main;
+import meltem.models.Teacher;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
-import meltem.view_models.StudentViewModel;
 import meltem.view_models.TeacherViewModel;
 
 import java.io.IOException;
@@ -25,86 +26,109 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TeachersController implements Initializable {
-    public ObservableList<TeacherViewModel> teachers = FXCollections.observableArrayList();
-    @FXML
-    public Button btnEdit;
+
+    public static int route = 0;
+    private int selectedId = 1;
+
     public TextField txtTeacherId;
-    public Button btnAdd;
-    private int selectedId;
+    public ObservableList<TeacherViewModel> teachers = FXCollections.observableArrayList(
+            fetchAllModelsForTeachers()
+    );
+
+    public List<TeacherViewModel> fetchAllModelsForTeachers()  {
+        List<TeacherViewModel> teacherVMs = new ArrayList<>();
+        try {
+            List<Teacher> teachers = TeacherRepository.Instance.fetchAll();
+            for (Teacher teacher: teachers) {
+                teacherVMs.add(new TeacherViewModel(teacher));
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return teacherVMs;
+    }
+
+    @FXML
+    Button btnUpdateTeacher;
+
+    public TableColumn<TeacherViewModel, SimpleIntegerProperty> colTeacherId;
+    public TableColumn<TeacherViewModel, SimpleStringProperty> colTeacherName;
+    public TableColumn<TeacherViewModel, SimpleStringProperty> colTeacherLastName;
+    public TableColumn<TeacherViewModel, SimpleStringProperty> colTeacherPhone;
+    public TableColumn<TeacherViewModel, SimpleStringProperty> colTeacherEmail;
+    public TableColumn<TeacherViewModel, SimpleStringProperty> colTeacherAuth;
+
     @FXML
     private TableView<TeacherViewModel> table = new TableView<TeacherViewModel>();
 
-    public void clickItem(MouseEvent mouseEvent) {
-        table.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                selectedId = table.getSelectionModel().getSelectedItem().teacher.getTeacherId();
-                Logger.LogDebug(String.valueOf(selectedId));
-                if(selectedId != 0) {
-                    btnEdit.setDisable(false);
-                }
-            }
-        });
-    }
-
-    public void findTeacher(ActionEvent event) throws IOException {
-        int teacherId = Integer.parseInt(txtTeacherId.getText());
-        if(teacherId != 0) {
-            SceneBuilder.Instance.BuildScene("teacher_info", new RouteData(teacherId, "teacher"));
+    @FXML
+    public void getCourseViewModel(MouseEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() != null) {
+            selectedId = table.getSelectionModel().getSelectedItem().teacher.getTeacherId();
+            TeacherEditController.TeacherId = selectedId;
+            Logger.LogDebug(String.valueOf(TeacherEditController.TeacherId) + " is the selected ID.");
+            btnUpdateTeacher.setDisable(false);
         }
     }
 
     public void goBack(ActionEvent event) throws IOException {
-        SceneBuilder.Instance.BuildScene("search_page");
+        switch(route) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("classroom_info_admin");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("student_list");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("branch_courses");
+                break;
+        }
     }
 
-    public void addData(ActionEvent event) throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_new");
+    public void goBackToMenu(ActionEvent event) throws IOException {
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("search_page");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("home_class");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("home_branch");
+                break;
+        }
     }
 
     public void proceedToEdit(ActionEvent event) throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_edit", new RouteData(selectedId, "teacher"));
+        TeacherEditController.TeacherId = selectedId;
+        SceneBuilder.Instance.BuildScene("teacher_edit");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //teachers.add(new TeacherViewModel(1, "Sema", "Yirun", "s.yirun@abc.com", (byte)0));
-        //teachers.add(new TeacherViewModel(1, "Jane", "Doe", "j.doe@abc.com", (byte)1));
-
-        btnEdit.setDisable(true);
-        table.setEditable(true);
-        // First Name
-        TableColumn<TeacherViewModel, SimpleStringProperty> firstNameCol = new TableColumn<>("Öğretmen Adı");
-        firstNameCol.setMinWidth(100);
-        firstNameCol.setCellValueFactory(
+        btnUpdateTeacher.setDisable(true);
+        colTeacherId.setCellValueFactory(
+                teacher -> teacher.getValue().teacherId
+        );
+        colTeacherName.setCellValueFactory(
                 teacher -> teacher.getValue().teacherName
         );
-        // Last Name
-        TableColumn<TeacherViewModel, SimpleStringProperty> lastNameCol = new TableColumn<>("Öğretmen Soyadı");
-        lastNameCol.setMinWidth(100);
-        lastNameCol.setCellValueFactory(
+        colTeacherLastName.setCellValueFactory(
                 teacher -> teacher.getValue().teacherLastName
         );
-        // Orientation Start
-        TableColumn<TeacherViewModel, SimpleStringProperty> emailCol = new TableColumn<>("Öğretmen Email'ı");
-        emailCol.setMinWidth(250);
-        emailCol.setCellValueFactory(
+        colTeacherPhone.setCellValueFactory(
+                teacher -> teacher.getValue().teacherPhone
+        );
+        colTeacherEmail.setCellValueFactory(
                 teacher -> teacher.getValue().teacherEmail
         );
-        // Orientation End
-        TableColumn<TeacherViewModel, SimpleStringProperty> typeCol = new TableColumn<>("Öğretmen Tipi");
-        typeCol.setMinWidth(200);
-        typeCol.setCellValueFactory(
+        colTeacherAuth.setCellValueFactory(
                 teacher -> teacher.getValue().teacherType
         );
-
-
         table.setItems(teachers);
-        table.getColumns().addAll(
-                firstNameCol,
-                lastNameCol,
-                emailCol,
-                typeCol
-        );
+        table.setFixedCellSize(75);
+    }
+
+    public void searchTeacher(ActionEvent event) {
     }
 }

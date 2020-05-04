@@ -40,11 +40,11 @@ public class ClassroomViewModel {
         }
     }
     public ClassroomViewModel(Classroom classroom) {
+        this.classroom = classroom;
         this.classroomId = (ObservableValue) new SimpleIntegerProperty(classroom.getClassroomId());
         this.classroomName = (ObservableValue) new SimpleStringProperty(classroom.getClassroomName());
         this.capacity = (ObservableValue) new SimpleIntegerProperty(classroom.getClassroomCapacity());
         this.classroomTeacherFullName = (ObservableValue) new SimpleStringProperty(classroom.getClassroomTeacherName() + " " + classroom.getClassroomTeacherLastName());
-        this.classroom = classroom;
     }
 
 }

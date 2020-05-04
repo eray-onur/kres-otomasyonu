@@ -8,25 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import meltem.models.Classroom;
 import meltem.models.RouteData;
-import meltem.models.Student;
-import meltem.models.User;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.ClassroomRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.ClassroomViewModel;
-import meltem.view_models.CourseViewModel;
-import meltem.view_models.StudentViewModel;
-import meltem.view_models.UserViewModel;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,9 +78,11 @@ public class AdminClassroomController implements Initializable {
         if(classroomTable.getSelectionModel().getSelectedItem() != null) {
             btnShowClassInfo.setDisable(false);
             ClassroomViewModel vm = classroomTable.getSelectionModel().getSelectedItem();
+            Logger.LogDebug("GOTTEN CLASSROOM ID WAS: " + vm.classroom.getClassroomId());
+            AdminClassroomInfoController.classroom = vm.classroom;
             AdminClassroomInfoController.ClassroomId = vm.classroom.getClassroomId();
             AdminClassroomInfoController.ClassroomTeacherFullName = vm.classroom.getClassroomTeacherName() + " " + vm.classroom.getClassroomTeacherLastName();
-            Logger.LogDebug(AdminClassroomInfoController.ClassroomTeacherFullName + " IS The FULLNAME!");
+            Logger.LogDebug(AdminClassroomInfoController.ClassroomId + " IS The IDDDDDDDDDD!");
         }
     }
 
@@ -103,29 +96,14 @@ public class AdminClassroomController implements Initializable {
     public void goBack() throws IOException {
         SceneBuilder.Instance.BuildScene("search_page");
     }
+
     public void update() throws IOException {
         SceneBuilder.Instance.BuildScene("classroom_edit", new RouteData(1, "user"));
-    }
-    public void delete() throws IOException {
-        Logger.LogDebug("DELETE!");
-        SceneBuilder.Instance.BuildScene("classroom_list");
-    }
-
-    public void findClassroom(ActionEvent event) {
-    }
-
-    public void goBackToClassroomAdmin(ActionEvent event) {
-        SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
-    }
-    public void addTeacher() throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_new_admin");
     }
 
     public void proceedToEdit() throws IOException {
         SceneBuilder.Instance.BuildScene("classroom_edit", new RouteData(1, "classroom"));
     }
-
-
 
     public void proceedToInfo() {
         SceneBuilder.Instance.BuildScene("classroom_info_admin");
@@ -135,7 +113,7 @@ public class AdminClassroomController implements Initializable {
         SceneBuilder.Instance.BuildScene("search_page");
     }
 
-    public void proceedToAddClassroom(MouseEvent mouseEvent) {
-        SceneBuilder.Instance.BuildScene("classroom_course_new");
+    public void proceedToAddClassroom(ActionEvent mouseEvent) {
+        SceneBuilder.Instance.BuildScene("classroom_new_admin");
     }
 }

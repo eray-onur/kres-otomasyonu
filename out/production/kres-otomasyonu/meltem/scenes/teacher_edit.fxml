@@ -6,58 +6,106 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" styleClass="app" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.TeacherEditController">
-    <ImageView fx:id="imageView" fitHeight="125.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-        <image>
-            <Image backgroundLoading="true" url="@../icons/students.png" />
-        </image>
-    </ImageView>
-    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="1.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.TeacherEditController">
+    <HBox alignment="CENTER" prefHeight="500.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <children>
+            <GridPane alignment="CENTER" HBox.hgrow="ALWAYS">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <children>
+                            <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../icons/teacher.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </VBox>
+                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+                        <children>
+                            <Text fill="WHITE" text="Öğretmen Güncelleme">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Text>
+                        </children>
+                    </VBox>
+                </children>
+            </GridPane>
+        </children>
+    </HBox>
+    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="1">
         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets left="25.0" right="25.0" />
         </padding>
-        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" GridPane.vgrow="ALWAYS">
+      <BorderPane layoutX="35.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0">
+         <left>
+            <Text styleClass="body2" text="Öğretmen Numarası" BorderPane.alignment="CENTER" />
+         </left>
+          <right>
+              <Text fx:id="txtTeacherId" styleClass="body2" BorderPane.alignment="CENTER" />
+          </right>
+      </BorderPane>
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Numarası</Text>
+                <Text styleClass="body2" text="Öğretmen Adı" BorderPane.alignment="CENTER">Öğrenci Adı</Text>
             </left>
             <right>
-                <Text fx:id="txtTeacherId" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtTeacherName" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Adı</Text>
+                <Text styleClass="body2" text="Öğretmen Soyadı" BorderPane.alignment="CENTER">Öğrenci Soyadı</Text>
             </left>
             <right>
-                <TextField fx:id="txtTeacherName" BorderPane.alignment="CENTER" />
-            </right>
-        </BorderPane>
-        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
-            <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Soyadı</Text>
-            </left>
-            <right>
-                <TextField fx:id="txtTeacherLastName" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtTeacherLastName" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font></TextField>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Email'i</Text>
+                <Text styleClass="body2" text="Öğretmen Tel No." BorderPane.alignment="CENTER">Oryantasyon Başlangıç</Text>
             </left>
             <right>
-                <TextField fx:id="txtTeacherEmail" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtTeacherPhone" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font></TextField>
             </right>
         </BorderPane>
-        <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
             <left>
-                <Text styleClass="body2" BorderPane.alignment="CENTER">Öğretmen Tipi</Text>
+                <Text styleClass="body2" text="Öğretmen Mail Adresi" BorderPane.alignment="CENTER">Oryantasyon Bitiş</Text>
             </left>
             <right>
-                <TextField fx:id="txtTeacherType" BorderPane.alignment="CENTER" />
+                <TextField fx:id="txtTeacherEmail" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font></TextField>
+            </right>
+        </BorderPane>
+        <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+            <left>
+                <Text styleClass="body2" text="Öğretmen Yetkisi" BorderPane.alignment="CENTER" />
+            </left>
+            <right>
+                <Text fx:id="txtTeacherType" styleClass="body2" BorderPane.alignment="CENTER" />
             </right>
         </BorderPane>
     </VBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
         <children>
             <Button onAction="#goBack">
                 <graphic>
@@ -69,7 +117,7 @@
                 </graphic>
                 Geri Dön
             </Button>
-            <Button onAction="#update">
+            <Button fx:id="btnTeacherUpdate" onAction="#update" text="Öğretmeni Güncelle">
                 <graphic>
                     <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -77,36 +125,21 @@
                         </image>
                     </ImageView>
                 </graphic>
-                Öğretmen Bilgilerini Güncelle
             </Button>
         </children>
-        <GridPane.margin>
-            <Insets bottom="10.0" />
-        </GridPane.margin>
     </HBox>
     <columnConstraints>
         <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
+        <RowConstraints maxHeight="200.0" percentHeight="30.0" />
+        <RowConstraints maxHeight="200.0" minHeight="200.0" percentHeight="60.0" prefHeight="200.0" />
+        <RowConstraints percentHeight="10.0" vgrow="ALWAYS" />
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
         <RowConstraints />
-        <RowConstraints />
-        <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
         <RowConstraints />
         <RowConstraints />
         <RowConstraints />

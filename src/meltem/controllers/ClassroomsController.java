@@ -14,9 +14,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import meltem.models.Classroom;
 import meltem.models.RouteData;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.ClassroomRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.ClassroomViewModel;
 import meltem.view_models.StudentViewModel;
@@ -24,6 +26,8 @@ import meltem.view_models.UserViewModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 //new GregorianCalendar(2020,0,31)
@@ -44,11 +48,18 @@ public class ClassroomsController implements Initializable {
     @FXML
     private TableView<ClassroomViewModel> table = new TableView<ClassroomViewModel>();
     public final ObservableList<ClassroomViewModel> data = FXCollections.observableArrayList(
-            //new ClassroomViewModel(1, "A", 1, 25),
-            //new ClassroomViewModel(2, "B", 1, 25),
-           // new ClassroomViewModel(3, "C", 1, 25),
-            //new ClassroomViewModel(4, "D", 1, 25)
+        fetchViewModel()
     );
+
+    ArrayList<ClassroomViewModel> fetchViewModel() {
+        ArrayList<ClassroomViewModel> classroomVMs = new ArrayList<>();
+        ArrayList<Classroom> classrooms = (ArrayList<Classroom>) ClassroomRepository.Instance.fetchAll();
+        for(Classroom c: classrooms) {
+            classroomVMs.add(new ClassroomViewModel(c));
+        }
+        return classroomVMs;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //btnEdit.setDisable(true);

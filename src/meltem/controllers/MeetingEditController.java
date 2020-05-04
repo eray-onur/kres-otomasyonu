@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MeetingEditController implements Initializable {
+    public static int MeetingId = -1;
     public final ObservableList<MeetingViewModel> data = FXCollections.observableArrayList(
             new MeetingViewModel(1, "Ali Öncül Hakkında", "...", "29/03/2020")
     );

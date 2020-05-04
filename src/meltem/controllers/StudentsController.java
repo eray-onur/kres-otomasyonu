@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 //new GregorianCalendar(2020,0,31)
 
 public class StudentsController implements Initializable {
+    public static int route = 0;
     @FXML
     public Button btnUpdateStudent;
     @FXML
@@ -163,6 +164,20 @@ public class StudentsController implements Initializable {
 
 
     public void goBack(ActionEvent event) throws IOException {
+        switch(route) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("classroom_info_admin");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("student_list");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("branch_courses");
+                break;
+        }
+    }
+
+    public void goBackToMenu(ActionEvent event) throws IOException {
         switch(Main.user.getUserAuth()) {
             case 1:
                 SceneBuilder.Instance.BuildScene("search_page");

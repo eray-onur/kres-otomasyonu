@@ -1,5 +1,6 @@
 package meltem.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -8,6 +9,8 @@ import javafx.scene.text.Text;
 import meltem.models.Classroom;
 import meltem.models.RouteData;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.ClassroomRepository;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.ClassroomViewModel;
 
@@ -17,41 +20,47 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClassroomEditController implements Initializable {
-    //Classroom classroom = new ClassroomViewModel(1, "A Sınıfı", 1, 25).classroom;
-    @FXML
-    public Text txtClassroomId;
-    @FXML
+    public static Classroom classroom;
+
     public TextField txtClassroomName;
-    @FXML
+    public TextField txtTeacherName;
+    public TextField txtTeacherLastName;
     public TextField txtClassroomCapacity;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Main.userDataService.fetchById(SceneBuilder.routeData.id);
-        if(SceneBuilder.routeData != null) {
-            Logger.LogDebug(SceneBuilder.routeData.dataName);
-            if(txtClassroomId != null) {
-                //txtClassroomId.setText(String.valueOf(classroom.getClassroomId()));
-            }
-            //txtClassroomName.setText(classroom.getClassroomName());
-            //txtClassroomCapacity.setText(String.valueOf(classroom.getClassroomCapacity()));
+        if(classroom != null) {
+            txtClassroomName.setText(classroom.getClassroomName());
+            txtTeacherName.setText(classroom.getClassroomTeacherName());
+            txtTeacherLastName.setText(classroom.getClassroomTeacherLastName());
+            txtClassroomCapacity.setText(String.valueOf(classroom.getClassroomCapacity()));
         } else {
-            if(txtClassroomId != null) {
-                txtClassroomId.setDisable(false);
-            }
+            classroom = new Classroom();
         }
-    }
-    public void attendance() throws IOException {
-        SceneBuilder.Instance.BuildScene("student_assign_classroom");
-    }
-    public void update() throws IOException {
-        SceneBuilder.Instance.BuildScene("classroom_edit", new RouteData(1, "user"));
-    }
-    public void delete() throws IOException {
-        Logger.LogDebug("DELETE!");
-        SceneBuilder.Instance.BuildScene("classroom_list");
     }
     @FXML
     public void goBack() throws IOException {
+        classroom = null;
+        SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
+    }
+
+    public void addClassroom(ActionEvent event) {
+        int teacherIndex = TeacherRepository.Instance.returnLast().getTeacherId() + 1;
+
+        classroom.setClassroomName(txtClassroomName.getText());
+        classroom.setClassroomTeacherName(txtTeacherName.getText());
+        classroom.setClassroomTeacherLastName(txtTeacherLastName.getText());
+        classroom.setClassroomCapacity(Integer.parseInt(txtClassroomCapacity.getText()));
+
+        Logger.LogDebug(String.valueOf(teacherIndex) + " IS INDEX!!!");
+        ClassroomRepository.Instance.Add(classroom, teacherIndex);
+        classroom = null;
+        SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
+    }
+
+    public void editClassroom(ActionEvent event) {
+        ClassroomRepository.Instance.UpdateById(classroom, classroom.getClassroomTeacherId());
+        classroom = null;
         SceneBuilder.Instance.BuildScene("attendance_classroom_admin");
     }
 }

@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,97 +12,133 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import meltem.models.RouteData;
+import meltem.Main;
+import meltem.models.Meeting;
+import meltem.models.Teacher;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.MeetingRepository;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.MeetingViewModel;
+import meltem.view_models.TeacherViewModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-//new GregorianCalendar(2020,0,31)
-
 public class MeetingsController implements Initializable {
-    public final ObservableList<MeetingViewModel> data = FXCollections.observableArrayList(
-            new MeetingViewModel(1, "Ali Öncül Hakkında", "...", "29/03/2020")
-    );
-    int selectedId = 0;
+    public static int route = 0;
     @FXML
-    public Button btnEdit;
+    public Button btnAddMeeting;
     @FXML
+    public Button btnDetailMeeting;
+    @FXML
+    public Button btnSearchMeeting;
+    private int selectedId = 1;
+
     public TextField txtMeetingId;
-    public void findMeeting() throws IOException {
-        int meetingId = Integer.parseInt(txtMeetingId.getText());
-        if(meetingId != 0) {
-            SceneBuilder.Instance.BuildScene("meeting_info", new RouteData(1, "meeting"));
+    public ObservableList<MeetingViewModel> meetings = FXCollections.observableArrayList(
+            fetchAllModelsForMeetings()
+    );
+
+    public List<MeetingViewModel> fetchAllModelsForMeetings()  {
+        List<MeetingViewModel> meetingVMs = new ArrayList<>();
+        try {
+            List<Meeting> meetings = MeetingRepository.Instance.fetchAll();
+            for (Meeting meeting: meetings) {
+                meetingVMs.add(new MeetingViewModel(meeting));
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
         }
+        return meetingVMs;
     }
+
+    @FXML
+    public Button btnUpdateMeeting;
+
+    public TableColumn<MeetingViewModel, SimpleIntegerProperty> colMeetingId;
+    public TableColumn<MeetingViewModel, SimpleStringProperty> colMeetingTitle;
+    public TableColumn<MeetingViewModel, SimpleStringProperty> colMeetingDate;
+    public TableColumn<MeetingViewModel, SimpleStringProperty> colMeetingSummary;
+
+
     @FXML
     private TableView<MeetingViewModel> table = new TableView<MeetingViewModel>();
+
+    @FXML
+    public void getCourseViewModel(MouseEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() != null) {
+            selectedId = table.getSelectionModel().getSelectedItem().meeting.getMeetingId();
+            MeetingEditController.MeetingId = selectedId;
+            Logger.LogDebug(String.valueOf(TeacherEditController.TeacherId) + " is the selected ID.");
+            btnUpdateMeeting.setDisable(false);
+            btnDetailMeeting.setDisable(false);
+        }
+    }
+
+    public void goBack(ActionEvent event) throws IOException {
+        switch(route) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("classroom_info_admin");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("student_list");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("branch_courses");
+                break;
+        }
+    }
+
+    public void goBackToMenu(ActionEvent event) throws IOException {
+        switch(Main.user.getUserAuth()) {
+            case 1:
+                SceneBuilder.Instance.BuildScene("search_page");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("home_class");
+                break;
+            case 3:
+                SceneBuilder.Instance.BuildScene("home_branch");
+                break;
+        }
+    }
+
+    public void proceedToEdit(ActionEvent event) throws IOException {
+        TeacherEditController.TeacherId = selectedId;
+        SceneBuilder.Instance.BuildScene("teacher_edit");
+    }
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnEdit.setDisable(true);
-        table.setEditable(true);
-        Logger.LogDebug(data.get(0).meeting.toString());
-        // First Name
-        TableColumn<MeetingViewModel, SimpleIntegerProperty> userIdCol = new TableColumn<>("Toplantı Numarası");
-        userIdCol.setMinWidth(100);
-        userIdCol.setCellValueFactory(
-                user -> user.getValue().meetingId
+    public void initialize(URL location, ResourceBundle resources) {
+        btnUpdateMeeting.setDisable(true);
+        colMeetingId.setCellValueFactory(
+                meeting -> meeting.getValue().meetingId
         );
-        // Last Name
-        TableColumn<MeetingViewModel, SimpleStringProperty> usernameCol = new TableColumn<>("Toplantı Başlığı");
-        usernameCol.setMinWidth(100);
-        usernameCol.setCellValueFactory(
-                user -> user.getValue().meetingTitle
+        colMeetingTitle.setCellValueFactory(
+                meeting -> meeting.getValue().meetingTitle
         );
-        // Orientation Start
-        TableColumn<MeetingViewModel, SimpleStringProperty> pwCol = new TableColumn<>("Toplantı Tarihi");
-        pwCol.setMinWidth(250);
-        pwCol.setCellValueFactory(
-                user -> user.getValue().meetingDate
+        colMeetingDate.setCellValueFactory(
+                meeting -> meeting.getValue().meetingDate
         );
-
-        TableColumn<MeetingViewModel, SimpleStringProperty> userAuthCol = new TableColumn<>("Toplantı Özeti");
-        userAuthCol.setMinWidth(250);
-        userAuthCol.setCellValueFactory(
-                user -> user.getValue().meetingSummary
+        colMeetingSummary.setCellValueFactory(
+                meeting -> meeting.getValue().meetingSummary
         );
-
-
-
-        table.setItems(data);
-        table.getColumns().addAll(userIdCol, usernameCol, pwCol, userAuthCol);
-
+        table.setItems(meetings);
+        table.setFixedCellSize(75);
     }
 
-    public void clickItem(MouseEvent event) {
-        table.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //selectedId = table.getSelectionModel().getSelectedItem().meeting.meetingId;
-                Logger.LogDebug(String.valueOf(selectedId));
-                if(selectedId != 0) {
-                    btnEdit.setDisable(false);
-                }
-            }
-        });
+    public void searchMeeting(ActionEvent event) {
     }
 
-    public void addData() throws IOException {
+    public void proceedToNew(ActionEvent event) {
         SceneBuilder.Instance.BuildScene("meeting_new");
     }
 
-    public void proceedToInfo() throws IOException {
-        SceneBuilder.Instance.BuildScene("meeting_info", new RouteData(1, "meeting"));
-    }
-
-    public void proceedToEdit() throws IOException {
-        SceneBuilder.Instance.BuildScene("meeting_edit", new RouteData(1, "meeting"));
-    }
-
-    public void goBack(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("search_page");
+    public void proceedToDetails(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("meeting_info");
     }
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 public class SearchController {
     @FXML
     public void goStudent() throws IOException {
+        StudentsController.route = 2;
         SceneBuilder.Instance.BuildScene("student_list");
     }
     @FXML

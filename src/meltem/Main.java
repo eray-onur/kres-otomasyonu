@@ -13,15 +13,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main extends Application {
-    public static UserRepository userDataService = new UserRepository();
+    public static UserRepository ur = new UserRepository();
     public ClassroomRepository cr = new ClassroomRepository();
     public ClassroomCourseRepository ccr = new ClassroomCourseRepository();
     public ClassroomAttendanceRepository car = new ClassroomAttendanceRepository();
     public TeacherRepository tr = new TeacherRepository();
     public StudentRepository sr = new StudentRepository();
-//    public static StudentDataService studentDataService = new StudentDataService();
-//    public static ClassroomDataService classroomDataService = new ClassroomDataService();
-//    public static TeacherDataService teacherDataService = new TeacherDataService();
+    public MeetingRepository mr = new MeetingRepository();
+
     public static User user = new User(1, "sema_yirun", "123456", (short)1);
     @Override
     public void start(Stage primaryStage) throws Exception {

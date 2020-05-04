@@ -34,9 +34,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminClassroomInfoController implements Initializable {
-    public static int CourseId;
-    public static int ClassroomId;
-    public static String ClassroomTeacherFullName;
+    public static int CourseId = -1;
+    public static int ClassroomId = -1;
+    public static String ClassroomTeacherFullName = "";
+    public static Classroom classroom;
     public Student selectedStudent;
     @FXML
     public Button btnShowStudents;
@@ -101,11 +102,13 @@ public class AdminClassroomInfoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
 
-            Classroom classroom = ClassroomRepository.Instance.fetchById(ClassroomId);
+            //Classroom classroom = ClassroomRepository.Instance.fetchById(ClassroomId);
+            Logger.LogDebug(ClassroomId + " ID IN CLASSROOM INFO CONTROLLER!");
+
             txtClassroomId.setText(String.valueOf(classroom.getClassroomId()));
             txtClassroomName.setText(classroom.getClassroomName());
             txtClassroomCapacity.setText(String.valueOf(classroom.getClassroomCapacity()));
-            txtClassroomTeacherName.setText(ClassroomTeacherFullName);
+            txtClassroomTeacherName.setText(classroom.getClassroomTeacherName() + " " + classroom.getClassroomTeacherLastName());
 
             tableCourses.setOnMouseClicked(v -> getCourseViewModel());
 
@@ -170,7 +173,7 @@ public class AdminClassroomInfoController implements Initializable {
             btnUpdateCourse.setDisable(false);
             AdminClassroomInfoController.ClassroomId = tableCourses.getSelectionModel().getSelectedItem().course.getClassroomCourseId();
             ClassroomCourseEditController.courseToEdit = tableCourses.getSelectionModel().getSelectedItem().course;
-            Logger.LogDebug(String.valueOf(AdminClassroomInfoController.ClassroomId));
+            Logger.LogDebug(String.valueOf(AdminClassroomInfoController.ClassroomId + " IS THE STATIC ID!"));
         }
     }
 

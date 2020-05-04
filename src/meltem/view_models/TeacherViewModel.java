@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import meltem.models.Teacher;
 import meltem.services.logging.Logger;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 public class TeacherViewModel {
     public Teacher teacher;
@@ -13,6 +14,7 @@ public class TeacherViewModel {
     public ObservableValue<SimpleStringProperty> teacherName;
     public ObservableValue<SimpleStringProperty> teacherLastName;
     public ObservableValue<SimpleStringProperty> teacherEmail;
+    public ObservableValue<SimpleStringProperty> teacherPhone;
     public ObservableValue<SimpleStringProperty> teacherType;
 
     public TeacherViewModel (
@@ -41,5 +43,15 @@ public class TeacherViewModel {
         catch(NullPointerException ex) {
             Logger.LogError(ex.toString());
         }
+    }
+    public TeacherViewModel(Teacher teacher) {
+        this.teacher = teacher;
+
+        this.teacherId = (ObservableValue) new SimpleIntegerProperty(teacher.getTeacherId());
+        this.teacherName = (ObservableValue) new SimpleStringProperty(teacher.getTeacherName());
+        this.teacherLastName = (ObservableValue) new SimpleStringProperty(teacher.getTeacherLastName());
+        this.teacherPhone = (ObservableValue) new SimpleStringProperty(teacher.getTeacherPhone());
+        this.teacherEmail = (ObservableValue) new SimpleStringProperty(teacher.getTeacherEmail());
+        this.teacherType = (ObservableValue) new SimpleStringProperty(teacher.getTeacherType());
     }
 }

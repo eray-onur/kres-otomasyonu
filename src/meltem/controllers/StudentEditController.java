@@ -79,22 +79,7 @@ public class StudentEditController implements Initializable {
 
     @FXML
     public void goBack() throws IOException {
-        switch(Main.user.getUserAuth()) {
-            case 1:
-                SceneBuilder.Instance.BuildScene("student_list");
-                break;
-            case 2:
-                SceneBuilder.Instance.BuildScene("student_info");
-                break;
-            case 3:
-                SceneBuilder.Instance.BuildScene("branch_course_single");
-                break;
-        }
-
-    }
-
-    @FXML
-    public void goBack(int route) throws IOException {
+        Logger.LogDebug(String.valueOf(route) + " is the route ID");
         switch(route) {
             case 1:
                 SceneBuilder.Instance.BuildScene("classroom_info_admin");
@@ -108,6 +93,7 @@ public class StudentEditController implements Initializable {
         }
 
     }
+
 
     public void update(ActionEvent actionEvent)  {
         Student updatedStudent = new Student(
@@ -125,7 +111,7 @@ public class StudentEditController implements Initializable {
 
         try {
             StudentRepository.Instance.UpdateById(updatedStudent, StudentId);
-            goBack(route);
+            goBack();
         } catch(Exception ex) {
             ex.printStackTrace();
         }

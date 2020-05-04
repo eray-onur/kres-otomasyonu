@@ -29,9 +29,9 @@
                </VBox>
                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
                   <children>
-                      <Text fill="WHITE" text="Lütfen adam gibi verin şu değerleri amk evlatları">
+                      <Text fill="WHITE" text="Lüften tüm öğrenci bilgilerini eksiksiz giriniz.">
                         <font>
-                           <Font size="20.0" />
+                           <Font size="24.0" />
                         </font>
                      </Text>
                   </children>
