@@ -20,7 +20,7 @@ public class Main extends Application {
     public TeacherRepository tr = new TeacherRepository();
     public StudentRepository sr = new StudentRepository();
     public MeetingRepository mr = new MeetingRepository();
-
+    public BranchRepository br = new BranchRepository();
     public static User user = new User(1, "sema_yirun", "123456", (short)1);
     @Override
     public void start(Stage primaryStage) throws Exception {

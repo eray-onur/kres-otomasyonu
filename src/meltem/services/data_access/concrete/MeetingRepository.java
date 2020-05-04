@@ -99,11 +99,11 @@ public class MeetingRepository extends PersistentDataService<Meeting> {
         try {
             this.connect();
             // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
-            String sql = "UPDATE meetings SET meeting_title = ?, meeting_date = ?, meeting_summary = ?, teacher_email = ?, teacher_auth = ? WHERE teacher_id = ?";
+            String sql = "UPDATE meetings SET meeting_title = ?, meeting_date = ?, meeting_summary = ? WHERE meeting_id = ?";
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setString(1, entity.getMeetingTitle());
-            pst.setString(2, entity.getMeetingSummary());
-            pst.setString(3, entity.getMeetingDate());
+            pst.setString(2, entity.getMeetingDate());
+            pst.setString(3, entity.getMeetingSummary());
             pst.setInt(4, entity.getMeetingId());
             int i = pst.executeUpdate();
             Logger.LogDebug("RESULTS OF THIS TEACHER UPDATE IS: " + i);

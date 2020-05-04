@@ -109,7 +109,7 @@ public class MeetingsController implements Initializable {
 
     public void proceedToEdit(ActionEvent event) throws IOException {
         TeacherEditController.TeacherId = selectedId;
-        SceneBuilder.Instance.BuildScene("teacher_edit");
+        SceneBuilder.Instance.BuildScene("meeting_edit");
     }
 
     @Override
@@ -131,14 +131,18 @@ public class MeetingsController implements Initializable {
         table.setFixedCellSize(75);
     }
 
-    public void searchMeeting(ActionEvent event) {
-    }
-
     public void proceedToNew(ActionEvent event) {
+        MeetingEditController.MeetingId = -1;
         SceneBuilder.Instance.BuildScene("meeting_new");
     }
 
+
     public void proceedToDetails(ActionEvent event) {
+        MeetingInfoController.MeetingId = selectedId;
         SceneBuilder.Instance.BuildScene("meeting_info");
+    }
+
+    public void searchMeeting(ActionEvent event) {
+
     }
 }

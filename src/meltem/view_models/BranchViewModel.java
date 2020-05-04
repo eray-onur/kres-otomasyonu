@@ -4,7 +4,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import meltem.models.Branch;
+import meltem.models.Classroom;
+import meltem.models.Teacher;
 import meltem.models.User;
+import meltem.services.data_access.concrete.BranchRepository;
+import meltem.services.data_access.concrete.ClassroomRepository;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
 
 import java.util.ArrayList;
@@ -12,77 +17,42 @@ import java.util.List;
 
 public class BranchViewModel{
     public Branch branch;
+    public Teacher teacher;
 
-    public ObservableValue<SimpleStringProperty> nBranchCourse;
-    public ObservableValue<SimpleStringProperty> nBranchTeacherFullName;
-    public StudentViewModel[] studentViewModelList = new StudentViewModel[]{
-            new StudentViewModel(1,
-                    "Ali",
-                    "Oncul",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 555 4433",
-                    "Ahmet",
-                    "Oncul",
-                    "aoncul76@hotmail.com",
-                    680
-            ),
-            new StudentViewModel(1,
-                    "Veli",
-                    "Turk",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 555 4433",
-                    "Huseyin",
-                    "Turk",
-                    "",
-                    680
-            ),
-            new StudentViewModel(1,
-                    "Mehmet",
-                    "Kaya",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 666 1122",
-                    "Nazan",
-                    "Ata",
-                    "nazan.ata@gmail.com",
-                    680
-            ),
-            new StudentViewModel(1,
-                    "Abdullah",
-                    "Gök",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 222 3399",
-                    "Davud",
-                    "Gök",
-                    "",
-                    680
-            ),
-            new StudentViewModel(1,
-                    "Atakan",
-                    "Irmak",
-                    "23/03/2020",
-                    "07/04/2020",
-                    "0543 545 4433",
-                    "Davud",
-                    "Oncul",
-                    "aoncul76@hotmail.com",
-                    680
-            ),
-    };
+    public ObservableValue<SimpleIntegerProperty> branchId;
+    public ObservableValue<SimpleIntegerProperty> branchTeacherId;
+    public ObservableValue<SimpleStringProperty> branchName;
+    public ObservableValue<SimpleIntegerProperty> branchCapacity;
+    public ObservableValue<SimpleStringProperty> branchTeacherName;
+    public ObservableValue<SimpleStringProperty> branchTeacherLastName;
+    public ObservableValue<SimpleStringProperty> branchTeacherPhone;
 
     public BranchViewModel (
-            String course,
-            String teacher
+            int id,
+            int teacherId
     ) {
         try {
-
+            branch = BranchRepository.Instance.fetchById(id);
+            teacher = TeacherRepository.Instance.fetchById(teacherId);
+            this.branchId = (ObservableValue) new SimpleIntegerProperty(branch.getBranchId());
+            this.branchTeacherId = (ObservableValue) new SimpleIntegerProperty(teacher.getTeacherId());
+            this.branchName = (ObservableValue) new SimpleStringProperty(branch.getBranchCourseName());
+            this.branchCapacity = (ObservableValue) new SimpleIntegerProperty(branch.getBranchCapacity());
+            this.branchTeacherName = (ObservableValue) new SimpleStringProperty(teacher.getTeacherName());
+            this.branchTeacherLastName = (ObservableValue) new SimpleStringProperty(teacher.getTeacherLastName());
         }
         catch(NullPointerException ex) {
             Logger.LogError(ex.toString());
         }
+    }
+    public BranchViewModel(Branch branch) {
+        this.branch = branch;
+        this.branchId = (ObservableValue) new SimpleIntegerProperty(branch.getBranchId());
+        this.branchName = (ObservableValue) new SimpleStringProperty(branch.getBranchCourseName());
+        this.branchCapacity = (ObservableValue) new SimpleIntegerProperty(branch.getBranchCapacity());
+        this.branchTeacherName = (ObservableValue) new SimpleStringProperty(branch.getBranchTeacherName());
+        this.branchTeacherLastName = (ObservableValue) new SimpleStringProperty(branch.getBranchTeacherLastName());
+        this.branchTeacherPhone = (ObservableValue) new SimpleStringProperty(branch.getBranchTeacherPhone());
     }
 
 }

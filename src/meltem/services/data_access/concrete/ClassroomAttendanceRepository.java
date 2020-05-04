@@ -108,7 +108,7 @@ public class ClassroomAttendanceRepository extends PersistentDataService<Student
         try {
             this.connect();
             Logger.LogDebug("BEFORE OPERATION, CLASSROOM ID IS: " + StudentNewController.ClassroomId);
-            String sql = "INSERT INTO students VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO students(students.student_name, students.student_lastname, students.orientation_start, students.orientation_end, students.parent_name, students.parent_lastname, students.parent_phone, students.parent_email, students.payment_monthly, students.student_classroom_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setString(1, entity.getStudentName());
             pst.setString(2, entity.getStudentLastName());
@@ -127,7 +127,7 @@ public class ClassroomAttendanceRepository extends PersistentDataService<Student
             this.close();
         }
         catch(Exception ex) {
-            Logger.Log(LogType.Error, ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
@@ -135,7 +135,7 @@ public class ClassroomAttendanceRepository extends PersistentDataService<Student
         try {
             this.connect();
             Logger.LogDebug("BEFORE OPERATION, CLASSROOM ID IS: " + StudentNewController.ClassroomId);
-            String sql = "INSERT INTO students VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO students(student_name, student_lastname, orientation_start, orientation_end, parent_name, parent_lastname, parent_phone, parent_email, payment_monthly, student_classroom_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setString(1, entity.getStudentName());
             pst.setString(2, entity.getStudentLastName());
@@ -148,7 +148,7 @@ public class ClassroomAttendanceRepository extends PersistentDataService<Student
             pst.setInt(9, entity.getPaymentMonthly());
             pst.setInt(10, classroomId);
             int i = pst.executeUpdate();
-            Logger.LogDebug("BEFORE RESULT");
+            Logger.LogDebug("BEFORE RESULT" + "ID: " + classroomId);
             Logger.LogDebug(String.valueOf(i));
             Logger.LogDebug("END OF RESULT");
             this.close();

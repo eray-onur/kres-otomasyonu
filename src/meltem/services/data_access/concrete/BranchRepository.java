@@ -1,9 +1,9 @@
 package meltem.services.data_access.concrete;
 
+import meltem.controllers.BranchEditController;
+import meltem.controllers.StudentEditController;
 import meltem.enums.LogType;
-import meltem.models.Branch;
-import meltem.models.Classroom;
-import meltem.models.User;
+import meltem.models.*;
 import meltem.services.data_access.PersistentDataService;
 import meltem.services.logging.Logger;
 
@@ -15,6 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BranchRepository extends PersistentDataService<Branch> {
+    public static BranchRepository Instance;
+
+    public BranchRepository() {
+        if(Instance == null) {
+            Instance = this;
+        }
+    }
+
     @Override
     public Branch fetchById(int id) {
         Branch[] branchList = new Branch[1];
@@ -73,22 +81,102 @@ public class BranchRepository extends PersistentDataService<Branch> {
     public void Add(Branch entity) {
         try {
             this.connect();
-            String sql = "INSERT INTO branch_courses VALUES(?, ?, ?)";
+            String sql = "INSERT INTO teachers VALUES(?, ?, ?, ?, 3)";
+
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setString(1, entity.getBranchCourseName());
-            pst.setInt(2, entity.getBranchTeacher());
-            pst.setInt(3, entity.getBranchCapacity());
-            int i = pst.executeUpdate();
-            Logger.LogDebug(String.valueOf(i));
+            pst.setString(2, entity.getBranchTeacherName());
+            pst.setString(3, entity.getBranchTeacherLastName());
+            pst.setInt(4, entity.getBranchCapacity());
+
+            int resultPst1 = pst.executeUpdate();
+
+            String sql2 = "INSERT INTO branch_courses VALUES(?, ?, ?)";
+
+            PreparedStatement pst2 = this.connection.prepareStatement(sql2);
+
+            pst2.setString(1, entity.getBranchCourseName());
+            pst2.setInt(2, Instance.returnLast().getTeacherId());
+            pst2.setInt(3, entity.getBranchCapacity());
+
+            int resultPst2 = pst2.executeUpdate();
+
+            Logger.LogDebug(String.valueOf(resultPst1) + " " + String.valueOf(resultPst2));
+
             this.close();
         }
         catch(Exception ex) {
-            Logger.Log(LogType.Error, ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
+    public void AddStudentToBranchCourse(int branchId, Student entity) {
+
+        try {
+            entity.setBranchId(branchId);
+            StudentRepository.Instance.AddToBranch(entity);
+            Student addedStudent = StudentRepository.Instance.returnLast();
+            Logger.LogDebug(addedStudent.getParentNumber() + " IS THE PARENT NUMBER OF LAST INDEX");
+            Logger.LogDebug(addedStudent.getStudentId() + " x");
+
+
+            this.connect();
+
+            String sql2 = "INSERT INTO branch_attendance VALUES (?, ?);";
+
+            PreparedStatement pst = this.connection.prepareStatement(sql2);
+            pst.setInt(1, branchId);
+            pst.setInt(2, addedStudent.getStudentId());
+
+            int i = pst.executeUpdate();
+            Logger.LogDebug("RESULT OF UPDATING BRANCH ATTENDANCE IS: " + i);
+
+
+
+
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public List<Student> fetchAllStudents(int branchId) {
+        List<Student> studentList = new ArrayList<Student>();
+        try {
+            this.connect();
+            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
+            Statement statement = connection.createStatement();
+            String query = String.format("select students.student_id, students.student_name, students.student_lastname, students.orientation_start, students.orientation_end, students.parent_name, students.parent_lastname, students.parent_phone, students.parent_email FROM (\n" +
+                    "\tbranch_attendance\n" +
+                    "\tINNER JOIN students ON branch_attendance.student_id = students.student_id\n" +
+                    ") WHERE branch_attendance.branch_id = %d;", branchId);
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+                Student student = new Student(
+                        rs.getInt("student_id"),
+                        rs.getString("student_name"),
+                        rs.getString("student_lastname"),
+                        rs.getString("orientation_start"),
+                        rs.getString("orientation_end"),
+                        rs.getString("parent_name"),
+                        rs.getString("parent_lastname"),
+                        rs.getString("parent_phone"),
+                        rs.getString("parent_email"),
+                        850
+                );
+                studentList.add(student);
+            }
+            // Bitis
+            this.close();
+        }
+        catch (Exception ex) {
+            Logger.Log(LogType.Error, ex.getMessage());
+        }
+        return studentList;
+    }
+
     @Override
-    public void UpdateById(Branch branch, int id) {
+    public void UpdateById(Branch branch, int teacherId) {
         try {
             this.connect();
             // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
@@ -97,7 +185,7 @@ public class BranchRepository extends PersistentDataService<Branch> {
             pst.setString(1, branch.getBranchCourseName());
             pst.setInt(2, branch.getBranchTeacher());
             pst.setInt(3, branch.getBranchCapacity());
-            pst.setInt(4, id);
+            pst.setInt(4, branch.getBranchId());
             int i = pst.executeUpdate();
             Logger.LogDebug(String.valueOf(i));
             // Bitis
@@ -123,6 +211,52 @@ public class BranchRepository extends PersistentDataService<Branch> {
         }
         catch (Exception ex) {
             Logger.Log(LogType.Error, ex.getMessage());
+        }
+    }
+
+    public Teacher returnLast() {
+        Teacher[] teachers = new Teacher[1];
+        try {
+            Teacher teacher = new Teacher(-1, "", "", "", "", 2);
+            this.connect();
+            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
+            Statement statement = connection.createStatement();
+            String query = "SELECT TOP 1 * FROM teachers ORDER BY teachers.teacher_id DESC;";
+
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+                teacher.setTeacherId(rs.getInt("teacher_id"));
+                teacher.setTeacherName(rs.getString("teacher_name"));
+                teacher.setTeacherLastName(rs.getString("teacher_lastname"));
+                teacher.setTeacherPhone(rs.getString("teacher_phone"));
+                teacher.setTeacherEmail(rs.getString("teacher_email"));
+                teacher.setTeacherAuth(rs.getInt("teacher_auth"));
+            }
+            Logger.LogDebug(String.valueOf(teacher.getTeacherName()));
+            teachers[0] = teacher;
+            // Bitis
+            this.close();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return teachers[0];
+    }
+
+    public void Add(Branch entity, int teacherIndex) {
+        try {
+            this.connect();
+            String sql = "INSERT INTO branch_courses(branch_name, branch_teacher_id, branch_capacity) VALUES (?,?,?);";
+            PreparedStatement pst = this.connection.prepareStatement(sql);
+            pst.setString(1, entity.getBranchCourseName());
+            pst.setInt(2, teacherIndex);
+            pst.setInt(3, entity.getBranchCapacity());
+            int i = pst.executeUpdate();
+            Logger.LogDebug(String.valueOf(i));
+            this.close();
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

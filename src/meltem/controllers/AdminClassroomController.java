@@ -10,11 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import meltem.models.Branch;
 import meltem.models.Classroom;
 import meltem.models.RouteData;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.BranchRepository;
 import meltem.services.data_access.concrete.ClassroomRepository;
 import meltem.services.logging.Logger;
+import meltem.view_models.BranchViewModel;
 import meltem.view_models.ClassroomViewModel;
 
 import java.io.IOException;
@@ -53,21 +56,22 @@ public class AdminClassroomController implements Initializable {
         classroomTableList = FXCollections.observableArrayList(
             fetchAllModels()
         );
+
         // Classroom ID
         colClassId.setCellValueFactory(
-                classroom -> classroom.getValue().classroomId
+                branch -> branch.getValue().classroomId
         );
         // Classroom Name
         colClassName.setCellValueFactory(
-                classroom -> classroom.getValue().classroomName
+                branch -> branch.getValue().classroomName
         );
         // Classroom Teacher Fullname
         colClassTeacher.setCellValueFactory(
-                classroom -> classroom.getValue().classroomTeacherFullName
+                branch -> branch.getValue().classroomTeacherFullName
         );
-        // Classroom Capacity
+        // Classroom Teacher Fullname
         colClassCapacity.setCellValueFactory(
-                classroom -> classroom.getValue().capacity
+                branch -> branch.getValue().capacity
         );
 
         classroomTable.setItems(classroomTableList);
@@ -91,10 +95,6 @@ public class AdminClassroomController implements Initializable {
             classroomList.add(new ClassroomViewModel(classroom));
         }
         return classroomList;
-    }
-
-    public void goBack() throws IOException {
-        SceneBuilder.Instance.BuildScene("search_page");
     }
 
     public void update() throws IOException {

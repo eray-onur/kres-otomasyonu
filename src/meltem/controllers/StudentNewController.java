@@ -8,8 +8,10 @@ import javafx.scene.text.Text;
 import meltem.Main;
 import meltem.models.Student;
 import meltem.services.SceneBuilder;
+import meltem.services.data_access.concrete.BranchRepository;
 import meltem.services.data_access.concrete.ClassroomAttendanceRepository;
 import meltem.services.data_access.concrete.StudentRepository;
+import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
 import meltem.view_models.StudentViewModel;
 
@@ -61,12 +63,15 @@ public class StudentNewController implements Initializable {
                 txtParentName.setText(student.getParentName());
                 txtParentLastName.setText(student.getParentLastName());
                 txtParentEmail.setText(student.getParentEmail());
-                StudentId = -1;
 
             }
 
             if(ClassroomId != -1) {
                 Logger.LogDebug(String.valueOf(ClassroomId));
+            }
+
+            if(BranchCourseId != -1) {
+                Logger.LogDebug(String.valueOf(BranchCourseId));
             }
 
         } catch (Exception e) {
@@ -86,11 +91,13 @@ public class StudentNewController implements Initializable {
                 SceneBuilder.Instance.BuildScene("student_list");
                 break;
             case 3:
-                SceneBuilder.Instance.BuildScene("branch_courses");
+                SceneBuilder.Instance.BuildScene("branch_info_admin");
                 break;
         }
 
     }
+
+
 
     public void update(ActionEvent actionEvent)  {
         Student updatedStudent = new Student(
@@ -107,13 +114,18 @@ public class StudentNewController implements Initializable {
         );
 
         try {
-            StudentRepository.Instance.UpdateById(updatedStudent, student.getStudentId());
+            StudentRepository.Instance.UpdateById(updatedStudent, StudentId);
             Logger.LogDebug(StudentRepository.Instance.fetchById(student.getStudentId()).getParentName());
+            StudentId = -1;
+            ClassroomId = -1;
+            BranchCourseId = -1;
             goBack();
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-
+        StudentId = -1;
+        ClassroomId = -1;
+        BranchCourseId = -1;
     }
 
     public void add(ActionEvent actionEvent)  {
@@ -131,11 +143,27 @@ public class StudentNewController implements Initializable {
         );
 
         try {
-            ClassroomAttendanceRepository.Instance.Add(studentToAdd);
+            Logger.LogDebug("" + ClassroomId + " " + BranchCourseId + " COMPARE!!!!!!!!!!!!!!!!1");
+            if(ClassroomId != -1) {
+                ClassroomAttendanceRepository.Instance.Add(studentToAdd, ClassroomId);
+                Logger.LogDebug("CLASSROOM");
+            }
+            if(BranchCourseId != -1) {
+                Logger.LogDebug("BRANCH COURSE!!!!!!!!!!!!!!");
+                BranchRepository.Instance.AddStudentToBranchCourse(StudentNewController.BranchCourseId, studentToAdd);
+            }
+            StudentId = -1;
+            ClassroomId = -1;
+            BranchCourseId = -1;
             goBack();
         } catch(Exception ex) {
+            ClassroomId = -1;
+            BranchCourseId = -1;
+            StudentId = -1;
             ex.printStackTrace();
         }
-
+        ClassroomId = -1;
+        BranchCourseId = -1;
+        StudentId = -1;
     }
 }

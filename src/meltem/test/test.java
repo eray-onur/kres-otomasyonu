@@ -2,6 +2,7 @@ package meltem.test;
 
 import meltem.models.Classroom;
 import meltem.models.Student;
+import meltem.models.Teacher;
 import meltem.services.data_access.concrete.*;
 import meltem.services.logging.Logger;
 
@@ -13,10 +14,10 @@ public class test {
         TeacherRepository tr = new TeacherRepository();
         ClassroomAttendanceRepository car = new ClassroomAttendanceRepository();
         ClassroomRepository cr = new ClassroomRepository();
-        ClassroomRepository.Instance.Add(new Classroom(10, "sadf",
-                "dsafdfg", "asdfsfdg", 25), ClassroomRepository.Instance.returnLast().getClassroomId());
+
         MeetingRepository mr = new MeetingRepository();
-        Logger.LogDebug(String.valueOf(MeetingRepository.Instance.fetchAll().get(0).getMeetingSummary()));
+        BranchRepository br = new BranchRepository();
+        TeacherRepository.Instance.UpdateById(new Teacher(1, "sssssssss", "xxxxxxxxxxxxxx", "222", "2222", 3), 1);
     }
 }
 

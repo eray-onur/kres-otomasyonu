@@ -15,6 +15,16 @@ public class Student {
     private String parentEmail;
     private int paymentMonthly;
 
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    private int branchId;
+
     public int getStudentId() {
         return this.studentId;
     }

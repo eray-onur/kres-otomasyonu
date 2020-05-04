@@ -130,6 +130,25 @@ public class TeacherRepository extends PersistentDataService<Teacher> {
         }
     }
 
+    public void Add(Teacher entity, int auth)  {
+        try {
+            this.connect();
+            String sql = "INSERT INTO teachers(teacher_name, teacher_lastname, teacher_phone, teacher_email, teacher_auth) VALUES (?,?,?,?,?);";
+            PreparedStatement pst = this.connection.prepareStatement(sql);
+            pst.setString(1, entity.getTeacherName());
+            pst.setString(2, entity.getTeacherLastName());
+            pst.setString(3, entity.getTeacherPhone());
+            pst.setString(4, entity.getTeacherEmail());
+            pst.setInt(5, auth);
+            int i = pst.executeUpdate();
+            Logger.LogDebug(String.valueOf(i));
+            this.close();
+        }
+        catch(Exception ex) {
+            Logger.Log(LogType.Error, ex.getMessage());
+        }
+    }
+
     @Override
     public void UpdateById(Teacher entity, int teacherId) {
         try {

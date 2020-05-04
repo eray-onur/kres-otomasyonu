@@ -104,8 +104,10 @@ public class AdminClassroomInfoController implements Initializable {
 
             //Classroom classroom = ClassroomRepository.Instance.fetchById(ClassroomId);
             Logger.LogDebug(ClassroomId + " ID IN CLASSROOM INFO CONTROLLER!");
+            if(txtClassroomId != null) {
+                txtClassroomId.setText(String.valueOf(classroom.getClassroomId()));
+            }
 
-            txtClassroomId.setText(String.valueOf(classroom.getClassroomId()));
             txtClassroomName.setText(classroom.getClassroomName());
             txtClassroomCapacity.setText(String.valueOf(classroom.getClassroomCapacity()));
             txtClassroomTeacherName.setText(classroom.getClassroomTeacherName() + " " + classroom.getClassroomTeacherLastName());

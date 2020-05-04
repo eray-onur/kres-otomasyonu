@@ -44,4 +44,11 @@ public class Meeting {
         this.meetingSummary = summary;
         this.meetingDate = date;
     }
+
+    public Meeting() {
+        this.meetingId = -1;
+        this.meetingTitle = "";
+        this.meetingSummary = "";
+        this.meetingDate = "";
+    }
 }
