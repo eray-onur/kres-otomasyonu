@@ -105,7 +105,6 @@ public class ClassroomRepository extends PersistentDataService<Classroom> {
                 classroomCapacity = rs.getInt("classroom_capacity");
                 classroomList.add(new Classroom(classroomId, classroomName, teacherName, teacherLastName, classroomCapacity));
             }
-            Logger.LogDebug(classroomList.get(0).getClassroomName());
             // Bitis
             this.close();
         }
