@@ -109,6 +109,49 @@ public class StudentRepository extends PersistentDataService<Student> {
         return studentList[0];
     }
 
+    public Student fetchByName(String studentName) {
+        Student[] studentList = new Student[1];
+        try {
+            this.connect();
+            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
+            Statement statement = connection.createStatement();
+            String query = String.format("SELECT * FROM students WHERE student_name = '%s';", studentName);
+            Logger.LogDebug(query);
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+                Student student = new Student(
+                        rs.getInt("student_id"),
+                        rs.getString("student_name"),
+                        rs.getString("student_lastname"),
+                        rs.getString("orientation_start"),
+                        rs.getString("orientation_end"),
+                        rs.getString("parent_name"),
+                        rs.getString("parent_lastname"),
+                        rs.getString("parent_phone"),
+                        rs.getString("parent_email"),
+                        rs.getInt("payment_monthly")
+                );
+                StringBuilder sb = new StringBuilder();
+                sb.append("Student by the id of ");
+                sb.append(student.getStudentId());
+                sb.append(" was found. ");
+                sb.append("Orientation start and end dates are: ");
+                sb.append(student.getOrientationStart());
+                sb.append(", ");
+                sb.append(student.getOrientationEnd());
+                Logger.LogDebug(sb.toString());
+                studentList[0] = student;
+            }
+            // Bitis
+            this.close();
+        }
+        catch (Exception ex) {
+            Logger.Log(LogType.Error, ex.getMessage());
+        }
+        // Returning the found user, or null if not found any.
+        return studentList[0];
+    }
+
     @Override
     public List<Student> fetchAll() throws SQLException {
         List<Student> studentList = new ArrayList<Student>();

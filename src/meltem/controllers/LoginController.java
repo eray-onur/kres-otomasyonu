@@ -20,13 +20,6 @@ public class LoginController {
     public TextField txtPassword;
 
     private Boolean userIsValid() {
-//        List<User> userList = Main.userDataService.fetchAll();
-//        for(User u: userList) {
-//            if(u.getUserName().equals(txtUsername.getText()) && u.getPassword().equals(txtPassword.getText())) {
-//                return true;
-//            }
-//        }
-//        return false;
         Logger.LogDebug(txtUsername.getText());
 
         Logger.LogDebug(txtPassword.getText());
@@ -47,10 +40,10 @@ public class LoginController {
                     SceneBuilder.Instance.BuildScene("search_page");
                     break;
                 case 2:
-                    SceneBuilder.Instance.BuildScene("home_class");
+                    SceneBuilder.Instance.BuildScene("attendance_classroom_teacher");
                     break;
                 case 3:
-                    SceneBuilder.Instance.BuildScene("home_branch");
+                    SceneBuilder.Instance.BuildScene("attendance_branch_teacher");
                     break;
             }
         } else {

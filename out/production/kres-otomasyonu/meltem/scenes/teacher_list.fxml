@@ -102,9 +102,8 @@
                     </Text>
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                         <children>
-                            <CheckBox mnemonicParsing="false" text="Öğretmen Numarası" />
-                            <CheckBox layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Öğretmen Adı" />
-                     <CheckBox layoutX="283.0" layoutY="30.0" mnemonicParsing="false" text="Öğretmen Yetkisi" />
+                            <CheckBox fx:id="chkId" mnemonicParsing="false" text="Öğretmen Numarası" />
+                            <CheckBox fx:id="chkName" layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Öğretmen Adı" />
                         </children>
                     </HBox>
                 </children>
@@ -123,7 +122,7 @@
                     </font>
                     Geri Dön
                 </Button>
-                <TextField fx:id="txtTeacherId" prefHeight="46" prefWidth="310.0">
+                <TextField fx:id="txtTeacherInfo" prefHeight="46" prefWidth="310.0">
                     <font>
                         <Font size="18.0" />
                     </font>

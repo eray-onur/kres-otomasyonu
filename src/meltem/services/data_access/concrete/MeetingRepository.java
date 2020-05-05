@@ -30,7 +30,32 @@ public class MeetingRepository extends PersistentDataService<Meeting> {
             this.connect();
             // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT * FROM meetings WHERE meeting_id = %d", id);
+            String query = String.format("SELECT TOP 1 * FROM meetings WHERE meeting_id = %d", id);
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+                meeting.setMeetingId(rs.getInt(1));
+                meeting.setMeetingTitle(rs.getString(2));
+                meeting.setMeetingSummary(rs.getString(4));
+                meeting.setMeetingDate(rs.getString(3));
+            }
+            meetings[0] = meeting;
+            // Bitis
+            this.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return meetings[0];
+    }
+
+    public Meeting fetchByTitle(String title) {
+
+        Meeting[] meetings = new Meeting[1];
+        Meeting meeting = new Meeting(99, "", "", "");
+        try {
+            this.connect();
+            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
+            Statement statement = connection.createStatement();
+            String query = String.format("SELECT TOP 1 * FROM meetings WHERE meeting_title='%s'", title);
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()) {
                 meeting.setMeetingId(rs.getInt(1));

@@ -29,7 +29,7 @@ public class TeacherRepository extends PersistentDataService<Teacher> {
             this.connect();
             // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT * FROM teachers WHERE teacher_id = %d", id);
+            String query = String.format("SELECT TOP 1 * FROM teachers WHERE teacher_id = %d", id);
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()) {
                 // teacher.setId blah blah
@@ -132,6 +132,7 @@ public class TeacherRepository extends PersistentDataService<Teacher> {
 
     public void Add(Teacher entity, int auth)  {
         try {
+            Logger.LogDebug(entity.getTeacherName());
             this.connect();
             String sql = "INSERT INTO teachers(teacher_name, teacher_lastname, teacher_phone, teacher_email, teacher_auth) VALUES (?,?,?,?,?);";
             PreparedStatement pst = this.connection.prepareStatement(sql);

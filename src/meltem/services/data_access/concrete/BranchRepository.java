@@ -6,6 +6,7 @@ import meltem.enums.LogType;
 import meltem.models.*;
 import meltem.services.data_access.PersistentDataService;
 import meltem.services.logging.Logger;
+import meltem.view_models.BranchViewModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -258,5 +259,68 @@ public class BranchRepository extends PersistentDataService<Branch> {
         catch(Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public List<Branch> fetchAllTeachers() {
+        List<Branch> branches = new ArrayList<Branch>();
+        try {
+
+            this.connect();
+            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
+            Statement statement = connection.createStatement();
+            String query = "select branch_id, branch_name, teacher_name, teacher_lastname, teacher_phone, branch_capacity from (\n" +
+                    "\tbranch_courses\n" +
+                    "\tINNER JOIN teachers ON branch_courses.branch_teacher_id = teachers.teacher_id\n" +
+                    ");";
+
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+                Branch branch = new Branch(-1, "", "", "", 2);
+                Logger.LogDebug("INDEX OF BRANCH IS: " + rs.getInt("branch_id"));
+                branch.setBranchId(rs.getInt("branch_id"));
+                branch.setBranchCourseName(rs.getString("branch_name"));
+                branch.setBranchTeacherName(rs.getString("teacher_name"));
+                branch.setBranchTeacherLastName(rs.getString("teacher_lastname"));
+                branch.setBranchTeacherPhone(rs.getString("teacher_phone"));
+                branch.setBranchCapacity(rs.getInt("branch_capacity"));
+
+                branches.add(branch);
+            }
+            // Bitis
+            this.close();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return branches;
+    }
+    public Teacher fetchTeacherByBranch(int branchId) {
+        Teacher[] teachers = new Teacher[1];
+        Teacher teacher = new Teacher(-1, "", "", "", "", -1);
+        try {
+            this.connect();
+            // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
+            Statement statement = connection.createStatement();
+            String query = String.format("SELECT * FROM teachers WHERE teacher_name = %d", branchId);
+
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+                teacher.setTeacherId(rs.getInt(1));
+                teacher.setTeacherName(rs.getString(2));
+                teacher.setTeacherLastName(rs.getString(3));
+                teacher.setTeacherPhone(rs.getString(4));
+                teacher.setTeacherEmail(rs.getString(5));
+                teacher.setTeacherAuth(rs.getInt(6));
+            }
+            if(teacher.getTeacherId() != -1) {
+                teachers[0] = teacher;
+            }
+            // Bitis
+            this.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return teachers[0];
     }
 }

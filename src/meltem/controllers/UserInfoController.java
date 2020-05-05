@@ -19,12 +19,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserInfoController implements Initializable {
-    User user = new User(
-            1,
-            "Sema Yirun",
-            "*******",
-            (short) 1
-    );
+    // routes
+    // 0: yonetici paneli
+    // 1: user list
+    // 2:
+    //
+
+    public static User user;
+
+    public static int route = 1;
+
     @FXML
     public Text txtUserId;
     @FXML
@@ -35,12 +39,10 @@ public class UserInfoController implements Initializable {
     public Text userAuth;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        User user = new UserViewModel(1, "sema_yirun", "1", 1).user;
         txtUserId.setText(String.valueOf(user.getUserId()));
         txtUserName.setText(user.getUserName());
         txtPw.setText(user.getPassword());
         userAuth.setText(setChoiceBoxValue());
-
     }
 
     public String setChoiceBoxValue() {
@@ -57,23 +59,16 @@ public class UserInfoController implements Initializable {
     }
 
     public void goBack() throws IOException {
-        switch(Main.user.getUserAuth()) {
+        switch(route) {
+            case 0:
+                SceneBuilder.Instance.BuildScene("search_page");
+                break;
             case 1:
                 SceneBuilder.Instance.BuildScene("user_list");
                 break;
             case 2:
-                SceneBuilder.Instance.BuildScene("home_class");
-                break;
-            case 3:
                 SceneBuilder.Instance.BuildScene("home_branch");
                 break;
         }
-    }
-    public void update() throws IOException {
-        SceneBuilder.Instance.BuildScene("user_edit", new RouteData(1, "user"));
-    }
-    public void delete() throws IOException {
-        Logger.LogDebug("DELETE!");
-        SceneBuilder.Instance.BuildScene("user_list");
     }
 }

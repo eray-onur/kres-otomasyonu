@@ -2,16 +2,15 @@ package meltem.controllers;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import meltem.models.RouteData;
@@ -20,6 +19,7 @@ import meltem.models.User;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.UserRepository;
 import meltem.services.logging.Logger;
+import meltem.services.search.UserSearch;
 import meltem.view_models.StudentViewModel;
 import meltem.view_models.UserViewModel;
 
@@ -32,17 +32,23 @@ import java.util.ResourceBundle;
 //new GregorianCalendar(2020,0,31)
 
 public class UsersController implements Initializable {
+
+    int selectedId = 0;
+    @FXML
+    public TextField txtUserInfo;
+    @FXML
+    public CheckBox chkId;
+    @FXML
+    public CheckBox chkName;
     @FXML
     TableColumn<UserViewModel, SimpleIntegerProperty> userIdCol;
     @FXML
     TableColumn<UserViewModel, SimpleStringProperty> userNameCol;
     @FXML
     TableColumn<UserViewModel, SimpleStringProperty> trueAuthCol;
-    int selectedId = 0;
+
     @FXML
     public Button btnUpdateUser;
-    @FXML
-    public TextField txtUserId;
     @FXML
     public void findUser() {
         if(tableUsers.getSelectionModel().getSelectedItem() != null) {
@@ -68,6 +74,22 @@ public class UsersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        chkId.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                chkName.setSelected(false);
+            }
+        });
+
+        chkName.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                chkId.setSelected(false);
+            }
+        });
+
+
         tableUsers.setEditable(true);
         // First Name
         tableUsers.setFixedCellSize(50);
@@ -75,18 +97,14 @@ public class UsersController implements Initializable {
                 user -> user.getValue().userId
         );
         // Last Name
-        userNameCol.setPrefWidth(50);
         userNameCol.setCellValueFactory(
                 user -> user.getValue().userName
         );
-        trueAuthCol.setPrefWidth(50);
         trueAuthCol.setCellValueFactory(
                 user -> user.getValue().userTrueAuth
         );
-
-
-
         tableUsers.setItems(data);
+        tableUsers.setFixedCellSize(60.0);
         tableUsers.setOnMouseClicked(v -> findUser());
     }
 
@@ -101,5 +119,16 @@ public class UsersController implements Initializable {
 
     public void proceedToNew(ActionEvent event) {
         SceneBuilder.Instance.BuildScene("user_new");
+    }
+
+    public void searchUser() {
+        UserSearch us = new UserSearch();
+        String searchParam = txtUserInfo.getText();
+        Logger.LogDebug(searchParam + " is the input for the search.");
+        if(chkId.isSelected()) {
+            us.searchById(searchParam);
+        } else if(chkName.isSelected()) {
+            us.searchByUsername(searchParam);
+        }
     }
 }

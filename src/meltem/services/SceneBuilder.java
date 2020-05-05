@@ -55,6 +55,26 @@ public class SceneBuilder<T> {
         }
     }
 
+    public void BuildModal(String warning, ActionEvent event) {
+        try {
+            routeData = null;
+            modalWarning = warning;
+            Logger.Log(LogType.Debug,"/meltem/scenes/modal_invalid_input.fxml");
+            Stage modalStage = new Stage();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("meltem/scenes/modal_invalid_input.fxml")));
+            modalStage.setScene(new Scene(root));
+            modalStage.setTitle("Uyarı");
+            modalStage.initModality(Modality.WINDOW_MODAL);
+            modalStage.initOwner(
+                    ((Node)event.getSource()).getScene().getWindow()
+            );
+            // modalStage.getIcons().add(new Image("@../icons/lock.png"));
+            modalStage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void BuildScene(String sceneName)  {
         try {
             routeData = null;

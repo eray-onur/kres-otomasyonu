@@ -21,8 +21,9 @@ public class ModalController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(txtWarning != null) {
-            txtWarning.setText(SceneBuilder.modalWarning);
-        }
+            if(txtWarning != null) {
+                txtWarning.setText(SceneBuilder.modalWarning);
+            }
+
     }
 }

@@ -124,8 +124,8 @@
                     </Text>
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                         <children>
-                            <CheckBox mnemonicParsing="false" text="Toplantı Numarası" />
-                            <CheckBox layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Toplantı Başlığı" />
+                            <CheckBox fx:id="chkId" mnemonicParsing="false" text="Toplantı Numarası" />
+                            <CheckBox fx:id="chkTitle" layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Toplantı Başlığı" />
                         </children>
                     </HBox>
                 </children>
@@ -144,7 +144,7 @@
                     </font>
                     Geri Dön
                 </Button>
-                <TextField fx:id="txtMeetingId" prefHeight="46" prefWidth="310.0">
+                <TextField fx:id="txtMeetingInfo" prefHeight="46" prefWidth="310.0">
                     <font>
                         <Font size="18.0" />
                     </font>

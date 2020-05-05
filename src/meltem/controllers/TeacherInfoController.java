@@ -21,11 +21,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TeacherInfoController implements Initializable {
-//    TeacherViewModel teacherVM = new TeacherViewModel(1,
-//            "Sema",
-//            "Yirun",
-//            "s.yirun@abd.com",
-//            (byte)0);
+    public static Teacher teacher;
+    public static int route = 1;
+    @FXML
+    public Text txtFullName;
     @FXML
     public Text txtTeacherId;
     @FXML
@@ -33,33 +32,38 @@ public class TeacherInfoController implements Initializable {
     @FXML
     public Text txtTeacherLastName;
     @FXML
+    public Text txtTeacherPhone;
+    @FXML
     public Text txtTeacherEmail;
     @FXML
     public Text txtTeacherType;
     @FXML
     public Button btnNew;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Main.userDataService.fetchById(SceneBuilder.routeData.id);
-        if(SceneBuilder.routeData != null) {
-            Logger.LogDebug(SceneBuilder.routeData.dataName);
-            //txtTeacherId.setText(String.valueOf(teacherVM.teacher.getTeacherId()));
-            //txtTeacherName.setText(teacherVM.teacher.getTeacherName());
-            //txtTeacherLastName.setText(teacherVM.teacher.getTeacherLastName());
-            //txtTeacherEmail.setText(teacherVM.teacher.getTeacherEmail());
-            //txtTeacherType.setText("Sınıf Öğretmeni");
+        if (teacher != null) {
+            txtFullName.setText("Teacher #" + teacher.getTeacherId());
+            txtTeacherId.setText(String.valueOf(teacher.getTeacherId()));
+            txtTeacherName.setText(teacher.getTeacherName());
+            txtTeacherLastName.setText(teacher.getTeacherLastName());
+            txtTeacherEmail.setText(teacher.getTeacherEmail());
+            txtTeacherType.setText(teacher.getTeacherType());
         }
     }
-    @FXML
-    public void goAssign() throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_assign");
-    }
+
     @FXML
     public void goBack() throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_list");
-    }
-
-    public void update(ActionEvent actionEvent) throws IOException {
-        SceneBuilder.Instance.BuildScene("teacher_edit", new RouteData(1, "student"));
+        switch (route) {
+            case 0:
+                SceneBuilder.Instance.BuildScene("teacher_list");
+                break;
+            case 1:
+                SceneBuilder.Instance.BuildScene("teacher_list");
+                break;
+            case 2:
+                SceneBuilder.Instance.BuildScene("teacher_list");
+                break;
+        }
     }
 }

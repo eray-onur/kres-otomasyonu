@@ -72,18 +72,6 @@
                             <Font size="18.0" />
                         </font>
                     </Button>
-               <Button fx:id="btnPaymentInfo" disable="true" layoutX="30.0" layoutY="305.0" maxWidth="1.7976931348623157E308" prefHeight="75.0" text="Ödeme Bilgileri">
-                  <graphic>
-                     <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../icons/students.png" />
-                        </image>
-                     </ImageView>
-                  </graphic>
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-               </Button>
                 </children>
                 <padding>
                     <Insets left="20.0" right="20.0" />
@@ -114,8 +102,8 @@
                     </Text>
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                         <children>
-                            <CheckBox mnemonicParsing="false" text="Sınıf Numarası" />
-                            <CheckBox layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Sınıf İsmi" />
+                            <CheckBox fx:id="chkId" mnemonicParsing="false" text="Öğrenci Numarası" />
+                            <CheckBox fx:id="chkName" layoutX="193.0" layoutY="33.0" mnemonicParsing="false" text="Öğrenci Adı" />
                         </children>
                     </HBox>
                 </children>
@@ -134,12 +122,12 @@
                     </font>
                     Geri Dön
                 </Button>
-                <TextField fx:id="txtStudentId" prefHeight="46" prefWidth="310.0">
+                <TextField fx:id="txtStudentInfo" prefHeight="46" prefWidth="310.0">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </TextField>
-                <Button fx:id="btnAdd" onAction="#findStudent" prefWidth="125.0">
+                <Button fx:id="btnAdd" onAction="#findStudent" prefWidth="175.0">
                     <graphic>
                         <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                             <image>

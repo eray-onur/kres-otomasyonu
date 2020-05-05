@@ -116,4 +116,8 @@ public class AdminClassroomController implements Initializable {
     public void proceedToAddClassroom(ActionEvent mouseEvent) {
         SceneBuilder.Instance.BuildScene("classroom_new_admin");
     }
+
+    public void quit(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("login");
+    }
 }

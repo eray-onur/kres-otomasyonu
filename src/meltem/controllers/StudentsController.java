@@ -2,6 +2,8 @@ package meltem.controllers;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,10 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import meltem.Main;
@@ -21,6 +20,8 @@ import meltem.models.Student;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.StudentRepository;
 import meltem.services.logging.Logger;
+import meltem.services.search.StudentSearch;
+import meltem.services.search.UserSearch;
 import meltem.view_models.StudentViewModel;
 
 import java.io.IOException;
@@ -60,6 +61,12 @@ public class StudentsController implements Initializable {
     public TextField txtStudentId;
 
     public ObservableList<StudentViewModel> studentVMs = FXCollections.observableArrayList();
+    @FXML
+    public TextField txtStudentInfo;
+    @FXML
+    public CheckBox chkId;
+    @FXML
+    public CheckBox chkName;
 
     private int selectedId;
 
@@ -67,9 +74,13 @@ public class StudentsController implements Initializable {
     }
 
     public void findStudent() throws IOException {
-        int studentId = Integer.parseInt(txtStudentId.getText());
-        if(studentId != 0) {
-            SceneBuilder.Instance.BuildScene("student_info", new RouteData(studentId, "student"));
+        StudentSearch ss = new StudentSearch();
+        String searchParam = txtStudentInfo.getText();
+        Logger.LogDebug(searchParam + " is the input for the search.");
+        if(chkId.isSelected()) {
+            ss.searchById(searchParam);
+        } else if(chkName.isSelected()) {
+            ss.searchByName(searchParam);
         }
     }
     public void findStudentForClass() throws IOException {
@@ -129,7 +140,19 @@ public class StudentsController implements Initializable {
         );
 
 
+        chkId.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                chkName.setSelected(false);
+            }
+        });
 
+        chkName.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                chkId.setSelected(false);
+            }
+        });
         tableStudents.setItems(data);
 
         tableStudents.setOnMouseClicked(v -> getCourseViewModel());

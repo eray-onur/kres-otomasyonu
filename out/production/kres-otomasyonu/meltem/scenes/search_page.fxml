@@ -11,9 +11,10 @@
         <padding>
             <Insets bottom="15.0" top="15.0" />
         </padding>
-        <Text styleClass="header1" textAlignment="JUSTIFY" GridPane.halignment="CENTER">
-            Yönetici Paneli
-        </Text>
+        <Text styleClass="header1" text="Yönetici Paneli" textAlignment="JUSTIFY" GridPane.halignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
     </HBox>
     <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
         <Button fx:id="btnUsers" maxWidth="1.7976931348623157E308" onAction="#goUsers" text="Kullanıcı İşlem">
@@ -27,6 +28,9 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
             Users
         </Button>
         <Button fx:id="btnStudents" maxWidth="1.7976931348623157E308" onAction="#goStudent">
@@ -40,6 +44,9 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
             Öğrenci İşlem
         </Button>
         <Button fx:id="btnTeachers" maxWidth="1.7976931348623157E308" onAction="#goTeachers">
@@ -53,6 +60,9 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
             Öğretmen İşlem
         </Button>
         <Button fx:id="btnClassrooms" maxWidth="1.7976931348623157E308" onAction="#goClasses">
@@ -66,6 +76,9 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
             Sınıf İşlem
         </Button>
         <Button fx:id="btnCourses" maxWidth="1.7976931348623157E308" onAction="#goCourses">
@@ -79,6 +92,9 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
             Branş Ders İşlem
         </Button>
         <Button fx:id="btnMeetings" maxWidth="1.7976931348623157E308" onAction="#goMeetings">
@@ -92,6 +108,9 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
             Toplanti Kayıtları
         </Button>
       <Button fx:id="btnMeetings1" layoutX="25.0" layoutY="465.0" maxWidth="1.7976931348623157E308" onAction="#quit" text="Çıkış Yap">
@@ -105,10 +124,16 @@
          <VBox.margin>
             <Insets left="15.0" right="15.0" top="15.0" />
          </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
       </Button>
       <GridPane.margin>
          <Insets bottom="15.0" />
       </GridPane.margin>
+      <padding>
+         <Insets left="50.0" right="50.0" />
+      </padding>
     </VBox>
    <columnConstraints>
       <ColumnConstraints />

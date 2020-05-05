@@ -63,7 +63,7 @@ public class UserRepository extends PersistentDataService<User> {
             this.connect();
             // Tum sorgu yollama operasyonlari bu iki yorum arasinda gerceklestirilecek.
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT * FROM dbo.users WHERE user_name = '%s';", userName);
+            String query = String.format("SELECT TOP 1 * FROM dbo.users WHERE user_name = '%s';", userName);
             Logger.LogDebug(query);
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()) {

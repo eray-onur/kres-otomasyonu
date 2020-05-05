@@ -44,7 +44,9 @@ public class BranchEditController implements Initializable {
     }
 
     public void addBranch(ActionEvent event) {
-        Teacher teacherToAdd = new Teacher(-1, branch.getBranchTeacherName(), branch.getBranchTeacherLastName(), "", "", 3);
+        Teacher teacherToAdd = new Teacher(-1, txtBranchName.getText(), txtTeacherLastName.getText(), "", "", 3);
+        Logger.LogDebug("-------------------------- BRANCH TEACHER NAME: " + txtBranchName.getText());
+
         TeacherRepository.Instance.Add(teacherToAdd, teacherToAdd.getTeacherAuth());
         int teacherIndex = TeacherRepository.Instance.returnLast().getTeacherId() + 1;
 

@@ -2,15 +2,14 @@ package meltem.controllers;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import meltem.Main;
 import meltem.models.Meeting;
@@ -19,6 +18,8 @@ import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.MeetingRepository;
 import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
+import meltem.services.search.MeetingSearch;
+import meltem.services.search.UserSearch;
 import meltem.view_models.MeetingViewModel;
 import meltem.view_models.TeacherViewModel;
 
@@ -36,6 +37,13 @@ public class MeetingsController implements Initializable {
     public Button btnDetailMeeting;
     @FXML
     public Button btnSearchMeeting;
+    @FXML
+    public TextField txtMeetingInfo;
+    @FXML
+    public CheckBox chkId;
+    @FXML
+    public CheckBox chkTitle;
+
     private int selectedId = 1;
 
     public TextField txtMeetingId;
@@ -129,6 +137,20 @@ public class MeetingsController implements Initializable {
         );
         table.setItems(meetings);
         table.setFixedCellSize(75);
+
+        chkId.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                chkTitle.setSelected(false);
+            }
+        });
+
+        chkTitle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                chkId.setSelected(false);
+            }
+        });
     }
 
     public void proceedToNew(ActionEvent event) {
@@ -143,6 +165,13 @@ public class MeetingsController implements Initializable {
     }
 
     public void searchMeeting(ActionEvent event) {
-
+        MeetingSearch ms = new MeetingSearch();
+        String searchParam = txtMeetingInfo.getText();
+        Logger.LogDebug(searchParam + " is the input for the search.");
+        if(chkId.isSelected()) {
+            ms.searchById(searchParam);
+        } else if(chkTitle.isSelected()) {
+            ms.searchByTitle(searchParam);
+        }
     }
 }

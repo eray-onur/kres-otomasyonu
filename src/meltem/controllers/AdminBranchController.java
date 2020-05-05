@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import meltem.models.Branch;
 import meltem.models.RouteData;
+import meltem.models.Teacher;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.BranchRepository;
 import meltem.services.logging.Logger;
@@ -55,7 +56,7 @@ public class AdminBranchController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         branchTable.setOnMouseClicked(v -> getViewModel());
 
-        branchModels = BranchRepository.Instance.fetchAll();
+        branchModels = BranchRepository.Instance.fetchAllTeachers();
 
         branchTableList = FXCollections.observableArrayList(
             fetchAllModels()
@@ -97,7 +98,7 @@ public class AdminBranchController implements Initializable {
 
             selectedBranch = branchTable.getSelectionModel().getSelectedItem().branch;
 
-            Logger.LogDebug("GOTTEN CLASSROOM ID WAS: " + vm.branch.getBranchId());
+            Logger.LogDebug("GOTTEN BRANCH ID WAS: " + vm.branch.getBranchId());
             AdminBranchInfoController.branch = vm.branch;
             AdminBranchInfoController.BranchId = vm.branch.getBranchId();
             AdminBranchInfoController.BranchTeacherFullName = vm.branch.getBranchTeacherName() + " " + vm.branch.getBranchTeacherLastName();
@@ -131,6 +132,10 @@ public class AdminBranchController implements Initializable {
 
     public void goBack(ActionEvent actionEvent) throws IOException {
         SceneBuilder.Instance.BuildScene("search_page");
+    }
+
+    public void quit(ActionEvent event) {
+        SceneBuilder.Instance.BuildScene("login");
     }
 
 }

@@ -17,7 +17,7 @@ public class test {
 
         MeetingRepository mr = new MeetingRepository();
         BranchRepository br = new BranchRepository();
-        TeacherRepository.Instance.UpdateById(new Teacher(1, "sssssssss", "xxxxxxxxxxxxxx", "222", "2222", 3), 1);
+        System.out.println(MeetingRepository.Instance.fetchByTitle("allah"));
     }
 }
 

@@ -6,13 +6,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="1.0" prefHeight="400.0" prefWidth="600.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UserInfoController">
-    <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-        <image>
-            <Image backgroundLoading="true" url="@../icons/user.png" />
-        </image>
-    </ImageView>
-    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="10">
+<GridPane alignment="CENTER" hgap="1.0" styleClass="app" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meltem.controllers.UserInfoController">
+   <HBox alignment="CENTER" spacing="40.0" GridPane.vgrow="ALWAYS">
+      <children>
+          <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image backgroundLoading="true" url="@../icons/user.png" />
+              </image>
+          </ImageView>
+          <Text fill="WHITE" text="Kullanıcı Bilgileri" HBox.hgrow="ALWAYS">
+            <font>
+               <Font size="24.0" />
+            </font></Text>
+      </children>
+   </HBox>
+    <VBox alignment="CENTER" style="-fx-background-color: white; -fx-border-radius: 5px;" GridPane.rowIndex="1">
         <padding>
             <Insets left="25.0" right="25.0" />
         </padding>
@@ -21,7 +29,10 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Numarası</Text>
             </left>
             <right>
-                <Text fx:id="txtUserId" BorderPane.alignment="CENTER" />
+                <Text fx:id="txtUserId" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -29,7 +40,10 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Adı</Text>
             </left>
             <right>
-                <Text fx:id="txtUserName" BorderPane.alignment="CENTER" />
+                <Text fx:id="txtUserName" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -37,7 +51,10 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Şifresi</Text>
             </left>
             <right>
-                <Text fx:id="txtPw" BorderPane.alignment="CENTER" />
+                <Text fx:id="txtPw" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
             </right>
         </BorderPane>
         <BorderPane maxHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
@@ -45,12 +62,15 @@
                 <Text styleClass="body2" BorderPane.alignment="CENTER">Kullanıcı Yetkisi</Text>
             </left>
          <right>
-            <Text fx:id="userAuth" BorderPane.alignment="CENTER" />
+            <Text fx:id="userAuth" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
          </right>
         </BorderPane>
     </VBox>
-    <FlowPane alignment="CENTER" hgap="25" prefWidth="544.0" GridPane.rowIndex="12">
-        <Button onAction="#goBack">
+    <FlowPane alignment="CENTER" hgap="25" GridPane.rowIndex="2">
+        <Button onAction="#goBack" textAlignment="CENTER">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -58,26 +78,19 @@
                     </image>
                 </ImageView>
             </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
             Geri Dön
-        </Button>
-        <Button fx:id="btnEdit" onAction="#update">
-            <graphic>
-                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/edit.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            Kullanıcıyı Güncelle
         </Button>
     </FlowPane>
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="60.0" valignment="CENTER" vgrow="ALWAYS" />
+        <RowConstraints percentHeight="20.0" />
         <RowConstraints />
         <RowConstraints />
         <RowConstraints />

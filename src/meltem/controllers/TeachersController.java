@@ -7,16 +7,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import meltem.Main;
 import meltem.models.Teacher;
 import meltem.services.SceneBuilder;
 import meltem.services.data_access.concrete.TeacherRepository;
 import meltem.services.logging.Logger;
+import meltem.services.search.TeacherSearch;
+import meltem.services.search.UserSearch;
 import meltem.view_models.TeacherViewModel;
 
 import java.io.IOException;
@@ -30,7 +29,13 @@ public class TeachersController implements Initializable {
     public static int route = 0;
     private int selectedId = 1;
 
-    public TextField txtTeacherId;
+    @FXML
+    public TextField txtTeacherInfo;
+    @FXML
+    public CheckBox chkId;
+    @FXML
+    public CheckBox chkName;
+
     public ObservableList<TeacherViewModel> teachers = FXCollections.observableArrayList(
             fetchAllModelsForTeachers()
     );
@@ -129,6 +134,14 @@ public class TeachersController implements Initializable {
         table.setFixedCellSize(75);
     }
 
-    public void searchTeacher(ActionEvent event) {
+    public void searchTeacher() {
+        TeacherSearch ts = new TeacherSearch();
+        String searchParam = txtTeacherInfo.getText();
+        Logger.LogDebug(searchParam + " is the input for the search.");
+        if(chkId.isSelected()) {
+            ts.searchById(searchParam);
+        } else if(chkName.isSelected()) {
+            ts.searchByUsername(searchParam);
+        }
     }
 }
